@@ -474,10 +474,11 @@ def main():
         # Aquí también ocultamos el DF
         #st.write("Dataframe")
         #st.dataframe(df_oferta_snackys)
-        st.title("Dashboard ofertas")
+        st.markdown(f"<h1 style='text-align: center;'>Dashboard Ofertas</h1>",unsafe_allow_html=True,)
         if (len(df_oferta_snackys) > 0 ):
             cliente_pec = df_oferta_snackys['clientName'].unique().tolist()
-            st.subheader(f"Bienvenido {cliente_pec[0]}", class_="centered-subheader")
+            # st.subheader(f"Bienvenido {cliente_pec[0]}", class_="centered-subheader")
+            st.markdown(f"<h1 style='text-align: center;'>Bienvenido {cliente_pec[0]}</h1>",unsafe_allow_html=True,)
         st.write("---")
 
         # gráfico de torta
