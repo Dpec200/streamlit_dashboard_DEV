@@ -319,6 +319,17 @@ def main():
 
             border-radius: 28px;
             }
+            .ag-courses_item_core {
+            -ms-flex-preferred-size: calc(50% - 30px);
+            flex-basis: calc(50% - 30px);
+            border: 2px solid #15364C;
+
+            margin: 0 15px 30px;
+
+            overflow: hidden;
+
+            border-radius: 28px;
+            }
             .ag-courses-item_link {
             display: block;
             background-color: #FFF;
@@ -456,7 +467,7 @@ def main():
             # Crea el gráfico
             etiquetas = ['Categoría A', 'Categoría B', 'Categoría C', 'Categoría D']
             valores = [30, 45, 15, 10]
-            plt.figure(figsize=(8, 6))
+            plt.figure(figsize=(2, 1))
             plt.pie(labels=etiquetas, x=valores)
             plt.title('Subscritos VS No Subscritos')
 
