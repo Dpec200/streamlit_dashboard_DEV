@@ -400,7 +400,7 @@ def main():
             overflow: hidden;
 
             font-weight: bold;
-            font-size: 35px;
+            font-size: 30px;
             color: #15364C;
             text-align: center;
 
