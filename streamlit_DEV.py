@@ -355,7 +355,6 @@ def main():
             .ag-courses-item_link_core {
             display: block;
             background-color: #E85A2E;
-            height: 50vh;
             overflow: hidden;
 
             position: relative;
