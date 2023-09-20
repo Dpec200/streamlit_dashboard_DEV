@@ -448,6 +448,7 @@ def main():
         tarjeta_clientes_contactados_col1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_title"> Clientes Totales Contactados <br> Numero</div></div></div></div></div>'
         tarjeta_clientes_con_respuesta_col1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_title"> Clientes con respuesta <br> Numero</div></div></div></div></div>'
         from io import BytesIO
+        import base64
 
         # Genera un gráfico de Matplotlib
         def generar_grafico():
@@ -463,11 +464,11 @@ def main():
             buffer = BytesIO()
             plt.savefig(buffer, format='png')
             buffer.seek(0)
-            
-            return buffer
+            imagen_codificada = base64.b64encode(buffer.read()).decode()
+            return imagen_codificada
 
         # Tarjeta con el gráfico de Matplotlib
-        tarjeta_subscritos_vs_nosubscritos = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div class="ag-courses-item_link"><div class="ag-courses-item_title">Gráfico de Matplotlib</div></div></div></div></div>'
+        tarjeta_subscritos_vs_nosubscritos = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div class="ag-courses-item_link"><div class="ag-courses-item_title">Gráfico de Matplotlib</div><img src="data:image/png;base64,{generar_grafico()}" alt="Gráfico de Pastel"></div></div></div></div>'
 
         # Muestra la tarjeta en Streamlit
         with col_core_1:
