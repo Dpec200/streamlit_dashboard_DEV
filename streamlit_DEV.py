@@ -393,8 +393,8 @@ def main():
 
             z-index: 1;
             position: absolute;
-            top: -200px;
-            right: -200px;
+            top: -90px;
+            right: -90px;
 
             border-radius: 50%;
 
