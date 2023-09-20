@@ -32,7 +32,7 @@ def main():
     db_port = st.secrets["DB_PORT"]
     # Creamos la conexión
     conexion_string = f"mysql+pymysql://{db_username}:{db_password}@{db_host}:{db_port}/{db_token}"
-    engine = create_engine(conexion_string,pool_pre_ping=True, connect_args={'connect_timeout': 100})
+    engine = create_engine(conexion_string,pool_pre_ping=True)
     # Query de consulta para la contraseña
     query = """
             SELECT DISTINCT businessPhoneNumber
@@ -59,7 +59,8 @@ def main():
         db_password = st.secrets["DB_PASSWORD"]
         db_host = st.secrets["DB_HOST"]
         db_token = st.secrets["DB_TOKEN"]
-        conexion_string = f"mysql+pymysql://{db_username}:{db_password}@{db_host}/{db_token}"
+        db_port = st.secrets["DB_PORT"]
+        conexion_string = f"mysql+pymysql://{db_username}:{db_password}@{db_host}:{db_port}/{db_token}"
         engine = create_engine(conexion_string,pool_pre_ping=True)
         # Query de recompra
         query = f"""
@@ -239,7 +240,8 @@ def main():
         db_password = st.secrets["DB_PASSWORD"]
         db_host = st.secrets["DB_HOST"]
         db_token = st.secrets["DB_TOKEN"]
-        conexion_string = f"mysql+pymysql://{db_username}:{db_password}@{db_host}/{db_token}"
+        db_port = st.secrets["DB_PORT"]
+        conexion_string = f"mysql+pymysql://{db_username}:{db_password}@{db_host}:{db_port}/{db_token}"
         engine = create_engine(conexion_string,pool_pre_ping=True)
         # Query de recompra
         query = f"""
