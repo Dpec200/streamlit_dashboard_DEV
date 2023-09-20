@@ -29,8 +29,9 @@ def main():
     db_password = st.secrets["DB_PASSWORD"]
     db_host = st.secrets["DB_HOST"]
     db_token = st.secrets["DB_TOKEN"]
+    db_port = st.secrets["DB_PORT"]
     # Creamos la conexión
-    conexion_string = f"mysql+pymysql://{db_username}:{db_password}@{db_host}/{db_token}"
+    conexion_string = f"mysql+pymysql://{db_username}:{db_password}@{db_host}:{db_port}/{db_token}"
     engine = create_engine(conexion_string,pool_pre_ping=True, connect_args={'connect_timeout': 100})
     # Query de consulta para la contraseña
     query = """
