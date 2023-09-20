@@ -467,7 +467,7 @@ def main():
             # Crea el gráfico
             etiquetas = ['Categoría A', 'Categoría B', 'Categoría C', 'Categoría D']
             valores = [30, 45, 15, 10]
-            plt.figure(figsize=(2, 1))
+            plt.figure(figsize=(8, 8))
             plt.pie(labels=etiquetas, x=valores)
             plt.title('Subscritos VS No Subscritos')
 
