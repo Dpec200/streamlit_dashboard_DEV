@@ -330,6 +330,7 @@ def main():
             .ag-courses_item {
             -ms-flex-preferred-size: calc(25% - 30px);
             flex-basis: calc(25% - 30px);
+            border: 2px solid #000;
 
             margin: 0 15px 30px;
 
