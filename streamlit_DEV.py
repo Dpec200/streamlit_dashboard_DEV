@@ -320,8 +320,8 @@ def main():
             border-radius: 28px;
             }
             .ag-courses_item_core {
-            -ms-flex-preferred-size: calc(100%);
-            flex-basis: calc(100%);
+            -ms-flex-preferred-size: calc(50%);
+            flex-basis: calc(50%);
             border: 2px solid #15364C;
 
             margin: 0 15px 30px;
