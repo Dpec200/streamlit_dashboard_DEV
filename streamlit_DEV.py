@@ -323,6 +323,7 @@ def main():
             -ms-flex-preferred-size: calc(40% - 30px);
             flex-basis: calc(40% - 30px);
             border: 2px solid #15364C;
+            height: 50%;
 
             margin: 0 15px;
 
