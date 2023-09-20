@@ -313,7 +313,7 @@ def main():
 
 
             body {
-            background-color: #000;
+            background-color: #FFF;
             }
             .ag-courses_box {
             display: -webkit-box;
@@ -339,7 +339,7 @@ def main():
             }
             .ag-courses-item_link {
             display: block;
-            background-color: #000;
+            background-color: #FFF;
 
             overflow: hidden;
 
@@ -348,7 +348,7 @@ def main():
             .ag-courses-item_link:hover,
             .ag-courses-item_link:hover .ag-courses-item_date {
             text-decoration: none;
-            color: #FFF;
+            color: #000;
             }
             .ag-courses-item_link:hover .ag-courses-item_bg {
             -webkit-transform: scale(10);
@@ -362,7 +362,7 @@ def main():
 
             font-weight: bold;
             font-size: 23px;
-            color: #FFFFFF;
+            color: #000;
             text-align: center;
 
 
