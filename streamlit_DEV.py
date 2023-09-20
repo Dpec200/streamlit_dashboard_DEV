@@ -479,7 +479,7 @@ def main():
         # Aquí también ocultamos el DF
         #st.write("Dataframe")
         #st.dataframe(df_oferta_snackys)
-        st.markdown(f"<h1 style=' font-size: 90px;'>Dashboard Ofertas</h1>",unsafe_allow_html=True,)
+        st.markdown(f"<h1 style=' font-size: 70px;'>Dashboard Ofertas</h1>",unsafe_allow_html=True,)
         if (len(df_oferta_snackys) > 0 ):
             cliente_pec = df_oferta_snackys['clientName'].unique().tolist()
             # st.subheader(f"Bienvenido {cliente_pec[0]}", class_="centered-subheader")
@@ -513,6 +513,7 @@ def main():
         
         # Agregar el estilo CSS personalizado utilizando st.markdown
         st.markdown(custom_css, unsafe_allow_html=True)
+        st.markdown(f'<div style="color: black; font-size: 30px;">Informacion General</div>',unsafe_allow_html=True)
         col_core_1, col_core_2 = st.columns(2)
         tarjeta_clientes_contactados_col1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_core_1"><div href="#" class="ag-courses-item_link_core"><div class="ag-courses-item_title_core"> Clientes Totales Contactados <br> Numero</div></div></div></div></div>'
         tarjeta_clientes_con_respuesta_col1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_core_1"><div href="#" class="ag-courses-item_link_core"><div class="ag-courses-item_title_core"> Clientes con respuesta <br> Numero</div></div></div></div></div>'
