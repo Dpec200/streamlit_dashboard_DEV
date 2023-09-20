@@ -371,12 +371,12 @@ def main():
             transform: scale(10);
             }
             .ag-courses-item_title {
-            margin: 0 0 25px;
+            margin: 0 0 5px;
 
             overflow: hidden;
 
             font-weight: bold;
-            font-size: 23px;
+            font-size: 35px;
             color: #15364C;
             text-align: center;
 
