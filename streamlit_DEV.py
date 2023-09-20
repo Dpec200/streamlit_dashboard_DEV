@@ -498,7 +498,6 @@ def main():
 
         with col_core_2:
             st.markdown(tarjeta_subscritos_vs_nosubscritos, unsafe_allow_html=True)
-            st.image(generar_grafico(), use_column_width=True)
 
 
         # Crear 5 tarjetas en la primera fila
