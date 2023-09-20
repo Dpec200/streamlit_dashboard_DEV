@@ -338,6 +338,16 @@ def main():
 
             position: relative;
             }
+
+            .ag-courses-item_link_core {
+            display: block;
+            background-color: #E85A2E;
+
+            overflow: hidden;
+
+            position: relative;
+            }
+
             .ag-courses-item_link:hover,
             .ag-courses-item_link:hover .ag-courses-item_date {
             text-decoration: none;
@@ -456,8 +466,8 @@ def main():
         # Agregar el estilo CSS personalizado utilizando st.markdown
         st.markdown(custom_css, unsafe_allow_html=True)
         col_core_1, col_core_2 = st.columns(2)
-        tarjeta_clientes_contactados_col1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_title"> Clientes Totales Contactados <br> Numero</div></div></div></div></div>'
-        tarjeta_clientes_con_respuesta_col1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_title"> Clientes con respuesta <br> Numero</div></div></div></div></div>'
+        tarjeta_clientes_contactados_col1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link_core"><div class="ag-courses-item_title"> Clientes Totales Contactados <br> Numero</div></div></div></div></div>'
+        tarjeta_clientes_con_respuesta_col1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link_core"><div class="ag-courses-item_title"> Clientes con respuesta <br> Numero</div></div></div></div></div>'
         from io import BytesIO
         import base64
 
@@ -479,7 +489,7 @@ def main():
             return imagen_codificada
 
         # Tarjeta con el gráfico de Matplotlib
-        tarjeta_subscritos_vs_nosubscritos = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_core"><div class="ag-courses-item_link"><div class="ag-courses-item_title">Gráfico de Matplotlib</div><img src="data:image/png;base64,{generar_grafico()}" alt="Gráfico de Pastel"></div></div></div></div>'
+        tarjeta_subscritos_vs_nosubscritos = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_core"><div class="ag-courses-item_link_core"><div class="ag-courses-item_title">Gráfico de Matplotlib</div><img src="data:image/png;base64,{generar_grafico()}" alt="Gráfico de Pastel"></div></div></div></div>'
 
         # Muestra la tarjeta en Streamlit
         with col_core_1:
