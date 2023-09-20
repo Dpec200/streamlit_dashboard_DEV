@@ -323,7 +323,7 @@ def main():
             -ms-flex-preferred-size: calc(40% - 30px);
             flex-basis: calc(40% - 30px);
             border: 2px solid #15364C;
-            height: 13vh;
+            height: 15vh;
 
             margin: 0 15px;
 
@@ -355,7 +355,7 @@ def main():
             .ag-courses-item_link_core {
             display: block;
             background-color: #E85A2E;
-            height: 13vh;
+            height: 15vh;
             overflow: hidden;
 
             position: relative;
