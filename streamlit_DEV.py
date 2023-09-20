@@ -284,27 +284,8 @@ def main():
         clientes_suscriptos = subs["Suscriptos"]
         # Clientes prefieren 'dejar de recibir'
         clientes_dejar_de_recibir = len(df_oferta_snackys[df_oferta_snackys['msgBody'] == 'dejar de recibir'])
-        # Crear 5 tarjetas en la primera fila
-        col1, col2, col3, col4= st.columns(4)
-
         # Estilos CSS personalizados
-        custom_css = """
-        <style>
-            .tarjeta {
-                padding: 20px;
-                border-radius: 5px;
-                box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-                background-color: #f9f9f9;
-                text-align: center;
-            }
-            .subheader {
-                font-size: 20px;
-                font-weight: bold;
-                color: #333;
-            }
-        </style>
-        """
-        custom_css2 = """ 
+        custom_css = """ 
         <style>
             .ag-format-container {
             width: 1142px;
@@ -461,9 +442,45 @@ def main():
             }
         </style>
         """
-
         # Agregar el estilo CSS personalizado utilizando st.markdown
-        st.markdown(custom_css2, unsafe_allow_html=True)
+        st.markdown(custom_css, unsafe_allow_html=True)
+        col_core_1, col_core_2 = st.columns(2)
+        tarjeta_clientes_contactados_col1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_title"> Clientes Totales Contactados <br> Numero</div></div></div></div></div>'
+        tarjeta_clientes_con_respuesta_col1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_title"> Clientes con respuesta <br> Numero</div></div></div></div></div>'
+        from io import BytesIO
+
+        # Genera un gráfico de Matplotlib
+        def generar_grafico():
+            # Crea tus datos de ejemplo (reemplaza esto con tus propios datos)
+            # Crea el gráfico
+            plt.figure(figsize=(8, 6))
+            plt.pie(labels=list(subs.keys()), x=list(subs.values()))
+            plt.title('Subscritos VS No Subscritos')
+
+            # Convierte el gráfico en una imagen
+            buffer = BytesIO()
+            plt.savefig(buffer, format='png')
+            buffer.seek(0)
+            
+            return buffer
+
+        # Tarjeta con el gráfico de Matplotlib
+        tarjeta_subscritos_vs_nosubscritos = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div class="ag-courses-item_link"><div class="ag-courses-item_title">Gráfico de Matplotlib</div></div></div></div></div>'
+
+        # Muestra la tarjeta en Streamlit
+        with col_core_1:
+            st.markdown(tarjeta_clientes_contactados_col1,unsafe_allow_html=True)
+            st.markdown(tarjeta_clientes_con_respuesta_col1, unsafe_allow_html=True)
+
+        with col_core_2:
+            st.markdown(tarjeta_subscritos_vs_nosubscritos, unsafe_allow_html=True)
+            st.image(generar_grafico(), use_column_width=True)
+
+
+        # Crear 5 tarjetas en la primera fila
+        col1, col2, col3, col4= st.columns(4)
+
+        
     
         # Variable de ejemplo con estilos en línea
         tarjeta1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><div class="ag-courses-item_title"><span class="adjustable-text"><br> Clientes Subscritos <br>{clientes_suscriptos}</span></div></div></div></div></div></div>'
