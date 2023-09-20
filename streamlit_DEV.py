@@ -453,8 +453,10 @@ def main():
         def generar_grafico():
             # Crea tus datos de ejemplo (reemplaza esto con tus propios datos)
             # Crea el gráfico
+            etiquetas = ['Categoría A', 'Categoría B', 'Categoría C', 'Categoría D']
+            valores = [30, 45, 15, 10]
             plt.figure(figsize=(8, 6))
-            plt.pie(labels=list(subs.keys()), x=list(subs.values()))
+            plt.pie(labels=etiquetas, x=valores)
             plt.title('Subscritos VS No Subscritos')
 
             # Convierte el gráfico en una imagen
