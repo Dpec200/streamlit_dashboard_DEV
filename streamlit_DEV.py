@@ -330,7 +330,7 @@ def main():
             .ag-courses_item {
             -ms-flex-preferred-size: calc(25% - 30px);
             flex-basis: calc(25% - 30px);
-            border: 2px solid #000;
+            border: 2px solid #15364C;
 
             margin: 0 15px 30px;
 
@@ -349,7 +349,7 @@ def main():
             .ag-courses-item_link:hover,
             .ag-courses-item_link:hover .ag-courses-item_date {
             text-decoration: none;
-            color: #000;
+            color: #15364C;
             }
             .ag-courses-item_link:hover .ag-courses-item_bg {
             -webkit-transform: scale(10);
@@ -363,7 +363,7 @@ def main():
 
             font-weight: bold;
             font-size: 23px;
-            color: #000;
+            color: #15364C;
             text-align: center;
 
 
@@ -389,12 +389,12 @@ def main():
             .ag-courses-item_bg {
             height: 128px;
             width: 128px;
-            background-color: #E5A102;
+            background-color: #E85A2E;
 
             z-index: 1;
             position: absolute;
-            top: -90px;
-            right: -90px;
+            top: -100px;
+            right: -100px;
 
             border-radius: 50%;
 
