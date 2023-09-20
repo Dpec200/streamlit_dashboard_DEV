@@ -324,7 +324,7 @@ def main():
             flex-basis: calc(40% - 30px);
             border: 2px solid #15364C;
 
-            
+            margin: 0 15px;
 
             overflow: hidden;
 
@@ -336,7 +336,7 @@ def main():
             display: inline-block;
             width: auto;
             height: auto;
-            margin: 0 15px 30px;
+            margin: 0 15px;
 
             overflow: hidden;
 
@@ -491,7 +491,6 @@ def main():
             valores = [30, 45, 15, 10]
             plt.figure(figsize=(5, 3), facecolor='none')
             plt.pie(labels=etiquetas, x=valores)
-            plt.title('Subscritos VS No Subscritos')
 
             # Convierte el gráfico en una imagen
             buffer = BytesIO()
