@@ -467,7 +467,7 @@ def main():
             # Crea el gráfico
             etiquetas = ['Categoría A', 'Categoría B', 'Categoría C', 'Categoría D']
             valores = [30, 45, 15, 10]
-            plt.figure(figsize=(6, 4))
+            plt.figure(figsize=(5, 3))
             plt.pie(labels=etiquetas, x=valores)
             plt.title('Subscritos VS No Subscritos')
 
@@ -479,7 +479,7 @@ def main():
             return imagen_codificada
 
         # Tarjeta con el gráfico de Matplotlib
-        tarjeta_subscritos_vs_nosubscritos = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div class="ag-courses-item_link"><div class="ag-courses-item_title">Gráfico de Matplotlib</div><img src="data:image/png;base64,{generar_grafico()}" alt="Gráfico de Pastel"></div></div></div></div>'
+        tarjeta_subscritos_vs_nosubscritos = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_core"><div class="ag-courses-item_link"><div class="ag-courses-item_title">Gráfico de Matplotlib</div><img src="data:image/png;base64,{generar_grafico()}" alt="Gráfico de Pastel"></div></div></div></div>'
 
         # Muestra la tarjeta en Streamlit
         with col_core_1:
