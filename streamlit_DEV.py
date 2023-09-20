@@ -52,241 +52,12 @@ def main():
     if not verificar_contraseña(businessnumber=businessnumber):
         st.stop()
 
-    # SNACKYS
-    def recompra_snackys():
-        # Conexión a la base de datos
-        db_username = st.secrets["DB_USERNAME"]
-        db_password = st.secrets["DB_PASSWORD"]
-        db_host = st.secrets["DB_HOST"]
-        db_token = st.secrets["DB_TOKEN"]
-        db_port = st.secrets["DB_PORT"]
-        conexion_string = f"mysql+pymysql://{db_username}:{db_password}@{db_host}:{db_port}/{db_token}"
-        engine = create_engine(conexion_string,pool_pre_ping=True)
-        # Query de recompra
-        query = f"""
-                SELECT e.*, c.businessPhoneNumber, c.clientName, c.userPhoneNumber
-                FROM experiencias e
-                JOIN clientes c ON (e.idCliente = c.idCliente)
-                WHERE e.journeyClassName IN ('GenerarRecompraGenteInactiva' ,'PreguntaSiClientePudoComprar', 'RecordatorioClienteQuiereRecomprar') AND c.businessPhoneNumber = {businessnumber} ;
-                """
-        df_recompra = pd.read_sql(query, engine)
-        df_recompra.drop("hora",axis=1,inplace=True)
-        # Aquí también ocultamos el DF
-        #st.write("Dataframe")
-        #st.dataframe(df_recompra)
-        st.title("Dashboard Recompra")
-        if (len(df_recompra) > 0 ):
-            cliente_pec = df_recompra['clientName'].unique().tolist()
-            st.subheader(f"Bienvenido {cliente_pec[0]}")
-        st.write("---")
-
-        # gráfico de torta
-        torta = df_recompra[(df_recompra["journeyClassName"] == "GenerarRecompraGenteInactiva") & (df_recompra["journeyStep"] == "RespuestaMensajeInicial")]
-        # Contamos la cantidad de + o - de recompra
-        recompras = {"Positiva":     torta[torta["msgBody"].str.contains("\+")].shape[0] ,
-                    "Negativa":    torta[torta["msgBody"].str.contains("\-")].shape[0]
-                    }
-
-        # Tarjetas
-        # Cantidad de conversaciones
-        cantidad_conversaciones = len(df_recompra.loc[(df_recompra["journeyClassName"] == "GenerarRecompraGenteInactiva") & (df_recompra["journeyStep"] == "RespuestaMensajeInicial")])
-        # Conversaciones terminadas
-        conversaciones_terminadas = len(df_recompra[df_recompra["msgBody"].str.contains("ff")])
-        # Conversaciones incompletas
-        conversaciones_incompletas = cantidad_conversaciones - conversaciones_terminadas
-        # Intencion de recompra
-        intencion_recompra = len(df_recompra.loc[(df_recompra["journeyStep"] == "RespuestaMensajeInicial") &  (df_recompra["msgBody"] == "Si, me encantaría (+)")]) 
-        # Recompra exitosa
-        recompra_exitosa = len(df_recompra.loc[(df_recompra["journeyClassName"] == "PreguntaSiClientePudoComprar")& (df_recompra["journeyStep"] == "RespuestaClienteQuiereComprarProducto") & (df_recompra["msgBody"].str.contains("\+"))]) + len(df_recompra.loc[(df_recompra["journeyClassName"] == "RecordatorioClienteQuiereRecomprar") & (df_recompra["msgBody"].str.contains("\+"))])
-        # Tia Snackys
-        tia_snackys =  len(df_recompra.loc[(df_recompra["msgBody"].str.contains("Tia Snackys"))])
-
-        # Crear 5 tarjetas en la primera fila
-        col1, col2, col3, col4 = st.columns(4)
-
-        # Estilos CSS personalizados
-        custom_css = """
+    custom_css = """ 
         <style>
-            .tarjeta {
-                padding: 20px;
-                border-radius: 5px;
-                box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-                background-color: #f9f9f9;
-                text-align: center;
+            .centered-subheader {
+            text-align: center;
             }
-            .subheader {
-                font-size: 20px;
-                font-weight: bold;
-                color: #333;
-            }
-        </style>
-        """
-        # Agregar el estilo CSS personalizado utilizando st.markdown
-        st.markdown(custom_css, unsafe_allow_html=True)
-    
-        # Variable de ejemplo con estilos en línea
-        tarjeta1 = f'<div class="tarjeta" style="font-size: 30px; color: #00008B;">{cantidad_conversaciones}</div>'
-        tarjeta2 = f'<div class="tarjeta" style="font-size: 30px; color: #00008B;">{intencion_recompra}</div>'
-        tarjeta3 = f'<div class="tarjeta" style="font-size: 30px; color: #00008B;">{recompra_exitosa}</div>'
-        tarjeta4 = f'<div class="tarjeta" style="font-size: 30px; color: #00008B;">{tia_snackys}</div>'
 
-        # Contenido de las tarjetas
-        with col1:
-            st.markdown('<div class="subheader">Cantidad de conversaciones</div>', unsafe_allow_html=True)
-            st.markdown(tarjeta1, unsafe_allow_html=True)
-            st.markdown('</div>', unsafe_allow_html=True)
-            st.write(f"+ Conversaciones terminadas: **{conversaciones_terminadas}**")
-            st.write(f"+ Conversaciones incompletas: **{conversaciones_incompletas}**")
-
-        with col2:
-            st.markdown('<div class="subheader">Intención de recompra</div>', unsafe_allow_html=True)
-            st.markdown(tarjeta2, unsafe_allow_html=True)
-            st.markdown('</div></div>', unsafe_allow_html=True)
-
-        with col3:
-            st.markdown('<div class="subheader">Recompra exitosa</div>', unsafe_allow_html=True)
-            st.markdown(tarjeta3, unsafe_allow_html=True)
-            st.markdown('</div></div>', unsafe_allow_html=True)
-
-        with col4:
-            st.markdown('<div class="subheader">Tia Snackys</div>', unsafe_allow_html=True)
-            st.markdown(tarjeta4, unsafe_allow_html=True)
-            st.markdown('</div></div>', unsafe_allow_html=True)
-            ver_clientes = st.checkbox("Mostrar clientes")
-
-        st.write("---")
-
-    
-        col5, col6 = st.columns(2)
-
-        with col5 :
-            # gráfico de cantidad de mensajes por fecha
-            df_recompra['fecha'] = pd.to_datetime(df_recompra['fecha'])
-            registros_por_dia = df_recompra['fecha'].value_counts().reset_index()
-            registros_por_dia.columns = ['fecha', 'cantidad']
-            fig, ax = plt.subplots()
-            fig.set_size_inches(6, 3) 
-            sns.set(style="whitegrid")
-            ax = sns.lineplot(x="fecha", y="cantidad", marker='o', color='b',data=registros_por_dia,linewidth=4)
-            plt.xlabel('')
-            plt.ylabel('')
-            date_form = DateFormatter("%d/%m")
-            ax.xaxis.set_major_formatter(date_form)
-            #plt.tight_layout() 
-            gráfico_fecha = plt.gcf()
-            st.write("#### **Total de mensajes**")
-            st.pyplot(gráfico_fecha)
-
-        with col6:
-            if len(df_recompra) > 0 :
-                # Extrae las etiquetas y los valores del diccionario
-                etiquetas = list(recompras.keys())
-                valores = list(recompras.values())
-                total = sum(valores)
-                # Colores para el gráfico
-                colores = ['tab:green', 'tab:red']
-                plt.figure(figsize=(6, 3))  
-                sns.set(style="whitegrid")
-                # Crea el gráfico de torta
-                plt.pie(valores, labels=etiquetas, colors=colores, autopct=lambda p: '{:.0f} ({:.1f}%)'.format(p * total / 100, p), startangle=90)
-                plt.axis('equal')  # Hace que el gráfico sea circular
-                gráfico_torta = plt.gcf()
-                st.write("#### **Intenciones de recompra**")
-                st.pyplot(gráfico_torta)
-            else:
-                st.write("sin datos")
-
-        
-        st.write("---")
-
-        if (len(df_recompra) > 0):
-            # gráfico de barras horizontales de categorias 
-            filtro = (df_recompra["msgBody"].str.contains("pp"))
-            data_counts = df_recompra.loc[filtro, "msgBody"].value_counts().reset_index()
-            data_counts.loc[(data_counts["msgBody"].str.contains("sazonador")),"msgBody" ] = "Sazonador"
-            data_counts.loc[(data_counts["msgBody"].str.contains("snack hipoalergénico")),"msgBody" ] = "Snack Hipoalergénico"
-            data_counts.loc[(data_counts["msgBody"].str.contains("masticable")),"msgBody" ] = "Masticable"
-            data_counts.loc[(data_counts["msgBody"].str.contains("snacks liofinizados")),"msgBody" ] = "Snacks Liofinizados"
-            data_counts.loc[(data_counts["msgBody"].str.contains("Busco algo para dar como premio")),"msgBody" ] = "Busco algo para dar como premio"
-                        # Configura el estilo de Seaborn (opcional)
-            sns.set(style="whitegrid")
-            # Crea el gráfico de barras horizontales
-            plt.figure(figsize=(10, 6))  # Ajusta el tamaño del gráfico si es necesario
-            barplot = sns.barplot(x="count", y="msgBody",data=data_counts, orient="h")
-            # Agrega etiquetas y título
-            plt.xlabel("")
-            plt.ylabel("")
-            gráfico_productos = plt.gcf()
-            st.write("#### **Productos más seleccionados**")
-            st.pyplot(gráfico_productos)
-        else: 
-             st.write("sin datos")
-
-        st.write("---")
-        
-        # para ver clientes de tia snackys
-        if ver_clientes :
-            st.markdown("## **Clientes que buscan contacto con Tia Snackys**:")
-            df_tia = df_recompra.loc[(df_recompra["msgBody"].str.contains("Tia Snackys")),["fecha","userPhoneNumber"]]
-            st.dataframe(df_tia)
-
-        st.write("---")
-
-
-    # SNACKYS
-    def oferta_snackys():
-        # Conexión a la base de datos
-        db_username = st.secrets["DB_USERNAME"]
-        db_password = st.secrets["DB_PASSWORD"]
-        db_host = st.secrets["DB_HOST"]
-        db_token = st.secrets["DB_TOKEN"]
-        db_port = st.secrets["DB_PORT"]
-        conexion_string = f"mysql+pymysql://{db_username}:{db_password}@{db_host}:{db_port}/{db_token}"
-        engine = create_engine(conexion_string,pool_pre_ping=True)
-        # Query de recompra
-        query = f"""
-                SELECT e.* , c.businessPhoneNumber, c.clientName, c.userPhoneNumber
-                FROM experiencias e
-                JOIN clientes c ON (e.idCliente = c.idCliente)
-                WHERE e.journeyClassName = 'SnackyOfertas' AND c.businessPhoneNumber = {businessnumber} ;
-                """
-        df_oferta_snackys = pd.read_sql(query, engine)
-        df_oferta_snackys.drop("hora",axis=1,inplace=True)
-        # Aquí también ocultamos el DF
-        #st.write("Dataframe")
-        #st.dataframe(df_oferta_snackys)
-        st.title("Dashboard ofertas")
-        if (len(df_oferta_snackys) > 0 ):
-            cliente_pec = df_oferta_snackys['clientName'].unique().tolist()
-            st.subheader(f"Bienvenido {cliente_pec[0]}")
-        st.write("---")
-
-        # gráfico de torta
-        torta = df_oferta_snackys[(df_oferta_snackys["journeyStep"] == "RespuestaMensajeInicial")]
-        # Contamos la cantidad de suscriptos
-        subs = {"Suscriptos":     torta[torta["msgBody"] == '1'].shape[0],
-                "No suscriptos":    torta[torta["msgBody"] == '0'].shape[0]
-                    }
-
-        # Tarjetas
-        # Cantidad de conversaciones
-        cantidad_conversaciones = len(df_oferta_snackys.loc[(df_oferta_snackys["journeyStep"] == "RespuestaMensajeInicial")].reset_index())
-        # motivos_clientes_no_interesados
-        con_motivo_no_interesados1 = len(df_oferta_snackys.loc[(df_oferta_snackys["journeyStep"] == "RespuestaMotivoClienteParaNoSuscripcion")].reset_index()) 
-        con_motivo_no_interesados = f"{con_motivo_no_interesados1} de {subs['No suscriptos']}" 
-        # Intencion de no dejar motivos
-        sin_motivo_no_interesado = len((df_oferta_snackys['msgBody'] == 0) & (df_oferta_snackys['journeyStep'] == 'RespuestaClienteQuiereDejarMotivo'))
-        # Conversaciones terminadas
-        # conversaciones_terminadas = len(df_oferta_snackys[df_oferta_snackys["msgBody"].str.contains("ff")]) + motivos_clientes_no_interesados1
-        # Conversaciones_incompletas 
-        # conversaciones_incompletas = cantidad_conversaciones - conversaciones_terminadas
-        # clientes suscriptos
-        clientes_suscriptos = subs["Suscriptos"]
-        # Clientes prefieren 'dejar de recibir'
-        clientes_dejar_de_recibir = len(df_oferta_snackys[df_oferta_snackys['msgBody'] == 'dejar de recibir'])
-        # Estilos CSS personalizados
-        custom_css = """ 
-        <style>
             .ag-format-container {
             width: 1142px;
             margin: 0 auto;
@@ -499,6 +270,241 @@ def main():
             }
         </style>
         """
+
+    # SNACKYS
+    def recompra_snackys():
+        # Conexión a la base de datos
+        db_username = st.secrets["DB_USERNAME"]
+        db_password = st.secrets["DB_PASSWORD"]
+        db_host = st.secrets["DB_HOST"]
+        db_token = st.secrets["DB_TOKEN"]
+        db_port = st.secrets["DB_PORT"]
+        conexion_string = f"mysql+pymysql://{db_username}:{db_password}@{db_host}:{db_port}/{db_token}"
+        engine = create_engine(conexion_string,pool_pre_ping=True)
+        # Query de recompra
+        query = f"""
+                SELECT e.*, c.businessPhoneNumber, c.clientName, c.userPhoneNumber
+                FROM experiencias e
+                JOIN clientes c ON (e.idCliente = c.idCliente)
+                WHERE e.journeyClassName IN ('GenerarRecompraGenteInactiva' ,'PreguntaSiClientePudoComprar', 'RecordatorioClienteQuiereRecomprar') AND c.businessPhoneNumber = {businessnumber} ;
+                """
+        df_recompra = pd.read_sql(query, engine)
+        df_recompra.drop("hora",axis=1,inplace=True)
+        # Aquí también ocultamos el DF
+        #st.write("Dataframe")
+        #st.dataframe(df_recompra)
+        st.title("Dashboard Recompra")
+        if (len(df_recompra) > 0 ):
+            cliente_pec = df_recompra['clientName'].unique().tolist()
+            st.subheader(f"Bienvenido {cliente_pec[0]}")
+        st.write("---")
+
+        # gráfico de torta
+        torta = df_recompra[(df_recompra["journeyClassName"] == "GenerarRecompraGenteInactiva") & (df_recompra["journeyStep"] == "RespuestaMensajeInicial")]
+        # Contamos la cantidad de + o - de recompra
+        recompras = {"Positiva":     torta[torta["msgBody"].str.contains("\+")].shape[0] ,
+                    "Negativa":    torta[torta["msgBody"].str.contains("\-")].shape[0]
+                    }
+
+        # Tarjetas
+        # Cantidad de conversaciones
+        cantidad_conversaciones = len(df_recompra.loc[(df_recompra["journeyClassName"] == "GenerarRecompraGenteInactiva") & (df_recompra["journeyStep"] == "RespuestaMensajeInicial")])
+        # Conversaciones terminadas
+        conversaciones_terminadas = len(df_recompra[df_recompra["msgBody"].str.contains("ff")])
+        # Conversaciones incompletas
+        conversaciones_incompletas = cantidad_conversaciones - conversaciones_terminadas
+        # Intencion de recompra
+        intencion_recompra = len(df_recompra.loc[(df_recompra["journeyStep"] == "RespuestaMensajeInicial") &  (df_recompra["msgBody"] == "Si, me encantaría (+)")]) 
+        # Recompra exitosa
+        recompra_exitosa = len(df_recompra.loc[(df_recompra["journeyClassName"] == "PreguntaSiClientePudoComprar")& (df_recompra["journeyStep"] == "RespuestaClienteQuiereComprarProducto") & (df_recompra["msgBody"].str.contains("\+"))]) + len(df_recompra.loc[(df_recompra["journeyClassName"] == "RecordatorioClienteQuiereRecomprar") & (df_recompra["msgBody"].str.contains("\+"))])
+        # Tia Snackys
+        tia_snackys =  len(df_recompra.loc[(df_recompra["msgBody"].str.contains("Tia Snackys"))])
+
+        # Crear 5 tarjetas en la primera fila
+        col1, col2, col3, col4 = st.columns(4)
+
+        # Estilos CSS personalizados
+        custom_css = """
+        <style>
+            .tarjeta {
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+                background-color: #f9f9f9;
+                text-align: center;
+            }
+            .subheader {
+                font-size: 20px;
+                font-weight: bold;
+                color: #333;
+            }
+        </style>
+        """
+        # Agregar el estilo CSS personalizado utilizando st.markdown
+        st.markdown(custom_css, unsafe_allow_html=True)
+    
+        # Variable de ejemplo con estilos en línea
+        tarjeta1 = f'<div class="tarjeta" style="font-size: 30px; color: #00008B;">{cantidad_conversaciones}</div>'
+        tarjeta2 = f'<div class="tarjeta" style="font-size: 30px; color: #00008B;">{intencion_recompra}</div>'
+        tarjeta3 = f'<div class="tarjeta" style="font-size: 30px; color: #00008B;">{recompra_exitosa}</div>'
+        tarjeta4 = f'<div class="tarjeta" style="font-size: 30px; color: #00008B;">{tia_snackys}</div>'
+
+        # Contenido de las tarjetas
+        with col1:
+            st.markdown('<div class="subheader">Cantidad de conversaciones</div>', unsafe_allow_html=True)
+            st.markdown(tarjeta1, unsafe_allow_html=True)
+            st.markdown('</div>', unsafe_allow_html=True)
+            st.write(f"+ Conversaciones terminadas: **{conversaciones_terminadas}**")
+            st.write(f"+ Conversaciones incompletas: **{conversaciones_incompletas}**")
+
+        with col2:
+            st.markdown('<div class="subheader">Intención de recompra</div>', unsafe_allow_html=True)
+            st.markdown(tarjeta2, unsafe_allow_html=True)
+            st.markdown('</div></div>', unsafe_allow_html=True)
+
+        with col3:
+            st.markdown('<div class="subheader">Recompra exitosa</div>', unsafe_allow_html=True)
+            st.markdown(tarjeta3, unsafe_allow_html=True)
+            st.markdown('</div></div>', unsafe_allow_html=True)
+
+        with col4:
+            st.markdown('<div class="subheader">Tia Snackys</div>', unsafe_allow_html=True)
+            st.markdown(tarjeta4, unsafe_allow_html=True)
+            st.markdown('</div></div>', unsafe_allow_html=True)
+            ver_clientes = st.checkbox("Mostrar clientes")
+
+        st.write("---")
+
+    
+        col5, col6 = st.columns(2)
+
+        with col5 :
+            # gráfico de cantidad de mensajes por fecha
+            df_recompra['fecha'] = pd.to_datetime(df_recompra['fecha'])
+            registros_por_dia = df_recompra['fecha'].value_counts().reset_index()
+            registros_por_dia.columns = ['fecha', 'cantidad']
+            fig, ax = plt.subplots()
+            fig.set_size_inches(6, 3) 
+            sns.set(style="whitegrid")
+            ax = sns.lineplot(x="fecha", y="cantidad", marker='o', color='b',data=registros_por_dia,linewidth=4)
+            plt.xlabel('')
+            plt.ylabel('')
+            date_form = DateFormatter("%d/%m")
+            ax.xaxis.set_major_formatter(date_form)
+            #plt.tight_layout() 
+            gráfico_fecha = plt.gcf()
+            st.write("#### **Total de mensajes**")
+            st.pyplot(gráfico_fecha)
+
+        with col6:
+            if len(df_recompra) > 0 :
+                # Extrae las etiquetas y los valores del diccionario
+                etiquetas = list(recompras.keys())
+                valores = list(recompras.values())
+                total = sum(valores)
+                # Colores para el gráfico
+                colores = ['tab:green', 'tab:red']
+                plt.figure(figsize=(6, 3))  
+                sns.set(style="whitegrid")
+                # Crea el gráfico de torta
+                plt.pie(valores, labels=etiquetas, colors=colores, autopct=lambda p: '{:.0f} ({:.1f}%)'.format(p * total / 100, p), startangle=90)
+                plt.axis('equal')  # Hace que el gráfico sea circular
+                gráfico_torta = plt.gcf()
+                st.write("#### **Intenciones de recompra**")
+                st.pyplot(gráfico_torta)
+            else:
+                st.write("sin datos")
+
+        
+        st.write("---")
+
+        if (len(df_recompra) > 0):
+            # gráfico de barras horizontales de categorias 
+            filtro = (df_recompra["msgBody"].str.contains("pp"))
+            data_counts = df_recompra.loc[filtro, "msgBody"].value_counts().reset_index()
+            data_counts.loc[(data_counts["msgBody"].str.contains("sazonador")),"msgBody" ] = "Sazonador"
+            data_counts.loc[(data_counts["msgBody"].str.contains("snack hipoalergénico")),"msgBody" ] = "Snack Hipoalergénico"
+            data_counts.loc[(data_counts["msgBody"].str.contains("masticable")),"msgBody" ] = "Masticable"
+            data_counts.loc[(data_counts["msgBody"].str.contains("snacks liofinizados")),"msgBody" ] = "Snacks Liofinizados"
+            data_counts.loc[(data_counts["msgBody"].str.contains("Busco algo para dar como premio")),"msgBody" ] = "Busco algo para dar como premio"
+                        # Configura el estilo de Seaborn (opcional)
+            sns.set(style="whitegrid")
+            # Crea el gráfico de barras horizontales
+            plt.figure(figsize=(10, 6))  # Ajusta el tamaño del gráfico si es necesario
+            barplot = sns.barplot(x="count", y="msgBody",data=data_counts, orient="h")
+            # Agrega etiquetas y título
+            plt.xlabel("")
+            plt.ylabel("")
+            gráfico_productos = plt.gcf()
+            st.write("#### **Productos más seleccionados**")
+            st.pyplot(gráfico_productos)
+        else: 
+             st.write("sin datos")
+
+        st.write("---")
+        
+        # para ver clientes de tia snackys
+        if ver_clientes :
+            st.markdown("## **Clientes que buscan contacto con Tia Snackys**:")
+            df_tia = df_recompra.loc[(df_recompra["msgBody"].str.contains("Tia Snackys")),["fecha","userPhoneNumber"]]
+            st.dataframe(df_tia)
+
+        st.write("---")
+
+
+    # SNACKYS
+    def oferta_snackys():
+        # Conexión a la base de datos
+        db_username = st.secrets["DB_USERNAME"]
+        db_password = st.secrets["DB_PASSWORD"]
+        db_host = st.secrets["DB_HOST"]
+        db_token = st.secrets["DB_TOKEN"]
+        db_port = st.secrets["DB_PORT"]
+        conexion_string = f"mysql+pymysql://{db_username}:{db_password}@{db_host}:{db_port}/{db_token}"
+        engine = create_engine(conexion_string,pool_pre_ping=True)
+        # Query de recompra
+        query = f"""
+                SELECT e.* , c.businessPhoneNumber, c.clientName, c.userPhoneNumber
+                FROM experiencias e
+                JOIN clientes c ON (e.idCliente = c.idCliente)
+                WHERE e.journeyClassName = 'SnackyOfertas' AND c.businessPhoneNumber = {businessnumber} ;
+                """
+        df_oferta_snackys = pd.read_sql(query, engine)
+        df_oferta_snackys.drop("hora",axis=1,inplace=True)
+        # Aquí también ocultamos el DF
+        #st.write("Dataframe")
+        #st.dataframe(df_oferta_snackys)
+        st.title("Dashboard ofertas")
+        if (len(df_oferta_snackys) > 0 ):
+            cliente_pec = df_oferta_snackys['clientName'].unique().tolist()
+            st.subheader(f"Bienvenido {cliente_pec[0]}", class_="centered-subheader")
+        st.write("---")
+
+        # gráfico de torta
+        torta = df_oferta_snackys[(df_oferta_snackys["journeyStep"] == "RespuestaMensajeInicial")]
+        # Contamos la cantidad de suscriptos
+        subs = {"Suscriptos":     torta[torta["msgBody"] == '1'].shape[0],
+                "No suscriptos":    torta[torta["msgBody"] == '0'].shape[0]
+                    }
+
+        # Tarjetas
+        # Cantidad de conversaciones
+        cantidad_conversaciones = len(df_oferta_snackys.loc[(df_oferta_snackys["journeyStep"] == "RespuestaMensajeInicial")].reset_index())
+        # motivos_clientes_no_interesados
+        con_motivo_no_interesados1 = len(df_oferta_snackys.loc[(df_oferta_snackys["journeyStep"] == "RespuestaMotivoClienteParaNoSuscripcion")].reset_index()) 
+        con_motivo_no_interesados = f"{con_motivo_no_interesados1} de {subs['No suscriptos']}" 
+        # Intencion de no dejar motivos
+        sin_motivo_no_interesado = len((df_oferta_snackys['msgBody'] == 0) & (df_oferta_snackys['journeyStep'] == 'RespuestaClienteQuiereDejarMotivo'))
+        # Conversaciones terminadas
+        # conversaciones_terminadas = len(df_oferta_snackys[df_oferta_snackys["msgBody"].str.contains("ff")]) + motivos_clientes_no_interesados1
+        # Conversaciones_incompletas 
+        # conversaciones_incompletas = cantidad_conversaciones - conversaciones_terminadas
+        # clientes suscriptos
+        clientes_suscriptos = subs["Suscriptos"]
+        # Clientes prefieren 'dejar de recibir'
+        clientes_dejar_de_recibir = len(df_oferta_snackys[df_oferta_snackys['msgBody'] == 'dejar de recibir'])
+        # Estilos CSS personalizados
+        
         # Agregar el estilo CSS personalizado utilizando st.markdown
         st.markdown(custom_css, unsafe_allow_html=True)
         col_core_1, col_core_2 = st.columns(2)
