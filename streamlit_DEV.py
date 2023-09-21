@@ -471,7 +471,7 @@ def main():
         # Aquí también ocultamos el DF
         #st.write("Dataframe")
         #st.dataframe(df_oferta_snackys)
-        st.markdown(f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><span class="adjustable-text">Dashboard Ofertas</span></div></div></div></div></div></div>',unsafe_allow_html=True,)
+        st.markdown(f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><span class="adjustable-text">{businessnumber}</span></div></div></div></div></div></div>',unsafe_allow_html=True,)
         if (len(df_oferta_snackys) > 0 ):
             cliente_pec = df_oferta_snackys['clientName'].unique().tolist()
             # st.subheader(f"Bienvenido {cliente_pec[0]}", class_="centered-subheader")
