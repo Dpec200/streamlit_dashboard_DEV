@@ -53,7 +53,6 @@ def main():
         st.stop()
     else:
         businessnumber = verificar_contraseña(token=token)[1]
-    f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><span class="adjustable-text">{businessnumber}</span></div></div></div></div></div></div>'
     custom_css = """ 
         <style>
             .ag-format-container {
