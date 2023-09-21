@@ -104,6 +104,7 @@ def main():
             -ms-flex-preferred-size: calc(70% - 30px);
             flex-basis: calc(70% - 30px);
             height: auto;
+            weight: auto;
 
             overflow: hidden;
 
@@ -114,7 +115,7 @@ def main():
             -ms-flex-preferred-size: calc(40% - 30px);
             flex-basis: calc(40% - 30px);
             height: auto;
-
+            weight: auto;
             overflow: hidden;
 
             border-radius: 15px;
