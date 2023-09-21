@@ -53,7 +53,7 @@ def main():
         st.stop()
     else:
         businessnumber = verificar_contraseña(token=token)[1]
-
+    f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><span class="adjustable-text">{businessnumber}</span></div></div></div></div></div></div>'
     custom_css = """ 
         <style>
             .ag-format-container {
@@ -100,6 +100,17 @@ def main():
             border-radius: 28px;
             }
 
+            .ag-courses_item_gris {
+            -ms-flex-preferred-size: calc(40% - 30px);
+            flex-basis: calc(40% - 30px);
+            height: auto;
+
+            overflow: hidden;
+
+            border-radius: 28px;
+            }
+
+
             .ag-courses_item_core_2 {
             border: 2px solid #15364C;
             display: inline-block;
@@ -114,6 +125,15 @@ def main():
             .ag-courses-item_link {
             display: block;
             background-color: #FFF;
+
+            overflow: hidden;
+
+            position: relative;
+            }
+
+            .ag-courses-item_link_gris {
+            display: block;
+            background-color: #D1D1D1;
 
             overflow: hidden;
 
@@ -471,11 +491,11 @@ def main():
         # Aquí también ocultamos el DF
         #st.write("Dataframe")
         #st.dataframe(df_oferta_snackys)
-        st.markdown(f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><span class="adjustable-text">{businessnumber}</span></div></div></div></div></div></div>',unsafe_allow_html=True,)
+        st.markdown(f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_gris"><div href="#" class="ag-courses-item_link_gris"><span class="adjustable-text">Dashboard de Ofertas</span></div></div></div></div></div></div>',unsafe_allow_html=True)
         if (len(df_oferta_snackys) > 0 ):
             cliente_pec = df_oferta_snackys['clientName'].unique().tolist()
             # st.subheader(f"Bienvenido {cliente_pec[0]}", class_="centered-subheader")
-            st.markdown(f"<h1 style=' font-size: 40px;'>Bienvenido {cliente_pec[0]}</h1>",unsafe_allow_html=True,)
+            st.markdown(f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_gris"><div href="#" class="ag-courses-item_link_gris"><span class="adjustable-text">Bienvenido {cliente_pec[0]}</span></div></div></div></div></div></div>',unsafe_allow_html=True,)
         st.write("---")
 
         # gráfico de torta
@@ -547,11 +567,11 @@ def main():
         
     
         # Variable de ejemplo con estilos en línea
-        tarjeta1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><div class="ag-courses-item_title"><span class="adjustable-text"><br> Clientes Subscritos <br>{clientes_suscriptos}</span></div></div></div></div></div></div>'
-        tarjeta2 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><div class="ag-courses-item_title"><span class="adjustable-text"> Clientes que se dieron de baja <br>{clientes_dejar_de_recibir}</span></div></div></div></div></div></div>'
-        tarjeta3 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><div class="ag-courses-item_title"><span class="adjustable-text"> Clientes que dejaron motivos <br>{con_motivo_no_interesados}</span></div></div></div></div></div></div>'
+        tarjeta1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><div class="ag-courses-item_title"><span class="adjustable-text"><br> Subscritos <br>{clientes_suscriptos}</span></div></div></div></div></div></div>'
+        tarjeta2 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><div class="ag-courses-item_title"><span class="adjustable-text"> Dados de baja <br>{clientes_dejar_de_recibir}</span></div></div></div></div></div></div>'
+        tarjeta3 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><div class="ag-courses-item_title"><span class="adjustable-text"> Cantidad de motivos <br>{con_motivo_no_interesados}</span></div></div></div></div></div></div>'
         tarjeta4 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><div class="ag-courses-item_title"><span class="adjustable-text"> Clientes que no dejaron motivos <br>{sin_motivo_no_interesado}</span></div></div></div></div></div></div>'
-
+        st.markdown(f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_gris"><div href="#" class="ag-courses-item_link_gris"><span class="adjustable-text">Comportamiendo del cliente</span></div></div></div></div></div></div>',unsafe_allow_html=True)
         # Contenido de las tarjetas
         with col1:
             # st.markdown('<div class="ag-courses-item_title">Cantidad de clientes que dejaron motivos</div>', unsafe_allow_html=True)
