@@ -112,8 +112,8 @@ def main():
             }
 
             .ag-courses_item_gris_subtitle {
-            -ms-flex-preferred-size: calc(40% - 30px);
-            flex-basis: calc(40% - 30px);
+            -ms-flex-preferred-size: auto;
+            flex-basis: auto;
             height: auto;
             weight: auto;
             overflow: hidden;
