@@ -179,7 +179,7 @@ def main():
             transform: scale(10);
             }
             .ag-courses-item_title {
-            margin: 0 0 5px;
+            margin: 10px 0 5px;
 
             overflow: hidden;
 
@@ -577,7 +577,7 @@ def main():
         
     
         # Variable de ejemplo con estilos en línea
-        tarjeta1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><div class="ag-courses-item_title"><span class="adjustable-text"><br> Subscritos <br>{clientes_suscriptos}</span></div></div></div></div></div></div>'
+        tarjeta1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><div class="ag-courses-item_title"><span class="adjustable-text"> Subscritos <br>{clientes_suscriptos}</span></div></div></div></div></div></div>'
         tarjeta2 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><div class="ag-courses-item_title"><span class="adjustable-text"> Dados de baja <br>{clientes_dejar_de_recibir}</span></div></div></div></div></div></div>'
         tarjeta3 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><div class="ag-courses-item_title"><span class="adjustable-text"> Cantidad de motivos <br>{con_motivo_no_interesados}</span></div></div></div></div></div></div>'
         tarjeta4 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><div class="ag-courses-item_title"><span class="adjustable-text"> Clientes que no dejaron motivos <br>{sin_motivo_no_interesado}</span></div></div></div></div></div></div>'
