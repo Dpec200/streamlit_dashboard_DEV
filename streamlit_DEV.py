@@ -152,7 +152,7 @@ def main():
 
             .ag-courses-item_link_core {
             display: block;
-            background-color: #E85A2E;
+            background-color: #F5B7B1;
             height: 14vh;
             overflow: hidden;
             margin-bottom: 1px;
@@ -161,7 +161,7 @@ def main():
             }
             .ag-courses-item_link_core_2 {
             display: block;
-            background-color: #E85A2E;
+            background-color: #F5B7B1;
             height: 40vh;
             overflow: hidden;
 
@@ -225,7 +225,7 @@ def main():
             .ag-courses-item_bg {
             height: 128px;
             width: 128px;
-            background-color: #E85A2E;
+            background-color: #F5B7B1;
 
             z-index: 1;
             position: absolute;
@@ -580,7 +580,7 @@ def main():
         tarjeta1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><div class="ag-courses-item_title"><span class="adjustable-text"> Subscritos <br>{clientes_suscriptos}</span></div></div></div></div></div></div>'
         tarjeta2 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><div class="ag-courses-item_title"><span class="adjustable-text"> Dados de baja <br>{clientes_dejar_de_recibir}</span></div></div></div></div></div></div>'
         tarjeta3 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><div class="ag-courses-item_title"><span class="adjustable-text"> Dejaron motivos <br>{con_motivo_no_interesados}</span></div></div></div></div></div></div>'
-        tarjeta4 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><div class="ag-courses-item_title"><span class="adjustable-text"> Noo dejaron motivos <br>{sin_motivo_no_interesado}</span></div></div></div></div></div></div>'
+        tarjeta4 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><div class="ag-courses-item_title"><span class="adjustable-text"> No dejaron motivos <br>{sin_motivo_no_interesado}</span></div></div></div></div></div></div>'
         
         # Contenido de las tarjetas
         with col1:
