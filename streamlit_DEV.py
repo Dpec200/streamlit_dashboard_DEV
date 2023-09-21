@@ -44,15 +44,16 @@ def main():
     def verificar_contraseña(token):
         for elemento in df_password["token"]:
             if (token == str(elemento)):
-                global businessnumber
                 businessnumber = int(df_password['businessPhoneNumber'][df_password['token'] == token][0])
-                return True
+                return [True, businessnumber]
             else:
                 pass
         return False
     
     if not verificar_contraseña(token=token):
         st.stop()
+    else:
+        businessnumber = verificar_contraseña(token=token)[1]
 
     custom_css = """ 
         <style>
