@@ -464,7 +464,7 @@ def main():
                 SELECT e.* , c.businessPhoneNumber, c.clientName, c.userPhoneNumber
                 FROM experiencias e
                 JOIN clientes c ON (e.idCliente = c.idCliente)
-                WHERE e.journeyClassName = 'SnackyOfertas' AND c.businessPhoneNumber = {businessnumber} ;
+                WHERE e.journeyClassName = 'SnackyOfertasSuscripcion' AND c.businessPhoneNumber = {businessnumber} ;
                 """
         df_oferta_snackys = pd.read_sql(query, engine)
         df_oferta_snackys.drop("hora",axis=1,inplace=True)
