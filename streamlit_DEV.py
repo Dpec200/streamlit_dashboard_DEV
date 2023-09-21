@@ -16,8 +16,8 @@ st.set_page_config(
     )
 
 try:
-    businessnumber = st.experimental_get_query_params()
-    businessnumber = int(businessnumber['token'][0])
+    token = st.experimental_get_query_params()
+    token = str(token['token'][0])
 except:
     st.stop()
 
@@ -35,39 +35,31 @@ def main():
     engine = create_engine(conexion_string,pool_pre_ping=True)
     # Query de consulta para la contraseña
     query = """
-            SELECT DISTINCT businessPhoneNumber
+            SELECT DISTINCT businessPhoneNumber, token
             FROM clientes ;
     """
     df_password = pd.read_sql(query, engine)
-
+    businessnumber = None
     # Función para verificar la contraseña ingresada
-    def verificar_contraseña(businessnumber):
-        for elemento in df_password["businessPhoneNumber"]:
-            if (businessnumber == int(elemento)):
+    def verificar_contraseña(token):
+        for elemento in df_password["token"]:
+            if (token == str(elemento)):
+                global businessnumber
+                businessnumber = int(df_password['businessPhoneNumber'][df_password['token'] == token][0])
                 return True
             else:
                 pass
         return False
     
-    if not verificar_contraseña(businessnumber=businessnumber):
+    if not verificar_contraseña(token=token):
         st.stop()
 
     custom_css = """ 
         <style>
-            .centered-title {
-            text-align: center;
-            font-size: 66%;
-            }
-            .centered-subheader {
-            text-align: center;
-            font-size: 33%;
-            }
-
             .ag-format-container {
             width: 1142px;
             margin: 0 auto;
             }
-
 
             body {
             background-color: #FFF;
@@ -479,7 +471,7 @@ def main():
         # Aquí también ocultamos el DF
         #st.write("Dataframe")
         #st.dataframe(df_oferta_snackys)
-        st.markdown(f"<h1 style=' font-size: 70px;'>Dashboard Ofertas</h1>",unsafe_allow_html=True,)
+        st.markdown(f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><span class="adjustable-text">Dashboard Ofertas</span></div></div></div></div></div></div>',unsafe_allow_html=True,)
         if (len(df_oferta_snackys) > 0 ):
             cliente_pec = df_oferta_snackys['clientName'].unique().tolist()
             # st.subheader(f"Bienvenido {cliente_pec[0]}", class_="centered-subheader")
@@ -537,7 +529,7 @@ def main():
             return imagen_codificada
 
         # Tarjeta con el gráfico de Matplotlib
-        tarjeta_subscritos_vs_nosubscritos = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_core_2"><div class="ag-courses-item_link_core_2"><div class="ag-courses-item_title_core">Gráfico de Matplotlib</div><img src="data:image/png;base64,{generar_grafico()}" alt="Gráfico de Pastel"></div></div></div></div>'
+        tarjeta_subscritos_vs_nosubscritos = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_core_2"><div class="ag-courses-item_link_core_2"><div class="ag-courses-item_title_core">Clientes Subscritos VS No Subscritos</div><img src="data:image/png;base64,{generar_grafico()}" alt="Gráfico de Pastel"></div></div></div></div>'
 
         # Muestra la tarjeta en Streamlit
         with col_core_1:
@@ -547,6 +539,7 @@ def main():
         with col_core_2:
             st.markdown(tarjeta_subscritos_vs_nosubscritos, unsafe_allow_html=True)
 
+        st.write('---')
 
         # Crear 5 tarjetas en la primera fila
         col1, col2, col3, col4= st.columns(4)
