@@ -39,7 +39,6 @@ def main():
             FROM clientes ;
     """
     df_password = pd.read_sql(query, engine)
-    businessnumber = None
     # Función para verificar la contraseña ingresada
     def verificar_contraseña(token):
         for elemento in df_password["token"]:
@@ -48,9 +47,9 @@ def main():
                 return [True, businessnumber]
             else:
                 pass
-        return False
+        return [False]
     
-    if not verificar_contraseña(token=token):
+    if not verificar_contraseña(token=token)[0]:
         st.stop()
     else:
         businessnumber = verificar_contraseña(token=token)[1]
