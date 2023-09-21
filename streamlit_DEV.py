@@ -100,7 +100,17 @@ def main():
             border-radius: 28px;
             }
 
-            .ag-courses_item_gris {
+            .ag-courses_item_gris_title {
+            -ms-flex-preferred-size: calc(70% - 30px);
+            flex-basis: calc(70% - 30px);
+            height: auto;
+
+            overflow: hidden;
+
+            border-radius: 15px;
+            }
+
+            .ag-courses_item_gris_subtitle {
             -ms-flex-preferred-size: calc(40% - 30px);
             flex-basis: calc(40% - 30px);
             height: auto;
@@ -109,7 +119,6 @@ def main():
 
             border-radius: 15px;
             }
-
 
             .ag-courses_item_core_2 {
             border: 2px solid #15364C;
@@ -491,11 +500,11 @@ def main():
         # Aquí también ocultamos el DF
         #st.write("Dataframe")
         #st.dataframe(df_oferta_snackys)
-        st.markdown(f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_gris"><div href="#" class="ag-courses-item_link_gris"><span class="adjustable-text" style="font-size: 70px;">Dashboard de Ofertas</span></div></div></div></div></div></div>',unsafe_allow_html=True)
+        st.markdown(f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_gris_title"><div href="#" class="ag-courses-item_link_gris"><span class="adjustable-text" style="font-size: 70px;">Dashboard de Ofertas</span></div></div></div></div></div></div>',unsafe_allow_html=True)
         if (len(df_oferta_snackys) > 0 ):
             cliente_pec = df_oferta_snackys['clientName'].unique().tolist()
             # st.subheader(f"Bienvenido {cliente_pec[0]}", class_="centered-subheader")
-            st.markdown(f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_gris"><div href="#" class="ag-courses-item_link_gris"><span class="adjustable-text" style="font-size: 40px;">Bienvenido {cliente_pec[0]}</span></div></div></div></div></div></div>',unsafe_allow_html=True,)
+            st.markdown(f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_gris_subtitle"><div href="#" class="ag-courses-item_link_gris"><span class="adjustable-text" style="font-size: 40px;">Bienvenido {cliente_pec[0]}</span></div></div></div></div></div></div>',unsafe_allow_html=True,)
         st.write("---")
 
         # gráfico de torta
@@ -560,7 +569,7 @@ def main():
             st.markdown(tarjeta_subscritos_vs_nosubscritos, unsafe_allow_html=True)
 
         st.write('---')
-        st.markdown(f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_gris"><div href="#" class="ag-courses-item_link_gris"><span class="adjustable-text" style="font-size: 40px;">Comportamiendo del cliente</span></div></div></div></div></div></div>',unsafe_allow_html=True)
+        st.markdown(f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_gris_subtitle"><div href="#" class="ag-courses-item_link_gris"><span class="adjustable-text" style="font-size: 40px;">Comportamiendo del cliente</span></div></div></div></div></div></div>',unsafe_allow_html=True)
         # Crear 5 tarjetas en la primera fila
         col1, col2, col3, col4= st.columns(4)
 
