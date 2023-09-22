@@ -549,7 +549,7 @@ def main():
             # Extrae las etiquetas y los valores del diccionario
             etiquetas = list(subs.keys())
             valores = list(subs.values())
-            print(list(subs.values()))
+            
             total = sum(valores)
             # Colores para el gráfico
             # colores = ['tab:green', 'tab:red']
@@ -557,7 +557,8 @@ def main():
             sns.set(style="whitegrid")
             # Crea el gráfico de torta
             plt.pie(x=[30,30], labels=['sub', 'nosub'])
-            plt.axis('equal')  # Hace que el gráfico sea circular
+            plt.axis('equal')
+            plt.title(str(list(subs.values())))  # Hace que el gráfico sea circular
 
             # Convierte el gráfico en una imagen
             buffer = BytesIO()
