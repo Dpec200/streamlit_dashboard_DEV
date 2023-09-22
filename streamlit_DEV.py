@@ -555,7 +555,7 @@ def main():
             plt.figure(figsize=(6, 3))  
             sns.set(style="whitegrid")
             # Crea el gráfico de torta
-            plt.pie(valores, labels=['sub', 'nosub'])
+            plt.pie(x=[30,30], labels=['sub', 'nosub'])
             plt.axis('equal')  # Hace que el gráfico sea circular
 
             # Convierte el gráfico en una imagen
