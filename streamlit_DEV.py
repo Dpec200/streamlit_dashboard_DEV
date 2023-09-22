@@ -523,7 +523,7 @@ def main():
         con_motivo_no_interesados1 = len(df_oferta_snackys.loc[(df_oferta_snackys["journeyStep"] == "RespuestaMotivoClienteParaNoSuscripcion") & (df_oferta_snackys['journeyClassName'] == 'SnackyOfertasSuscripcion')].reset_index()) 
         con_motivo_no_interesados = f"{con_motivo_no_interesados1} de {subs['No suscriptos']}" 
         # Intencion de no dejar motivos
-        sin_motivo_no_interesado = len((df_oferta_snackys['msgBody'] == 2) & (df_oferta_snackys['journeyStep'] == 'RespuestaClienteQuiereDejarMotivo') & (df_oferta_snackys['journeyClassName'] == 'SnackyOfertasSuscripcion'))
+        sin_motivo_no_interesado = len(df_oferta_snackys[(df_oferta_snackys['msgBody'] == 2) & (df_oferta_snackys['journeyStep'] == 'RespuestaClienteQuiereDejarMotivo') & (df_oferta_snackys['journeyClassName'] == 'SnackyOfertasSuscripcion')])
         # Conversaciones terminadas
         # conversaciones_terminadas = len(df_oferta_snackys[df_oferta_snackys["msgBody"].str.contains("ff")]) + motivos_clientes_no_interesados1
         # Conversaciones_incompletas 
@@ -613,9 +613,8 @@ def main():
             
         st.write("---")
 
-        grafico_barras_data = df_oferta_snackys['msgBody','fecha']
-        # [(df_oferta_snackys['msgBody'].isin([1,2])) & (df_oferta_snackys['journeyClassName'] == 'SnackyOfertas') & (df_oferta_snackys['journeyStep'] == "RespuestaMensajeInicial")]
-        # df_count = grafico_barras_data.groupby(['fecha', 'msgBody']).size().unstack(fill_value=0).reset_index()
+        grafico_barras_data = df_oferta_snackys[['msgBody','fecha']][(df_oferta_snackys['msgBody'].isin([1,2])) & (df_oferta_snackys['journeyClassName'] == 'SnackyOfertas') & (df_oferta_snackys['journeyStep'] == "RespuestaMensajeInicial")]
+        df_count = grafico_barras_data.groupby(['fecha', 'msgBody']).size().unstack(fill_value=0).reset_index()
         col4 = st.columns(1)
 
         # with col4 :
@@ -655,26 +654,26 @@ def main():
         #     else:
         #         st.write("sin datos")
         
-        # with col4:
+        with col4:
             # Datos de ejemplo (reemplázalos con tus propios datos)
-            # categorias = ['Si', 'No']
-            # valores_1 = [10, 15]
-            # valores_2 = [5, 10]
+            categorias = ['Si', 'No']
+            valores_1 = [10, 15]
+            valores_2 = [5, 10]
 
-            # # Crear un DataFrame de pandas (opcional, pero útil para Seaborn)
-            # df = pd.DataFrame({'Categorías': categorias, 'Valor 1': valores_1, 'Valor 2': valores_2})
+            # Crear un DataFrame de pandas (opcional, pero útil para Seaborn)
+            df = pd.DataFrame({'Categorías': categorias, 'Valor 1': valores_1, 'Valor 2': valores_2})
 
-            # # Crear el gráfico de barras apiladas vertical
-            # sns.set(style="whitegrid")
-            # plt.figure(figsize=(8, 6))
-            # sns.barplot(x='fecha', y='1', data=df_count, color='blue', label='Valor 1')
-            # sns.barplot(x='fecha', y='2', data=df_count, color='red', bottom=valores_1, label='Valor 2')
-            # plt.xlabel('Categorías')
-            # plt.ylabel('Valores')
-            # plt.title('Gráfico de Barras Apiladas Vertical')
-            # plt.legend()
-            # gráfico12 = plt.gcf()
-            # st.pyplot(gráfico12)
+            # Crear el gráfico de barras apiladas vertical
+            sns.set(style="whitegrid")
+            plt.figure(figsize=(8, 6))
+            sns.barplot(x='fecha', y='1', data=df_count, color='blue', label='Valor 1')
+            sns.barplot(x='fecha', y='2', data=df_count, color='red', bottom=valores_1, label='Valor 2')
+            plt.xlabel('Categorías')
+            plt.ylabel('Valores')
+            plt.title('Gráfico de Barras Apiladas Vertical')
+            plt.legend()
+            gráfico12 = plt.gcf()
+            st.pyplot(gráfico12)
 
         st.write("---")
  
