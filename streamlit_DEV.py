@@ -546,12 +546,17 @@ def main():
 
         # Genera un gráfico de Matplotlib
         def generar_grafico():
-            # Crea tus datos de ejemplo (reemplaza esto con tus propios datos)
-            # Crea el gráfico
-            etiquetas = ['Categoría A', 'Categoría B', 'Categoría C', 'Categoría D']
-            valores = [30, 45, 15, 10]
-            plt.figure(figsize=(5, 3), facecolor='none')
-            plt.pie(labels=etiquetas, x=valores)
+            # Extrae las etiquetas y los valores del diccionario
+            etiquetas = list(subs.keys())
+            valores = list(subs.values())
+            total = sum(valores)
+            # Colores para el gráfico
+            colores = ['tab:green', 'tab:red']
+            plt.figure(figsize=(6, 3))  
+            sns.set(style="whitegrid")
+            # Crea el gráfico de torta
+            plt.pie(valores, labels=etiquetas, colors=colores, autopct=lambda p: '{:.0f} ({:.1f}%)'.format(p * total / 100, p), startangle=90)
+            plt.axis('equal')  # Hace que el gráfico sea circular
 
             # Convierte el gráfico en una imagen
             buffer = BytesIO()
@@ -611,7 +616,7 @@ def main():
         st.write("---")
 
     
-        col4, col5 = st.columns(2)
+        col4, col5, col6 = st.columns(3)
 
         with col4 :
             # gráfico de cantidad de mensajes por fecha
@@ -649,6 +654,27 @@ def main():
                 st.pyplot(gráfico11)
             else:
                 st.write("sin datos")
+        
+        with col6:
+            # Datos de ejemplo (reemplázalos con tus propios datos)
+            categorias = ['A', 'B', 'C', 'D']
+            valores_1 = [10, 15, 5, 20]
+            valores_2 = [5, 10, 15, 10]
+
+            # Crear un DataFrame de pandas (opcional, pero útil para Seaborn)
+            import pandas as pd
+            df = pd.DataFrame({'Categorías': categorias, 'Valor 1': valores_1, 'Valor 2': valores_2})
+
+            # Crear el gráfico de barras apiladas vertical
+            sns.set(style="whitegrid")
+            plt.figure(figsize=(8, 6))
+            sns.barplot(x='Categorías', y='Valor 1', data=df, color='blue', label='Valor 1')
+            sns.barplot(x='Categorías', y='Valor 2', data=df, color='red', bottom=valores_1, label='Valor 2')
+            plt.xlabel('Categorías')
+            plt.ylabel('Valores')
+            plt.title('Gráfico de Barras Apiladas Vertical')
+            plt.legend()
+            plt.show()
 
 
         st.write("---")
