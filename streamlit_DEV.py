@@ -616,8 +616,8 @@ def main():
         grafico_barras_data = df_oferta_snackys[['msgBody','fecha']][(df_oferta_snackys['msgBody'].isin([1,2])) & (df_oferta_snackys['journeyClassName'] == 'SnackyOfertas') & (df_oferta_snackys['journeyStep'] == "RespuestaMensajeInicial")]
         
         df_count = grafico_barras_data.groupby(['fecha', 'msgBody']).size().unstack(fill_value=0).reset_index()
-        
-        col7 = st.columns(1)
+
+        # col7 = st.columns(1)
 
         # with col4 :
         #     # gráfico de cantidad de mensajes por fecha
@@ -656,28 +656,28 @@ def main():
         #     else:
         #         st.write("sin datos")
 
-        with col7:
+        # with col7:
 
-            # Datos de ejemplo (reemplázalos con tus propios datos)
-            # categorias = ['Si', 'No']
-            # valores_1 = [10, 15]
-            # valores_2 = [5, 10]
+        # Datos de ejemplo (reemplázalos con tus propios datos)
+        # categorias = ['Si', 'No']
+        # valores_1 = [10, 15]
+        # valores_2 = [5, 10]
 
-            # Crear un DataFrame de pandas (opcional, pero útil para Seaborn)
-            # df = pd.DataFrame({'Categorías': categorias, 'Valor 1': valores_1, 'Valor 2': valores_2})
+        # Crear un DataFrame de pandas (opcional, pero útil para Seaborn)
+        # df = pd.DataFrame({'Categorías': categorias, 'Valor 1': valores_1, 'Valor 2': valores_2})
 
-            # Crear el gráfico de barras apiladas vertical
-            sns.set(style="whitegrid")
-            plt.figure(figsize=(8, 6))
-            sns.barplot(x='fecha', y='1', data=df_count, color='blue', label='Valor 1')
-            sns.barplot(x='fecha', y='2', data=df_count, color='red', bottom=df_count[1], label='Valor 2')
-            plt.xlabel('Categorías')
-            plt.ylabel('Valores')
-            plt.xticks(rotation=45)
-            plt.title('Gráfico de Barras Apiladas Vertical')
-            plt.legend()
-            gráfico12 = plt.gcf()
-            st.pyplot(gráfico12)
+        # Crear el gráfico de barras apiladas vertical
+        sns.set(style="whitegrid")
+        plt.figure(figsize=(8, 6))
+        sns.barplot(x='fecha', y='1', data=df_count, color='blue', label='Valor 1')
+        sns.barplot(x='fecha', y='2', data=df_count, color='red', bottom=df_count[1], label='Valor 2')
+        plt.xlabel('Categorías')
+        plt.ylabel('Valores')
+        plt.xticks(rotation=45)
+        plt.title('Gráfico de Barras Apiladas Vertical')
+        plt.legend()
+        gráfico12 = plt.gcf()
+        st.pyplot(gráfico12)
 
         st.write("---")
  
