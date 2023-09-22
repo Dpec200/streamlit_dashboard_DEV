@@ -502,7 +502,6 @@ def main():
         # Aquí también ocultamos el DF
         #st.write("Dataframe")
         #st.dataframe(df_oferta_snackys)
-
         if (len(df_oferta_snackys) > 0 ):
             cliente_pec = df_oferta_snackys['clientName'].unique().tolist()
             st.markdown(f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_gris_title"><div href="#" class="ag-courses-item_link_gris"><span class="adjustable-text" style="font-size: 70px;">Dashboard de Ofertas <br></span><span class="adjustable-text" style="font-size: 40px;">Bienvenido {cliente_pec[0]}</span></div></div></div></div></div></div>',unsafe_allow_html=True)
@@ -614,8 +613,9 @@ def main():
             
         st.write("---")
 
-        grafico_barras_data = df_oferta_snackys['msgBody','fecha'][(df_oferta_snackys['msgBody'].isin([1,2])) & (df_oferta_snackys['journeyClassName'] == 'SnackyOfertas') & (df_oferta_snackys['journeyStep'] == "RespuestaMensajeInicial")]
-        df_count = grafico_barras_data.groupby(['fecha', 'msgBody']).size().unstack(fill_value=0).reset_index()
+        grafico_barras_data = df_oferta_snackys['msgBody','fecha']
+        # [(df_oferta_snackys['msgBody'].isin([1,2])) & (df_oferta_snackys['journeyClassName'] == 'SnackyOfertas') & (df_oferta_snackys['journeyStep'] == "RespuestaMensajeInicial")]
+        # df_count = grafico_barras_data.groupby(['fecha', 'msgBody']).size().unstack(fill_value=0).reset_index()
         col4 = st.columns(1)
 
         # with col4 :
@@ -657,24 +657,24 @@ def main():
         
         with col4:
             # Datos de ejemplo (reemplázalos con tus propios datos)
-            categorias = ['Si', 'No']
-            valores_1 = [10, 15]
-            valores_2 = [5, 10]
+            # categorias = ['Si', 'No']
+            # valores_1 = [10, 15]
+            # valores_2 = [5, 10]
 
-            # Crear un DataFrame de pandas (opcional, pero útil para Seaborn)
-            df = pd.DataFrame({'Categorías': categorias, 'Valor 1': valores_1, 'Valor 2': valores_2})
+            # # Crear un DataFrame de pandas (opcional, pero útil para Seaborn)
+            # df = pd.DataFrame({'Categorías': categorias, 'Valor 1': valores_1, 'Valor 2': valores_2})
 
-            # Crear el gráfico de barras apiladas vertical
-            sns.set(style="whitegrid")
-            plt.figure(figsize=(8, 6))
-            sns.barplot(x='fecha', y='1', data=df_count, color='blue', label='Valor 1')
-            sns.barplot(x='fecha', y='2', data=df_count, color='red', bottom=valores_1, label='Valor 2')
-            plt.xlabel('Categorías')
-            plt.ylabel('Valores')
-            plt.title('Gráfico de Barras Apiladas Vertical')
-            plt.legend()
-            gráfico12 = plt.gcf()
-            st.pyplot(gráfico12)
+            # # Crear el gráfico de barras apiladas vertical
+            # sns.set(style="whitegrid")
+            # plt.figure(figsize=(8, 6))
+            # sns.barplot(x='fecha', y='1', data=df_count, color='blue', label='Valor 1')
+            # sns.barplot(x='fecha', y='2', data=df_count, color='red', bottom=valores_1, label='Valor 2')
+            # plt.xlabel('Categorías')
+            # plt.ylabel('Valores')
+            # plt.title('Gráfico de Barras Apiladas Vertical')
+            # plt.legend()
+            # gráfico12 = plt.gcf()
+            # st.pyplot(gráfico12)
 
         st.write("---")
  
