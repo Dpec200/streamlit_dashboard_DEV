@@ -43,7 +43,7 @@ def main():
     def verificar_contraseña(token):
         for elemento in df_password["token"]:
             if (token == str(elemento)):
-                businessnumber = int(df_password['businessPhoneNumber'][df_password['token'] == token][0])
+                businessnumber = int(df_password['businessPhoneNumber'][df_password['token'] == token])
                 return [True, businessnumber]
             else:
                 pass
