@@ -502,7 +502,7 @@ def main():
         # Aquí también ocultamos el DF
         #st.write("Dataframe")
         #st.dataframe(df_oferta_snackys)
-        
+
         if (len(df_oferta_snackys) > 0 ):
             cliente_pec = df_oferta_snackys['clientName'].unique().tolist()
             st.markdown(f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_gris_title"><div href="#" class="ag-courses-item_link_gris"><span class="adjustable-text" style="font-size: 70px;">Dashboard de Ofertas <br></span><span class="adjustable-text" style="font-size: 40px;">Bienvenido {cliente_pec[0]}</span></div></div></div></div></div></div>',unsafe_allow_html=True)
@@ -614,51 +614,52 @@ def main():
             
         st.write("---")
 
-    
-        col4, col5, col6 = st.columns(3)
+        grafico_barras_data = df_oferta_snackys['msgBody','fecha'][(df_oferta_snackys['msgBody'].isin([1,2])) & (df_oferta_snackys['journeyClassName'] == 'SnackyOfertas') & (df_oferta_snackys['journeyStep'] == "RespuestaMensajeInicial")]
+        df_count = grafico_barras_data.groupby(['fecha', 'msgBody']).size().unstack(fill_value=0).reset_index()
+        col4 = st.columns(1)
 
-        with col4 :
-            # gráfico de cantidad de mensajes por fecha
-            df_oferta_snackys['fecha'] = pd.to_datetime(df_oferta_snackys['fecha'])
-            registros_por_dia = df_oferta_snackys['fecha'].value_counts().reset_index()
-            registros_por_dia.columns = ['fecha', 'cantidad']
-            fig, ax = plt.subplots()
-            fig.set_size_inches(6, 3) 
-            sns.set(style="whitegrid")
-            ax = sns.lineplot(x="fecha", y="cantidad", marker='o', color='b',data=registros_por_dia,linewidth=4)
-            plt.xlabel('')
-            plt.ylabel('')
-            date_form = DateFormatter("%d/%m")
-            ax.xaxis.set_major_formatter(date_form)
-            #plt.tight_layout() 
-            gráfico2 = plt.gcf()
-            st.write("#### **Total de mensajes**")
-            st.pyplot(gráfico2)
+        # with col4 :
+        #     # gráfico de cantidad de mensajes por fecha
+        #     df_oferta_snackys['fecha'] = pd.to_datetime(df_oferta_snackys['fecha'])
+        #     registros_por_dia = df_oferta_snackys['fecha'].value_counts().reset_index()
+        #     registros_por_dia.columns = ['fecha', 'cantidad']
+        #     fig, ax = plt.subplots()
+        #     fig.set_size_inches(6, 3) 
+        #     sns.set(style="whitegrid")
+        #     ax = sns.lineplot(x="fecha", y="cantidad", marker='o', color='b',data=registros_por_dia,linewidth=4)
+        #     plt.xlabel('')
+        #     plt.ylabel('')
+        #     date_form = DateFormatter("%d/%m")
+        #     ax.xaxis.set_major_formatter(date_form)
+        #     #plt.tight_layout() 
+        #     gráfico2 = plt.gcf()
+        #     st.write("#### **Total de mensajes**")
+        #     st.pyplot(gráfico2)
 
-        with col5:
-            if len(df_oferta_snackys) > 0 :
-                # Extrae las etiquetas y los valores del diccionario
-                etiquetas = list(subs.keys())
-                valores = list(subs.values())
-                total = sum(valores)
-                # Colores para el gráfico
-                colores = ['tab:green', 'tab:red']
-                plt.figure(figsize=(6, 3))  
-                sns.set(style="whitegrid")
-                # Crea el gráfico de torta
-                plt.pie(valores, labels=etiquetas, colors=colores, autopct=lambda p: '{:.0f} ({:.1f}%)'.format(p * total / 100, p), startangle=90)
-                plt.axis('equal')  # Hace que el gráfico sea circular
-                gráfico11 = plt.gcf()
-                st.write("#### **Porcentaje de suscriptos**")
-                st.pyplot(gráfico11)
-            else:
-                st.write("sin datos")
+        # with col5:
+        #     if len(df_oferta_snackys) > 0 :
+        #         # Extrae las etiquetas y los valores del diccionario
+        #         etiquetas = list(subs.keys())
+        #         valores = list(subs.values())
+        #         total = sum(valores)
+        #         # Colores para el gráfico
+        #         colores = ['tab:green', 'tab:red']
+        #         plt.figure(figsize=(6, 3))  
+        #         sns.set(style="whitegrid")
+        #         # Crea el gráfico de torta
+        #         plt.pie(valores, labels=etiquetas, colors=colores, autopct=lambda p: '{:.0f} ({:.1f}%)'.format(p * total / 100, p), startangle=90)
+        #         plt.axis('equal')  # Hace que el gráfico sea circular
+        #         gráfico11 = plt.gcf()
+        #         st.write("#### **Porcentaje de suscriptos**")
+        #         st.pyplot(gráfico11)
+        #     else:
+        #         st.write("sin datos")
         
-        with col6:
+        with col4:
             # Datos de ejemplo (reemplázalos con tus propios datos)
-            categorias = ['A', 'B', 'C', 'D']
-            valores_1 = [10, 15, 5, 20]
-            valores_2 = [5, 10, 15, 10]
+            categorias = ['Si', 'No']
+            valores_1 = [10, 15]
+            valores_2 = [5, 10]
 
             # Crear un DataFrame de pandas (opcional, pero útil para Seaborn)
             df = pd.DataFrame({'Categorías': categorias, 'Valor 1': valores_1, 'Valor 2': valores_2})
@@ -666,8 +667,8 @@ def main():
             # Crear el gráfico de barras apiladas vertical
             sns.set(style="whitegrid")
             plt.figure(figsize=(8, 6))
-            sns.barplot(x='Categorías', y='Valor 1', data=df, color='blue', label='Valor 1')
-            sns.barplot(x='Categorías', y='Valor 2', data=df, color='red', bottom=valores_1, label='Valor 2')
+            sns.barplot(x='fecha', y='1', data=df_count, color='blue', label='Valor 1')
+            sns.barplot(x='fecha', y='2', data=df_count, color='red', bottom=valores_1, label='Valor 2')
             plt.xlabel('Categorías')
             plt.ylabel('Valores')
             plt.title('Gráfico de Barras Apiladas Vertical')
