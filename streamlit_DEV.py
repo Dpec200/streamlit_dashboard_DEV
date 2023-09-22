@@ -514,7 +514,7 @@ def main():
         torta = df_oferta_snackys[(df_oferta_snackys["journeyStep"] == "RespuestaMensajeInicial")]
         # Contamos la cantidad de suscriptos
         subs = {"Suscriptos":     torta[torta["msgBody"] == '1'].shape[0],
-                "No suscriptos":    torta[torta["msgBody"] == '0'].shape[0]
+                "No suscriptos":    torta[torta["msgBody"] == '2'].shape[0]
                     }
 
         # Tarjetas
@@ -524,7 +524,7 @@ def main():
         con_motivo_no_interesados1 = len(df_oferta_snackys.loc[(df_oferta_snackys["journeyStep"] == "RespuestaMotivoClienteParaNoSuscripcion")].reset_index()) 
         con_motivo_no_interesados = f"{con_motivo_no_interesados1} de {subs['No suscriptos']}" 
         # Intencion de no dejar motivos
-        sin_motivo_no_interesado = len((df_oferta_snackys['msgBody'] == 0) & (df_oferta_snackys['journeyStep'] == 'RespuestaClienteQuiereDejarMotivo'))
+        sin_motivo_no_interesado = len((df_oferta_snackys['msgBody'] == 2) & (df_oferta_snackys['journeyStep'] == 'RespuestaClienteQuiereDejarMotivo'))
         # Conversaciones terminadas
         # conversaciones_terminadas = len(df_oferta_snackys[df_oferta_snackys["msgBody"].str.contains("ff")]) + motivos_clientes_no_interesados1
         # Conversaciones_incompletas 
