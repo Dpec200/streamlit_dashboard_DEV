@@ -616,7 +616,7 @@ def main():
         grafico_barras_data = df_oferta_snackys[['msgBody','fecha']][(df_oferta_snackys['msgBody'].isin([1,2])) & (df_oferta_snackys['journeyClassName'] == 'SnackyOfertas') & (df_oferta_snackys['journeyStep'] == "RespuestaMensajeInicial")]
         
         df_count = grafico_barras_data.groupby(['fecha', 'msgBody']).size().unstack(fill_value=0).reset_index()
-
+        st.write(str(df_count.info))
         # col7 = st.columns(1)
 
         # with col4 :
