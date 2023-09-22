@@ -556,7 +556,7 @@ def main():
             plt.figure(figsize=(5, 4), facecolor='none')  
             # Crea el gráfico de torta
             plt.pie(x=valores, labels=etiquetas, colors=colores, autopct='%1.1f%%', startangle=140)
-            plt.subplots_adjust(left=0.9, right=1, top=1, bottom=0.9)
+            plt.subplots_adjust(left=0.1, right=0.9, top=0.9, bottom=0.1)
             # Convierte el gráfico en una imagen
             buffer = BytesIO()
             plt.savefig(buffer, format='png')
