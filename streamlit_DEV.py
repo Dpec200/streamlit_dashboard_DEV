@@ -662,7 +662,6 @@ def main():
             valores_2 = [5, 10, 15, 10]
 
             # Crear un DataFrame de pandas (opcional, pero útil para Seaborn)
-            import pandas as pd
             df = pd.DataFrame({'Categorías': categorias, 'Valor 1': valores_1, 'Valor 2': valores_2})
 
             # Crear el gráfico de barras apiladas vertical
