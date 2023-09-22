@@ -511,7 +511,7 @@ def main():
         st.write("---")
 
         # gráfico de torta
-        torta = df_oferta_snackys[(df_oferta_snackys["journeyStep"] == "RespuestaMensajeInicial")]
+        torta = df_oferta_snackys[(df_oferta_snackys["journeyStep"] == "RespuestaMensajeInicial") & (df_oferta_snackys['journeyClassName'] == 'SnackyOfertasSuscripcion')]
         # Contamos la cantidad de suscriptos
         subs = {"Suscriptos":     torta[torta["msgBody"] == '1'].shape[0],
                 "No suscriptos":    torta[torta["msgBody"] == '2'].shape[0]
@@ -521,10 +521,10 @@ def main():
         # Cantidad de conversaciones
         cantidad_conversaciones = len(df_oferta_snackys.loc[(df_oferta_snackys["journeyStep"] == "RespuestaMensajeInicial")].reset_index())
         # motivos_clientes_no_interesados
-        con_motivo_no_interesados1 = len(df_oferta_snackys.loc[(df_oferta_snackys["journeyStep"] == "RespuestaMotivoClienteParaNoSuscripcion")].reset_index()) 
+        con_motivo_no_interesados1 = len(df_oferta_snackys.loc[(df_oferta_snackys["journeyStep"] == "RespuestaMotivoClienteParaNoSuscripcion") & (df_oferta_snackys['journeyClassName'] == 'SnackyOfertasSuscripcion')].reset_index()) 
         con_motivo_no_interesados = f"{con_motivo_no_interesados1} de {subs['No suscriptos']}" 
         # Intencion de no dejar motivos
-        sin_motivo_no_interesado = len((df_oferta_snackys['msgBody'] == 2) & (df_oferta_snackys['journeyStep'] == 'RespuestaClienteQuiereDejarMotivo'))
+        sin_motivo_no_interesado = len((df_oferta_snackys['msgBody'] == 2) & (df_oferta_snackys['journeyStep'] == 'RespuestaClienteQuiereDejarMotivo') & (df_oferta_snackys['journeyClassName'] == 'SnackyOfertasSuscripcion'))
         # Conversaciones terminadas
         # conversaciones_terminadas = len(df_oferta_snackys[df_oferta_snackys["msgBody"].str.contains("ff")]) + motivos_clientes_no_interesados1
         # Conversaciones_incompletas 
@@ -553,12 +553,11 @@ def main():
             total = sum(valores)
             # Colores para el gráfico
             # colores = ['tab:green', 'tab:red']
-            plt.figure(figsize=(6, 3))  
+            plt.figure(figsize=(4, 4))  
             sns.set(style="whitegrid")
             # Crea el gráfico de torta
-            plt.pie(x=[30,30], labels=['sub', 'nosub'])
-            plt.axis('equal')
-            plt.title(str(list(subs.values())))  # Hace que el gráfico sea circular
+            plt.pie(x=valores, labels=etiquetas)
+            plt.axis('equal')  # Hace que el gráfico sea circular
 
             # Convierte el gráfico en una imagen
             buffer = BytesIO()
@@ -675,8 +674,8 @@ def main():
             plt.ylabel('Valores')
             plt.title('Gráfico de Barras Apiladas Vertical')
             plt.legend()
-            plt.show()
-
+            gráfico12 = plt.gcf()
+            st.pyplot(gráfico12)
 
         st.write("---")
  
