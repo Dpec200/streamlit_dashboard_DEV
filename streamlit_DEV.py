@@ -76,8 +76,8 @@ def main():
             padding: 50px 0;
             }
             .ag-courses_item {
-            -ms-flex-preferred-size: calc(25% - 30px);
-            flex-basis: calc(25% - 30px);
+            -ms-flex-preferred-size: calc(33.3333% - 30px);
+            flex-basis: calc(33.3333% - 30px);
             border: 2px solid #15364C;
 
             margin: 0 15px 30px;
@@ -578,13 +578,13 @@ def main():
         st.write('---')
         st.markdown(f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_gris_subtitle"><div href="#" class="ag-courses-item_link_gris"><span class="adjustable-text" style="font-size: 40px;">Comportamiendo del cliente</span></div></div></div></div></div></div>',unsafe_allow_html=True)
         # Crear 5 tarjetas en la primera fila
-        col1, col2, col3, col4= st.columns(4)
+        col1, col2, col3= st.columns(3)
 
         
     
         # Variable de ejemplo con estilos en línea
         tarjeta1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><div class="ag-courses-item_title"><span class="adjustable-text"> Subscritos <br>{clientes_suscriptos}</span></div></div></div></div></div></div>'
-        tarjeta2 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><div class="ag-courses-item_title"><span class="adjustable-text"> Dados de baja <br>{clientes_dejar_de_recibir}</span></div></div></div></div></div></div>'
+        # tarjeta2 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><div class="ag-courses-item_title"><span class="adjustable-text"> Dados de baja <br>{clientes_dejar_de_recibir}</span></div></div></div></div></div></div>'
         tarjeta3 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><div class="ag-courses-item_title"><span class="adjustable-text"> Dejaron motivos <br>{con_motivo_no_interesados}</span></div></div></div></div></div></div>'
         tarjeta4 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item"><div href="#" class="ag-courses-item_link"><div class="ag-courses-item_bg"></div><div class="ag-courses-item_title"><span class="adjustable-text"> No dejaron motivos <br>{sin_motivo_no_interesado}</span></div></div></div></div></div></div>'
         
@@ -596,17 +596,17 @@ def main():
             # st.write(f"+ Conversaciones terminadas: **{conversaciones_terminadas}**")
             # st.write(f"+ Conversaciones incompletas: **{conversaciones_incompletas}**")
 
-        with col2:
-            # st.markdown('<div class="ag-courses-item_title">Clientes suscriptos</div>', unsafe_allow_html=True)
-            st.markdown(tarjeta2, unsafe_allow_html=True)
-            # st.markdown('</div></div>', unsafe_allow_html=True)
+        # with col2:
+        #     # st.markdown('<div class="ag-courses-item_title">Clientes suscriptos</div>', unsafe_allow_html=True)
+        #     st.markdown(tarjeta2, unsafe_allow_html=True)
+        #     # st.markdown('</div></div>', unsafe_allow_html=True)
 
-        with col3:
+        with col2:
             # st.markdown('<div class="ag-courses-item_title">Clientes que se dieron de baja</div>', unsafe_allow_html=True)
             st.markdown(tarjeta3, unsafe_allow_html=True)
             # st.markdown('</div></div>', unsafe_allow_html=True)
 
-        with col4:
+        with col3:
             # st.markdown('<div class="ag-courses-item_title">Clientes que no dejaron motivos</div>', unsafe_allow_html=True)
             st.markdown(tarjeta4, unsafe_allow_html=True)
             # st.markdown('</div></div>', unsafe_allow_html=True)
