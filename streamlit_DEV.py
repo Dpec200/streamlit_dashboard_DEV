@@ -552,11 +552,11 @@ def main():
             
             total = sum(valores)
             # Colores para el gráfico
-            # colores = ['tab:green', 'tab:red']
-            plt.figure(figsize=(4, 4))  
+            colores = ['tab:blue', 'tab:white']
+            plt.figure(figsize=(3, 4), facecolor='none', edgecolor='none')  
             sns.set(style="whitegrid")
             # Crea el gráfico de torta
-            plt.pie(x=valores, labels=etiquetas)
+            plt.pie(x=valores, labels=etiquetas, colors=colores, autopct=lambda p: '{:.0f} ({:.1f}%)'.format(p * total / 100, p), startangle=90)
             plt.axis('equal')  # Hace que el gráfico sea circular
 
             # Convierte el gráfico en una imagen
