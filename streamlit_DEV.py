@@ -656,20 +656,21 @@ def main():
         
         with col4:
             # Datos de ejemplo (reemplázalos con tus propios datos)
-            categorias = ['Si', 'No']
-            valores_1 = [10, 15]
-            valores_2 = [5, 10]
+            # categorias = ['Si', 'No']
+            # valores_1 = [10, 15]
+            # valores_2 = [5, 10]
 
             # Crear un DataFrame de pandas (opcional, pero útil para Seaborn)
-            df = pd.DataFrame({'Categorías': categorias, 'Valor 1': valores_1, 'Valor 2': valores_2})
+            # df = pd.DataFrame({'Categorías': categorias, 'Valor 1': valores_1, 'Valor 2': valores_2})
 
             # Crear el gráfico de barras apiladas vertical
             sns.set(style="whitegrid")
             plt.figure(figsize=(8, 6))
             sns.barplot(x='fecha', y='1', data=df_count, color='blue', label='Valor 1')
-            sns.barplot(x='fecha', y='2', data=df_count, color='red', bottom=valores_1, label='Valor 2')
+            sns.barplot(x='fecha', y='2', data=df_count, color='red', bottom=df_count[1], label='Valor 2')
             plt.xlabel('Categorías')
             plt.ylabel('Valores')
+            plt.xticks(rotation=45)
             plt.title('Gráfico de Barras Apiladas Vertical')
             plt.legend()
             gráfico12 = plt.gcf()
