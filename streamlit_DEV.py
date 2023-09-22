@@ -613,7 +613,7 @@ def main():
             
         st.write("---")
 
-        grafico_barras_data = df_oferta_snackys[['msgBody','fecha']][(df_oferta_snackys['msgBody'] == 1) & (df_oferta_snackys['journeyClassName'] == 'SnackyOfertas') & (df_oferta_snackys['journeyStep'] == "RespuestaMensajeInicial")]
+        grafico_barras_data = df_oferta_snackys[['msgBody','fecha']][(df_oferta_snackys['msgBody'] == '1') & (df_oferta_snackys['journeyClassName'] == 'SnackyOfertas') & (df_oferta_snackys['journeyStep'] == "RespuestaMensajeInicial")]
         st.write(grafico_barras_data)
         df_count = grafico_barras_data.groupby(['fecha', 'msgBody']).size().unstack(fill_value=0).reset_index()
         st.write(df_count)
