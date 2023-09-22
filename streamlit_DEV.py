@@ -549,6 +549,7 @@ def main():
             # Extrae las etiquetas y los valores del diccionario
             etiquetas = list(subs.keys())
             valores = list(subs.values())
+            print(list(subs.values()))
             total = sum(valores)
             # Colores para el gráfico
             # colores = ['tab:green', 'tab:red']
