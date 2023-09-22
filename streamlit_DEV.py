@@ -655,7 +655,7 @@ def main():
         #     else:
         #         st.write("sin datos")
         
-        with col4:
+        # with col4:
             # Datos de ejemplo (reemplázalos con tus propios datos)
             # categorias = ['Si', 'No']
             # valores_1 = [10, 15]
