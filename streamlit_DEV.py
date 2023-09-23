@@ -614,8 +614,21 @@ def main():
         st.write("---")
         st.write(df_oferta_snackys)
         st.write(df_oferta_snackys.info())
-        grafico_barras_data = df_oferta_snackys[['msgBody','fecha']][(df_oferta_snackys['msgBody'] == '1') & (df_oferta_snackys['journeyClassName'] == 'SnackyOfertas') & (df_oferta_snackys['journeyStep'] == "RespuestaMensajeInicial")]
+        query2 = f"""
+                SELECT e.* , c.businessPhoneNumber, c.clientName, c.userPhoneNumber
+                FROM experiencias e
+                JOIN clientes c ON (e.idCliente = c.idCliente)
+                WHERE e.journeyClassName = 'SnackyOfertas' AND c.businessPhoneNumber = {businessnumber} ;
+                """
+        
+        df_oferta_snackys2 = pd.read_sql(query2, engine)
+        df_oferta_snackys2.drop("hora",axis=1,inplace=True)
+        st.write(df_oferta_snackys2)
+
+        grafico_barras_data = df_oferta_snackys2[['msgBody','fecha']][(df_oferta_snackys['msgBody'] == '1') & (df_oferta_snackys['journeyClassName'] == 'SnackyOfertas') & (df_oferta_snackys['journeyStep'] == "RespuestaMensajeInicial")]
         st.write(grafico_barras_data)
+
+
         df_count = grafico_barras_data.groupby(['fecha', 'msgBody']).size().unstack(fill_value=0).reset_index()
         st.write(df_count)
         # col7 = st.columns(1)
