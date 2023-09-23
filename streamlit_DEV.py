@@ -625,7 +625,7 @@ def main():
         df_oferta_snackys2.drop("hora",axis=1,inplace=True)
         st.write(df_oferta_snackys2)
 
-        grafico_barras_data = df_oferta_snackys2[['msgBody','fecha']][(df_oferta_snackys['msgBody'] == '1') & (df_oferta_snackys['journeyClassName'] == 'SnackyOfertas') & (df_oferta_snackys['journeyStep'] == "RespuestaMensajeInicial")]
+        grafico_barras_data = df_oferta_snackys2[['msgBody','fecha']][(df_oferta_snackys2['msgBody'] == '1') & (df_oferta_snackys2['journeyClassName'] == 'SnackyOfertas') & (df_oferta_snackys2['journeyStep'] == "RespuestaMensajeInicial")]
         st.write(grafico_barras_data)
 
 
