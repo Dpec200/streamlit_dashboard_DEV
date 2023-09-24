@@ -623,10 +623,10 @@ def main():
         df_oferta_snackys2 = pd.read_sql(query2, engine)
         df_oferta_snackys2.drop("hora",axis=1,inplace=True)
         grafico_barras_data = df_oferta_snackys2[['msgBody','fecha']][(df_oferta_snackys2['msgBody'].isin(['1', '2'])) & (df_oferta_snackys2['journeyClassName'] == 'SnackyOferta1') & (df_oferta_snackys2['journeyStep'] == "RespuestaMensajeInicial")]
-        df_count = grafico_barras_data.groupby(['fecha', 'msgBody']).size().unstack(fill_value=0).reset_index()
-        df_count['fecha'] = pd.to_datetime(df_count['fecha'])
-        st.write(df_count)
-        st.write(str(df_count['fecha'].dtype))
+        # df_count = grafico_barras_data.groupby(['fecha', 'msgBody']).size().unstack(fill_value=0).reset_index()
+        grafico_barras_data['fecha'] = pd.to_datetime(grafico_barras_data['fecha'])
+        # st.write(df_count)
+        # st.write(str(df_count['fecha'].dtype))
         
         # col7 = st.columns(1)
 
@@ -691,11 +691,11 @@ def main():
         # st.pyplot(gráfico12)
 
         # Crear columnas de mes y semana
-        df_count['mes'] = df_count['fecha'].dt.month
-        df_count['semana'] = df_count['fecha'].dt.isocalendar().week
+        grafico_barras_data['mes'] = grafico_barras_data['fecha'].dt.month
+        grafico_barras_data['semana'] = grafico_barras_data['fecha'].dt.isocalendar().week
 
         # Agrupar por mes y semana, contando las ocurrencias de cada categoría
-        grouped = df_count.groupby(['mes', 'semana', '1', '2']).size().reset_index(name='count')
+        grouped = grafico_barras_data.groupby(['mes', 'semana']).size().reset_index(name='count')
 
         # Crear el gráfico de barras apiladas
         plt.figure(figsize=(8, 6))
