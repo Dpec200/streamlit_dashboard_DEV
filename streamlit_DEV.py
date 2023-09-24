@@ -625,7 +625,7 @@ def main():
         grafico_barras_data = df_oferta_snackys2[['msgBody','fecha']][(df_oferta_snackys2['msgBody'].isin(['1', '2'])) & (df_oferta_snackys2['journeyClassName'] == 'SnackyOferta1') & (df_oferta_snackys2['journeyStep'] == "RespuestaMensajeInicial")]
         df_count = grafico_barras_data.groupby(['fecha', 'msgBody']).size().unstack(fill_value=0).reset_index()
         st.write(df_count)
-        
+        st.write(type(df_count['fecha']))
         
         # col7 = st.columns(1)
 
@@ -675,12 +675,12 @@ def main():
 
         # Crear un DataFrame de pandas (opcional, pero útil para Seaborn)
         # df = pd.DataFrame({'Categorías': categorias, 'Valor 1': valores_1, 'Valor 2': valores_2})
-
+        
         # Crear el gráfico de barras apiladas vertical
         sns.set(style="whitegrid")
         plt.figure(figsize=(8, 6))
-        sns.barplot(x='fecha', y='1', data=df_count, color='blue', label='Valor 1')
-        sns.barplot(x='fecha', y='2', data=df_count, color='red', label='Valor 2')
+        sns.barplot(x='fecha', y='1', data=df_count, color='#2D8DEC', label='Interesado')
+        sns.barplot(x='fecha', y='2', data=df_count, color='#DFE2E5', label='No Interesado')
         plt.xlabel('Categorías')
         plt.ylabel('Valores')
         plt.xticks(rotation=45)
