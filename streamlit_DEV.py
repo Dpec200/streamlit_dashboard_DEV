@@ -695,7 +695,7 @@ def main():
         df_count['semana'] = df_count['fecha'].dt.isocalendar().week
 
         # Agrupar por mes y semana, contando las ocurrencias de cada categoría
-        grouped = df_count.groupby(['mes', 'semana', 'categoria']).size().reset_index(name='count')
+        grouped = df_count.groupby(['mes', 'semana', '1', '2']).size().reset_index(name='count')
 
         # Crear el gráfico de barras apiladas
         plt.figure(figsize=(8, 6))
