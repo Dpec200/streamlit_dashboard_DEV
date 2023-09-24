@@ -543,6 +543,7 @@ def main():
         from io import BytesIO
         import base64
         st.write(subs)
+        st.write(df_oferta_snackys)
         # Genera un gráfico de Matplotlib
         def generar_grafico():
             # Extrae las etiquetas y los valores del diccionario
