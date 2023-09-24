@@ -696,7 +696,7 @@ def main():
 
         # Agrupar por mes y semana, contando las ocurrencias de cada categoría
         grouped = grafico_barras_data.groupby(['mes', 'semana']).size().reset_index(name='count')
-
+        st.write(grouped)
         # Crear el gráfico de barras apiladas
         plt.figure(figsize=(8, 6))
         sns.barplot(x='mes', y='count', hue='semana', data=grouped, palette='Set1')
