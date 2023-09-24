@@ -693,6 +693,8 @@ def main():
         # Crear columnas de mes y semana
         grafico_barras_data['mes'] = grafico_barras_data['fecha'].dt.month
         grafico_barras_data['semana'] = grafico_barras_data['fecha'].dt.isocalendar().week
+        grafico_barras_data['mes'] = grafico_barras_data['mes'].astype(str)
+        grafico_barras_data['semana'] = grafico_barras_data['semana'].astype(str)
 
         # Agrupar por mes y semana, contando las ocurrencias de cada categoría
         grouped = grafico_barras_data.groupby(['mes', 'semana', 'msgBody']).size().reset_index(name='count')
