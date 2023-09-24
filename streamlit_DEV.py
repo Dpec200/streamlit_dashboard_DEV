@@ -542,8 +542,7 @@ def main():
         tarjeta_clientes_con_respuesta_col1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_core_1"><div href="#" class="ag-courses-item_link_core"><div class="ag-courses-item_title_core"> Clientes con respuesta <br> Numero</div></div></div></div></div>'
         from io import BytesIO
         import base64
-        st.write(subs)
-        st.write(df_oferta_snackys)
+
         # Genera un gráfico de Matplotlib
         def generar_grafico():
             # Extrae las etiquetas y los valores del diccionario
@@ -613,25 +612,18 @@ def main():
             # ver_motivos = st.checkbox("Mostrar motivos")
             
         st.write("---")
-        st.write(df_oferta_snackys)
-        st.write(df_oferta_snackys.info())
+
         query2 = f"""
                 SELECT e.* , c.businessPhoneNumber, c.clientName, c.userPhoneNumber
                 FROM experiencias e
                 JOIN clientes c ON (e.idCliente = c.idCliente)
-                WHERE e.journeyClassName = 'SnackyOfertas' AND c.businessPhoneNumber = {businessnumber} ;
+                WHERE e.journeyClassName = 'SnackyOfertas1' AND c.businessPhoneNumber = {businessnumber} ;
                 """
         
         df_oferta_snackys2 = pd.read_sql(query2, engine)
         df_oferta_snackys2.drop("hora",axis=1,inplace=True)
-        st.write(df_oferta_snackys2)
-
-        grafico_barras_data = df_oferta_snackys2[['msgBody','fecha']][(df_oferta_snackys2['msgBody'] == '1') & (df_oferta_snackys2['journeyClassName'] == 'SnackyOfertas') & (df_oferta_snackys2['journeyStep'] == "RespuestaMensajeInicial")]
-        st.write(grafico_barras_data)
-
-
+        grafico_barras_data = df_oferta_snackys2[['msgBody','fecha']][(df_oferta_snackys2['msgBody'] == '1') & (df_oferta_snackys2['journeyClassName'] == 'SnackyOfertas1') & (df_oferta_snackys2['journeyStep'] == "RespuestaMensajeInicial")]
         df_count = grafico_barras_data.groupby(['fecha', 'msgBody']).size().unstack(fill_value=0).reset_index()
-        st.write(df_count)
         # col7 = st.columns(1)
 
         # with col4 :
