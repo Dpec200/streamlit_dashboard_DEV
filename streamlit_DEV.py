@@ -542,7 +542,7 @@ def main():
         tarjeta_clientes_con_respuesta_col1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_core_1"><div href="#" class="ag-courses-item_link_core"><div class="ag-courses-item_title_core"> Clientes con respuesta <br> Numero</div></div></div></div></div>'
         from io import BytesIO
         import base64
-
+        st.write(subs)
         # Genera un gráfico de Matplotlib
         def generar_grafico():
             # Extrae las etiquetas y los valores del diccionario
