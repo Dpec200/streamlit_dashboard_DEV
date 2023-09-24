@@ -678,17 +678,34 @@ def main():
         # df = pd.DataFrame({'Categorías': categorias, 'Valor 1': valores_1, 'Valor 2': valores_2})
         
         # Crear el gráfico de barras apiladas vertical
-        sns.set(style="whitegrid")
+        # sns.set(style="whitegrid")
+        # plt.figure(figsize=(8, 6))
+        # sns.barplot(x='fecha', y='1', data=df_count, color='#2D8DEC', label='Interesado')
+        # sns.barplot(x='fecha', y='2', data=df_count, color='#DFE2E5', label='No Interesado')
+        # plt.xlabel('Categorías')
+        # plt.ylabel('Valores')
+        # plt.xticks(rotation=45)
+        # plt.title('Gráfico de Barras Apiladas Vertical')
+        # plt.legend()
+        # gráfico12 = plt.gcf()
+        # st.pyplot(gráfico12)
+
+        # Crear columnas de mes y semana
+        df_count['mes'] = df_count['fecha'].dt.month
+        df_count['semana'] = df_count['fecha'].dt.isocalendar().week
+
+        # Agrupar por mes y semana, contando las ocurrencias de cada categoría
+        grouped = df_count.groupby(['mes', 'semana', 'categoria']).size().reset_index(name='count')
+
+        # Crear el gráfico de barras apiladas
         plt.figure(figsize=(8, 6))
-        sns.barplot(x='fecha', y='1', data=df_count, color='#2D8DEC', label='Interesado')
-        sns.barplot(x='fecha', y='2', data=df_count, color='#DFE2E5', label='No Interesado')
-        plt.xlabel('Categorías')
+        sns.barplot(x='mes', y='count', hue='semana', data=grouped, palette='Set1')
+        plt.xlabel('Mes')
         plt.ylabel('Valores')
-        plt.xticks(rotation=45)
-        plt.title('Gráfico de Barras Apiladas Vertical')
-        plt.legend()
-        gráfico12 = plt.gcf()
-        st.pyplot(gráfico12)
+        plt.title('Gráfico de Barras Apiladas por Mes y Semana')
+        plt.legend(title='Semana')
+        st.pyplot(plt)
+
 
         st.write("---")
  
