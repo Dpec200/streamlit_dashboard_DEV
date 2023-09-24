@@ -698,8 +698,8 @@ def main():
 
         # Agrupar por mes y semana, contando las ocurrencias de cada categoría
         grouped = grafico_barras_data.groupby(['mes', 'semana', 'msgBody']).size().reset_index(name='count')
-        grouped1 = grouped[grouped['msgBody'] == 1]
-        grouped2 = grouped[grouped['msgBody'] == 2]
+        grouped1 = grouped[grouped['msgBody'] == '1']
+        grouped2 = grouped[grouped['msgBody'] == '2']
         
         st.write(grouped1)
         # Crear el gráfico de barras apiladas
