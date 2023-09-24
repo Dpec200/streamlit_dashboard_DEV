@@ -624,6 +624,9 @@ def main():
         df_oferta_snackys2.drop("hora",axis=1,inplace=True)
         grafico_barras_data = df_oferta_snackys2[['msgBody','fecha']][(df_oferta_snackys2['msgBody'] == '1') & (df_oferta_snackys2['journeyClassName'] == 'SnackyOfertas1') & (df_oferta_snackys2['journeyStep'] == "RespuestaMensajeInicial")]
         df_count = grafico_barras_data.groupby(['fecha', 'msgBody']).size().unstack(fill_value=0).reset_index()
+        st.write(df_count)
+        
+        
         # col7 = st.columns(1)
 
         # with col4 :
