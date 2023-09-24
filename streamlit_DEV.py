@@ -700,9 +700,9 @@ def main():
         grouped = grafico_barras_data.groupby(['mes', 'semana', 'msgBody']).size().unstack(fill_value=0).reset_index()
         st.write(grouped)
         # Crear el gráfico de barras apiladas
-        plt.figure(figsize=(8, 6))
-        sns.barplot(x='mes', y='1', hue='semana', data=grouped, palette='Set1')
-        sns.barplot(x='mes', y='2', hue='semana', data=grouped, palette='Set2')
+        plt.figure(figsize=(10, 4))
+        sns.barplot(x='mes', y='1', hue='semana', data=grouped, palette='red')
+        sns.barplot(x='mes', y='2', hue='semana', data=grouped, palette='blue')
         plt.xlabel('Mes')
         plt.ylabel('Valores')
         plt.title('Gráfico de Barras Apiladas por Mes y Semana')
