@@ -695,7 +695,7 @@ def main():
         grafico_barras_data['semana'] = grafico_barras_data['fecha'].dt.isocalendar().week
 
         # Agrupar por mes y semana, contando las ocurrencias de cada categoría
-        grouped = grafico_barras_data.groupby(['mes', 'semana']).size().reset_index(name='count')
+        grouped = grafico_barras_data.groupby(['mes', 'semana', 'msgBody']).size().reset_index(name='count')
         st.write(grouped)
         # Crear el gráfico de barras apiladas
         plt.figure(figsize=(8, 6))
