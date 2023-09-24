@@ -692,7 +692,7 @@ def main():
 
         # Crear columnas de mes y semana
         grafico_barras_data['mes'] = grafico_barras_data['fecha'].dt.month
-        grafico_barras_data['semana'] = grafico_barras_data['fecha'].dt.isocalendar().week
+        grafico_barras_data['semana'] = grafico_barras_data['fecha'].dt.day // 7 + 1
         grafico_barras_data['mes'] = grafico_barras_data['mes'].astype(str)
         grafico_barras_data['semana'] = grafico_barras_data['semana'].astype(str)
 
@@ -701,7 +701,7 @@ def main():
         st.write(grouped)
         # Crear el gráfico de barras apiladas
         plt.figure(figsize=(8, 6))
-        sns.barplot(x='mes', y='count', hue='semana', data=grouped, palette='Set1')
+        sns.barplot(x='mes', y='count', hue='msgBody', data=grouped, palette='Set1')
         plt.xlabel('Mes')
         plt.ylabel('Valores')
         plt.title('Gráfico de Barras Apiladas por Mes y Semana')
