@@ -680,7 +680,7 @@ def main():
         sns.set(style="whitegrid")
         plt.figure(figsize=(8, 6))
         sns.barplot(x='fecha', y='1', data=df_count, color='blue', label='Valor 1')
-        sns.barplot(x='fecha', y='2', data=df_count, color='red', bottom=df_count[0], label='Valor 2')
+        sns.barplot(x='fecha', y='2', data=df_count, color='red', label='Valor 2')
         plt.xlabel('Categorías')
         plt.ylabel('Valores')
         plt.xticks(rotation=45)
