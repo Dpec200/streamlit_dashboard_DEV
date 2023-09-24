@@ -701,7 +701,7 @@ def main():
         grouped1 = grouped[grouped['msgBody'] == 1]
         grouped2 = grouped[grouped['msgBody'] == 2]
         
-        st.write(grouped)
+        st.write(grouped1)
         # Crear el gráfico de barras apiladas
         plt.figure(figsize=(10, 4))
         sns.barplot(x='mes', y='count', hue='semana', data=grouped1, color='#2D8DEC')
