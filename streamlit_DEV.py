@@ -700,19 +700,36 @@ def main():
         grouped = grafico_barras_data.groupby(['mes', 'semana', 'msgBody']).size().reset_index(name='count')
         grouped1 = grouped[grouped['msgBody'] == '1']
         grouped2 = grouped[grouped['msgBody'] == '2']
-        st.write(grouped1)
-        st.write(grouped2)
+        # st.write(grouped1)
+        # st.write(grouped2)
+        # # Crear el gráfico de barras apiladas
+        # plt.figure(figsize=(10, 4))
+        # sns.barplot(x='mes', y='count', hue='semana', data=grouped, palette=['red'])
+        # # sns.barplot(x='mes', y='count', hue='semana', data=grouped2, palette=['blue'])
+        # plt.xlabel('Mes')
+        # plt.ylabel('Valores')
+        # plt.title('Gráfico de Barras Apiladas por Mes y Semana')
+        # plt.legend(title='Semana', labels=['1','2'], labelcolor=['red', 'blue']).get_lines()[0].set_color('red')
+        # plt.ylim(0, 30)
+        # st.pyplot(plt)
+        data = {
+            'mes': ['Enero', 'Enero', 'Febrero', 'Febrero', 'Marzo', 'Marzo'],
+            'semana': [1, 2, 1, 2, 1, 2],
+            'msgBody': ['1', '2', '1', '2', '1', '2'],
+            'count': [10, 3, 12, 8, 15, 9]
+        }
+
+        df = pd.DataFrame(data)
+
         # Crear el gráfico de barras apiladas
         plt.figure(figsize=(10, 4))
-        sns.barplot(x='mes', y='count', hue='semana', data=grouped, palette=['red'])
-        # sns.barplot(x='mes', y='count', hue='semana', data=grouped2, palette=['blue'])
+        sns.barplot(x='mes', y='count', hue='semana', data=df, palette=['red', 'blue'])
         plt.xlabel('Mes')
         plt.ylabel('Valores')
         plt.title('Gráfico de Barras Apiladas por Mes y Semana')
-        plt.legend(title='Semana', labels=['1','2'], labelcolor=['red', 'blue']).get_lines()[0].set_color('red')
+        plt.legend(title='Semana', labels=['1', '2'], labelcolor=['red', 'blue'])
         plt.ylim(0, 30)
         st.pyplot(plt)
-
 
         st.write("---")
  
