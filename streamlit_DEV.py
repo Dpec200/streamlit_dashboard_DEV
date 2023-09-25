@@ -702,6 +702,7 @@ def main():
         grouped2 = grouped[grouped['msgBody'] == '2']
         colores_personalizados = ['red', 'blue']
         st.write(grouped1)
+        st.write(grouped2)
         # Crear el gráfico de barras apiladas
         plt.figure(figsize=(10, 4))
         sns.barplot(x='mes', y='count', hue='semana', data=grouped1, palette=['red'])
@@ -709,7 +710,7 @@ def main():
         plt.xlabel('Mes')
         plt.ylabel('Valores')
         plt.title('Gráfico de Barras Apiladas por Mes y Semana')
-        plt.legend(title='Semana', labels=['1','2'])
+        plt.legend(title='Semana', labels=['1','2'], labelcolor=['red', 'blue'])
         st.pyplot(plt)
 
 
