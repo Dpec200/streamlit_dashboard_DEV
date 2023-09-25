@@ -769,31 +769,27 @@ def main():
         colores = ['blue', 'green']
 
         # Definir la cantidad de semanas y el ancho de las barras
-        num_semanas = 4
+        num_semanas = grouped['semana'].max()
         ancho_barra = 0.35
 
-        # Crear un arreglo de índices para las barras de cada mes
-        indices = np.arange(1, num_semanas * len(grouped['mes'].unique()) + 1)
+        # Crear un arreglo de índices para las barras de cada semana
+        indices = list(range(1, num_semanas + 1))
 
         # Itera a través de los meses y crea las barras separadas por mes
         for i, month in enumerate(grouped['mes'].unique()):
             data = grouped[grouped['mes'] == month]
             
             # Barras para '1'
-            ax.bar(indices + i * ancho_barra, data['1'], width=ancho_barra, label=f'Mes {month} - 1', color=colores[0], alpha=0.7)
+            ax.bar([x + i * ancho_barra for x in indices], data['1'], width=ancho_barra, label=f'Mes {month} - 1', color=colores[0], alpha=0.7)
             
             # Barras para '2'
-            ax.bar(indices + i * ancho_barra, data['2'], width=ancho_barra, label=f'Mes {month} - 2', color=colores[1], alpha=0.7, bottom=data['1'])
+            ax.bar([x + i * ancho_barra for x in indices], data['2'], width=ancho_barra, label=f'Mes {month} - 2', color=colores[1], alpha=0.7, bottom=data['1'])
 
         # Etiqueta los ejes y agrega una leyenda
         ax.set_xlabel('Semana')
         ax.set_ylabel('Cantidad')
         ax.set_title('Cantidad de 1 y 2 por Semana y Mes (Barras Separadas)')
         ax.legend()
-
-        # Establece el espacio en el eje X para que haya espacio entre los meses
-        ax.set_xticks(indices + (ancho_barra * (len(grouped['mes'].unique()) - 1)) / 2)
-        ax.set_xticklabels([f'Semana {i}' for i in range(1, num_semanas + 1)])
 
 
 
