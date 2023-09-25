@@ -842,9 +842,9 @@ def main():
         for x, etiqueta in zip(x_coords, etiquetas):
             ax.annotate(etiqueta, (x, valores[x]), ha='center', va='bottom')
 
-        ax.xlabel('Categorías')
-        ax.ylabel('Valores')
-        ax.title('Gráfico de Barras con Etiquetas Personalizadas')
+        plt.xlabel('Categorías')
+        plt.ylabel('Valores')
+        plt.title('Gráfico de Barras con Etiquetas Personalizadas')
 
 
         st.pyplot(plt)
