@@ -840,9 +840,9 @@ def main():
 
         # Agregar etiquetas a ubicaciones específicas en el eje x
         for x, etiqueta in zip(x_coords, etiquetas):
-            ax.annotate(etiqueta, (x, valores[x]), ha='center', va='top')
+            ax.annotate(etiqueta, (x, valores[x]), ha='center', va='baseline')
             if x == 1:
-                ax.annotate('enero', (x, valores[x]), ha='center', va='top')
+                ax.annotate('enero', (x, valores[x]), ha='center', va='baseline')
 
         plt.xlabel('Categorías')
         plt.ylabel('Valores')
