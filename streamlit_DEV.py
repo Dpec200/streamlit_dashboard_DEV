@@ -817,7 +817,7 @@ def main():
             ax.bar(i*6 + 4*width, grouped7['1'], bottom=grouped7['2'], width=width, label='semana 4', color='#2D8DEC')
             
 
-        ax.legend(loc='best', labels=['Interesado', 'No Interesado'], facecolor=['SteelBlue', 'white'])
+        ax.legend(loc='best', labels=['Interesado', 'No Interesado'], facecolor=((45.0, 141.0, 236.0),(223.0, 226.0, 229.0)))
         # for i, text in enumerate(legend.get_texts()):
         #     if i == 1:
         #         text.set_bbox(dict(facecolor='#DFE2E5', alpha=0.5))
