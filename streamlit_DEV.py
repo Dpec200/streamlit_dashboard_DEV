@@ -791,34 +791,32 @@ def main():
         # ax.set_ylabel('Cantidad')
         # ax.set_title('Cantidad de 1 y 2 por Semana y Mes (Barras Separadas)')
         # ax.legend()
-
+        fig, ax = plt.subplots(figsize=(10, 6))
         n = len(grouped.index)
         x = np.arange(n)
         width = 0.20
         grouped1 = grouped[(grouped['semana'] == 1) & (grouped['mes'] == 'enero')]
 
-        st.write(grouped1)
         grouped3 = grouped[(grouped['semana'] == 2) & (grouped['mes'] == 'enero')]
 
-        st.write(grouped3)
         grouped5 = grouped[(grouped['semana'] == 3) & (grouped['mes'] == 'enero')]
 
         grouped7 = grouped[(grouped['semana'] == 4) & (grouped['mes'] == 'enero')]
 
-        plt.bar(x - (width/4), grouped1['1'], width=width, label='semana 1')
-        plt.bar(x - (width/4), grouped1['2'], bottom=grouped1['1'], width=width, label='semana 1')
+        ax.bar(x - (width/4), grouped1['1'], width=width, label='semana 1')
+        ax.bar(x - (width/4), grouped1['2'], bottom=grouped1['1'], width=width, label='semana 1')
 
-        plt.bar(x - (width/2), grouped3['1'], width=width, label='semana 2')
-        plt.bar(x - (width/2), grouped3['2'], bottom=grouped3['1'], width=width, label='semana 2')
+        ax.bar(x - (width/2), grouped3['1'], width=width, label='semana 2')
+        ax.bar(x - (width/2), grouped3['2'], bottom=grouped3['1'], width=width, label='semana 2')
 
-        plt.bar(x + (width/2), grouped5['1'], width=width, label='semana 3')
-        plt.bar(x + (width/2), grouped5['2'], bottom=grouped5['1'], width=width, label='semana 3')
+        ax.bar(x + (width/2), grouped5['1'], width=width, label='semana 3')
+        ax.bar(x + (width/2), grouped5['2'], bottom=grouped5['1'], width=width, label='semana 3')
 
-        plt.bar(x + (width/4), grouped7['1'], width=width, label='semana 4')
-        plt.bar(x + (width/4), grouped7['2'], bottom=grouped7['1'], width=width, label='semana 4')
+        ax.bar(x + (width/4), grouped7['1'], width=width, label='semana 4')
+        ax.bar(x + (width/4), grouped7['2'], bottom=grouped7['1'], width=width, label='semana 4')
 
-        plt.xticks(x, grouped.index)
-        plt.legend(loc='best')
+        ax.xticks(x, grouped.index)
+        ax.legend(loc='best')
         st.pyplot(plt)
 
         st.write("---")
