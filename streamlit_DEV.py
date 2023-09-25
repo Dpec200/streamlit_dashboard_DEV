@@ -710,7 +710,8 @@ def main():
         plt.xlabel('Mes')
         plt.ylabel('Valores')
         plt.title('Gráfico de Barras Apiladas por Mes y Semana')
-        plt.legend(title='Semana', labels=['1','2'], labelcolor=['red', 'blue'])
+        plt.legend(title='Semana', labels=['1','2'], labelcolor=['red', 'blue'], facecolor=['red', 'blue'])
+        plt.ylim(0, 30)
         st.pyplot(plt)
 
 
