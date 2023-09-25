@@ -818,10 +818,11 @@ def main():
             
 
         legend = ax.legend(loc='best', labels=['Interesado', 'No Interesado'])
-        for text in legend.get_texts():
-            for color in ['#2D8DEC', '#DFE2E5']:
-                text.set_bbox(dict(facecolor=color, alpha=0.5))
-        
+        for i, text in enumerate(legend.get_texts()):
+            if i == 0:
+                text.set_bbox(dict(facecolor='#DFE2E5', alpha=0.5))
+            elif i == 1:
+                text.set_bbox(dict(facecolor='#2D8DEC', alpha=0.5))
         # fig.xticks(x, grouped.index)
         st.pyplot(plt)
 
