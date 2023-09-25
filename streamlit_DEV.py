@@ -819,7 +819,7 @@ def main():
 
         legend = ax.legend(loc='best', labels=['Interesado', 'No Interesado'])
         for text in legend.get_texts():
-            for color in ['#DFE2E5', '#2D8DEC']:
+            for color in ['#2D8DEC', '#DFE2E5']:
                 text.set_bbox(dict(facecolor=color, alpha=0.5))
         
         # fig.xticks(x, grouped.index)
