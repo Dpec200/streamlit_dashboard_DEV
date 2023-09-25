@@ -720,15 +720,39 @@ def main():
         }
 
         df = pd.DataFrame(data)
-        df['semana'] = df['semana'].astype(str)
+
+        # Crear un DataFrame pivote
+        pivot_df = df.pivot(index=['mes', 'semana'], columns='msgBody', values='count').fillna(0)
+
+        # Obtener las categorías y sus colores
+        categorias = pivot_df.columns.tolist()
+        colores = ['red', 'blue']  # Puedes definir los colores que desees aquí
+
         # Crear el gráfico de barras apiladas
         plt.figure(figsize=(10, 4))
-        sns.barplot(x='mes', y='count', hue='msgBody', data=df, palette=['red', 'blue'])
-        plt.xlabel('Mes')
+        bottom = None
+
+        for categoria, color in zip(categorias, colores):
+            plt.bar(
+                pivot_df.index,
+                pivot_df[categoria],
+                bottom=bottom,
+                label=categoria,
+                color=color,
+            )
+            if bottom is None:
+                bottom = pivot_df[categoria]
+            else:
+                bottom += pivot_df[categoria]
+
+        plt.xlabel('Mes y Semana')
         plt.ylabel('Valores')
         plt.title('Gráfico de Barras Apiladas por Mes y Semana')
-        plt.legend(title='Semana', labels=['1', '2'], labelcolor=['red', 'blue'])
-        plt.ylim(0, 30)
+        plt.legend(title='Categoría')
+        plt.ylim(0, max(pivot_df.sum(axis=1)) + 5)  # Ajusta el límite superior
+        plt.xticks(pivot_df.index, [f'{mes} Semana {semana}' for mes, semana in pivot_df.index], rotation=45)
+        plt.tight_layout()
+        plt.show()
         st.pyplot(plt)
 
         st.write("---")
