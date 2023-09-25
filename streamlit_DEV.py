@@ -720,7 +720,7 @@ def main():
         }
 
         df = pd.DataFrame(data)
-
+        df['semana'] = df['semana'].astype(str)
         # Crear el gráfico de barras apiladas
         plt.figure(figsize=(10, 4))
         sns.barplot(x='mes', y='count', hue='semana', data=df, palette=['red', 'blue'])
