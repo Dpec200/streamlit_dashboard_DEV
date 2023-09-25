@@ -794,7 +794,7 @@ def main():
 
         n = len(grouped.index)
         x = np.arange(n)
-        width = 0.25
+        width = 0.20
         grouped1 = grouped[(grouped['semana'] == 1) & (grouped['mes'] == 'enero')]
         grouped2 = grouped[(grouped['semana'] == 1) & (grouped['mes'] == 'enero')]
         st.write(grouped1)
@@ -804,17 +804,17 @@ def main():
         grouped5 = grouped[(grouped['semana'] == 3) & (grouped['mes'] == 'enero')]
         grouped6 = grouped[(grouped['semana'] == 3) & (grouped['mes'] == 'enero')]
 
-        plt.bar(x - width, grouped1['1'], width=width, label='semana 1')
-        plt.bar(x - width, grouped2['2'], bottom=grouped1['1'], width=width, label='semana 1')
+        plt.bar(x - (width/4), grouped1['1'], width=width, label='semana 1')
+        plt.bar(x - (width/4), grouped2['2'], bottom=grouped1['1'], width=width, label='semana 1')
 
-        # plt.bar(x, grouped3['1'], width=width, label='semana 2')
-        # plt.bar(tuple(x), grouped4['2'], bottom=grouped3, width=width, label='semana 2')
+        plt.bar(x - (width/2), grouped3['1'], width=width, label='semana 2')
+        plt.bar(x - (width/2), grouped4['2'], bottom=grouped3, width=width, label='semana 2')
 
-        plt.bar(x + width, grouped5['1'], width=width, label='semana 3')
-        plt.bar(x + width, grouped6['2'], bottom=grouped5, width=width, label='semana 3')
+        plt.bar(x + (width/2), grouped5['1'], width=width, label='semana 3')
+        plt.bar(x + (width/2), grouped6['2'], bottom=grouped5, width=width, label='semana 3')
 
-        plt.bar(x + 1.25*(width), grouped7['1'], width=width, label='semana 4')
-        plt.bar(x + 1.25*(width), grouped8['2'], bottom=grouped7, width=width, label='semana 4')
+        plt.bar(x + (width/4), grouped7['1'], width=width, label='semana 4')
+        plt.bar(x + (width/4), grouped8['2'], bottom=grouped7, width=width, label='semana 4')
 
         plt.xticks(x, grouped.index)
         plt.legend(loc='best')
