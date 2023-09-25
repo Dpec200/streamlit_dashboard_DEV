@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from matplotlib.dates import DateFormatter, DayLocator
 import numpy as np
+import matplotlib.patches as mpatches
 
 
 # Configuramos la página
@@ -817,7 +818,11 @@ def main():
             ax.bar(i*6 + 4*width, grouped7['1'], bottom=grouped7['2'], width=width, label='semana 4', color='#2D8DEC')
             
 
-        ax.legend(loc='best', labels=['Interesado', 'No Interesado'], linecolor=((45.0/255, 141.0/255, 236.0/255)))
+        patch_1 = mpatches.Patch(color='#2D8DEC', label='Interesado')
+        patch_2 = mpatches.Patch(color='#DFE2E5', label='No Interesado')
+
+        # Crear la leyenda con las barras de color personalizadas
+        plt.legend(handles=[patch_1, patch_2], loc='upper right')
         # for i, text in enumerate(legend.get_texts()):
         #     if i == 1:
         #         text.set_bbox(dict(facecolor='#DFE2E5', alpha=0.5))
