@@ -769,7 +769,7 @@ def main():
         colores = ['blue', 'green']
 
         # Definir la cantidad de semanas y el ancho de las barras
-        num_semanas = grouped['semana'].max()
+        num_semanas = 4
         ancho_barra = 0.35
 
         # Crear un arreglo de índices para las barras de cada mes
