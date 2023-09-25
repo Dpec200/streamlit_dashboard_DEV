@@ -804,17 +804,17 @@ def main():
 
             grouped7 = grouped[(grouped['semana'] == 4) & (grouped['mes'] == mes)]
             
-            ax.bar(i*10 + 1, grouped1['1'], width=width, label='semana 1')
-            ax.bar(i*10 + 1, grouped1['2'], bottom=grouped1['1'], width=width, label='semana 1')
+            ax.bar(i*6 + width, grouped1['1'], width=width, label='semana 1')
+            ax.bar(i*6 + width, grouped1['2'], bottom=grouped1['1'], width=width, label='semana 1')
 
-            ax.bar(i*10 + 2, grouped3['1'], width=width, label='semana 2')
-            ax.bar(i*10 + 2, grouped3['2'], bottom=grouped3['1'], width=width, label='semana 2')
+            ax.bar(i*6 + width, grouped3['1'], width=width, label='semana 2')
+            ax.bar(i*6 + width, grouped3['2'], bottom=grouped3['1'], width=width, label='semana 2')
 
-            ax.bar(i*10 + 3, grouped5['1'], width=width, label='semana 3')
-            ax.bar(i*10 + 3, grouped5['2'], bottom=grouped5['1'], width=width, label='semana 3')
+            ax.bar(i*6 + width, grouped5['1'], width=width, label='semana 3')
+            ax.bar(i*6 + width, grouped5['2'], bottom=grouped5['1'], width=width, label='semana 3')
 
-            ax.bar(i*10 + 4, grouped7['1'], width=width, label='semana 4')
-            ax.bar(i*10 + 4, grouped7['2'], bottom=grouped7['1'], width=width, label='semana 4')
+            ax.bar(i*6 + width, grouped7['1'], width=width, label='semana 4')
+            ax.bar(i*6 + width, grouped7['2'], bottom=grouped7['1'], width=width, label='semana 4')
 
         ax.legend(loc='best')
         # fig.xticks(x, grouped.index)
