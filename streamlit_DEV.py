@@ -734,33 +734,69 @@ def main():
         # plt.legend(title='Categoría')
         # plt.tight_layout()
         # st.pyplot(plt)
-        fig, ax = plt.subplots(figsize=(10, 6))
+        # fig, ax = plt.subplots(figsize=(10, 6))
 
-        # Define los colores para '1' y '2'
-        colores = ['blue', 'green']
+        # # Define los colores para '1' y '2'
+        # colores = ['blue', 'green']
         data = {
-            'mes': [1, 1, 1, 1, 2, 2, 2, 2],
-            'semana': [1, 2, 3, 4, 1, 2, 3, 4],
+            'mes': ['enero', 'enero', 'enero', 'enero', 'feb', 'feb', 'feb', 'feb'],
+            'semana': ['1', '2', '3', '4', '1', '2', '3', '4'],
             '1': [5, 6, 9, 2, 3, 4, 1, 3],
             '2': [1, 2, 3, 5, 5, 7, 1, 1]
         }
 
         grouped = pd.DataFrame(data)
-        # Itera a través de los meses y crea las barras apiladas
+        # # Itera a través de los meses y crea las barras apiladas
+        # for i, month in enumerate(grouped['mes'].unique()):
+        #     data = grouped[grouped['mes'] == month]
+            
+        #     # Barras para '1'
+        #     ax.bar(data['semana'], data['2'], label=f'Mes {month} - 2', color=colores[1], alpha=0.7)
+            
+        #     # Barras para '2' (apiladas encima de '1')            
+        #     ax.bar(data['semana'], data['1'], bottom=data['2'], label=f'Mes {month} - 1', color=colores[0], alpha=0.7)
+        
+        # # Etiqueta los ejes y agrega una leyenda
+        # ax.set_xlabel('Semana')
+        # ax.set_ylabel('Cantidad')
+        # ax.set_title('Cantidad de 1 y 2 por Semana y Mes (Barras Apiladas)')
+        # ax.legend()
+
+        fig, ax = plt.subplots(figsize=(10, 6))
+
+        # Define los colores para '1' y '2'
+        colores = ['blue', 'green']
+
+        # Definir la cantidad de semanas y el ancho de las barras
+        num_semanas = grouped['semana'].max()
+        ancho_barra = 0.35
+
+        # Crear un arreglo de índices para las barras de cada mes
+        indices = np.arange(1, num_semanas * len(grouped['mes'].unique()) + 1)
+
+        # Itera a través de los meses y crea las barras separadas por mes
         for i, month in enumerate(grouped['mes'].unique()):
             data = grouped[grouped['mes'] == month]
             
             # Barras para '1'
-            ax.bar(data['semana'], data['2'], label=f'Mes {month} - 2', color=colores[1], alpha=0.7)
+            ax.bar(indices + i * ancho_barra, data['1'], width=ancho_barra, label=f'Mes {month} - 1', color=colores[0], alpha=0.7)
             
-            # Barras para '2' (apiladas encima de '1')            
-            ax.bar(data['semana'], data['1'], bottom=data['2'], label=f'Mes {month} - 1', color=colores[0], alpha=0.7)
-        
+            # Barras para '2'
+            ax.bar(indices + i * ancho_barra, data['2'], width=ancho_barra, label=f'Mes {month} - 2', color=colores[1], alpha=0.7, bottom=data['1'])
+
         # Etiqueta los ejes y agrega una leyenda
         ax.set_xlabel('Semana')
         ax.set_ylabel('Cantidad')
-        ax.set_title('Cantidad de 1 y 2 por Semana y Mes (Barras Apiladas)')
+        ax.set_title('Cantidad de 1 y 2 por Semana y Mes (Barras Separadas)')
         ax.legend()
+
+        # Establece el espacio en el eje X para que haya espacio entre los meses
+        ax.set_xticks(indices + (ancho_barra * (len(grouped['mes'].unique()) - 1)) / 2)
+        ax.set_xticklabels([f'Semana {i}' for i in range(1, num_semanas + 1)])
+
+
+
+
         st.pyplot(plt)
 
         st.write("---")
