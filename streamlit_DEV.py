@@ -723,7 +723,7 @@ def main():
 
         # Crear un DataFrame pivote
         pivot_df = df.pivot(index=['mes', 'semana'], columns='msgBody', values='count').fillna(0)
-
+        st.write(pivot_df)
         # Obtener las categorías y sus colores
         categorias = pivot_df.columns.tolist()
         colores = ['red', 'blue']  # Puedes definir los colores que desees aquí
