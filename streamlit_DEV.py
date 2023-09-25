@@ -741,7 +741,7 @@ def main():
         # colores = ['blue', 'green']
         data = {
             'mes': ['enero', 'enero', 'enero', 'enero', 'feb', 'feb', 'feb', 'feb'],
-            'semana': ['1', '2', '3', '4', '1', '2', '3', '4'],
+            'semana': [1, 2, 3, 4, 1, 2, 3, 4],
             '1': [5, 6, 9, 2, 3, 4, 1, 3],
             '2': [1, 2, 3, 5, 5, 7, 1, 1]
         }
