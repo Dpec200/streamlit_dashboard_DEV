@@ -795,25 +795,26 @@ def main():
         n = len(grouped.index)
         x = np.arange(n)
         width = 0.40
-        grouped1 = grouped[(grouped['semana'] == 1) & (grouped['mes'] == 'enero')]
+        for mes in list(grouped['mes'].unique()):
+            grouped1 = grouped[(grouped['semana'] == 1) & (grouped['mes'] == mes)]
 
-        grouped3 = grouped[(grouped['semana'] == 2) & (grouped['mes'] == 'enero')]
+            grouped3 = grouped[(grouped['semana'] == 2) & (grouped['mes'] == mes)]
 
-        grouped5 = grouped[(grouped['semana'] == 3) & (grouped['mes'] == 'enero')]
+            grouped5 = grouped[(grouped['semana'] == 3) & (grouped['mes'] == mes)]
 
-        grouped7 = grouped[(grouped['semana'] == 4) & (grouped['mes'] == 'enero')]
+            grouped7 = grouped[(grouped['semana'] == 4) & (grouped['mes'] == mes)]
 
-        ax.bar(x - (1.5*width), grouped1['1'], width=width, label='semana 1')
-        ax.bar(x - (1.5*width), grouped1['2'], bottom=grouped1['1'], width=width, label='semana 1')
+            ax.bar(x - (1.5*width), grouped1['1'], width=width, label='semana 1')
+            ax.bar(x - (1.5*width), grouped1['2'], bottom=grouped1['1'], width=width, label='semana 1')
 
-        ax.bar(x - (0.5*width), grouped3['1'], width=width, label='semana 2')
-        ax.bar(x - (0.5*width), grouped3['2'], bottom=grouped3['1'], width=width, label='semana 2')
+            ax.bar(x - (0.5*width), grouped3['1'], width=width, label='semana 2')
+            ax.bar(x - (0.5*width), grouped3['2'], bottom=grouped3['1'], width=width, label='semana 2')
 
-        ax.bar(x + (0.5*width), grouped5['1'], width=width, label='semana 3')
-        ax.bar(x + (0.5*width), grouped5['2'], bottom=grouped5['1'], width=width, label='semana 3')
+            ax.bar(x + (0.5*width), grouped5['1'], width=width, label='semana 3')
+            ax.bar(x + (0.5*width), grouped5['2'], bottom=grouped5['1'], width=width, label='semana 3')
 
-        ax.bar(x + (1.5*width), grouped7['1'], width=width, label='semana 4')
-        ax.bar(x + (1.5*width), grouped7['2'], bottom=grouped7['1'], width=width, label='semana 4')
+            ax.bar(x + (1.5*width), grouped7['1'], width=width, label='semana 4')
+            ax.bar(x + (1.5*width), grouped7['2'], bottom=grouped7['1'], width=width, label='semana 4')
 
         ax.legend(loc='best')
         st.pyplot(plt)
