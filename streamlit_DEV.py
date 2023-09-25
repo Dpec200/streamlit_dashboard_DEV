@@ -808,13 +808,13 @@ def main():
         plt.bar(x - width, grouped2['2'], bottom=grouped1['1'], width=width, label='semana 1')
 
         plt.bar(x, grouped3['1'], width=width, label='semana 2')
-        plt.bar(x, grouped4['2'], bottom=grouped3, width=width, label='semana 2')
+        plt.bar(tuple(x), grouped4['2'], bottom=grouped3, width=width, label='semana 2')
 
         plt.bar(x + width, grouped5['1'], width=width, label='semana 3')
         plt.bar(x + width, grouped6['2'], bottom=grouped5, width=width, label='semana 3')
 
-        plt.bar(x + 2*(width), grouped7['1'], width=width, label='semana 4')
-        plt.bar(x + 2*(width), grouped8['2'], bottom=grouped7, width=width, label='semana 4')
+        plt.bar(x + 1.25*(width), grouped7['1'], width=width, label='semana 4')
+        plt.bar(x + 1.25*(width), grouped8['2'], bottom=grouped7, width=width, label='semana 4')
 
         plt.xticks(x, grouped.index)
         plt.legend(loc='best')
