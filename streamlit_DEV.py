@@ -747,6 +747,7 @@ def main():
         }
 
         grouped = pd.DataFrame(data)
+        st.write(grouped)
         # # Itera a través de los meses y crea las barras apiladas
         # for i, month in enumerate(grouped['mes'].unique()):
         #     data = grouped[grouped['mes'] == month]
