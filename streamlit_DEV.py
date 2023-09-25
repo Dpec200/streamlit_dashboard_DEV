@@ -828,9 +828,9 @@ def main():
 
         categorias = ['A', 'B', 'C', 'D']
         valores = [10, 24, 15, 30]
-
+        fig, ax = plt.subplots(figsize=(10, 6))
         # Crear el gráfico de barras
-        plt.bar(categorias, valores)
+        ax.bar(categorias, valores)
 
         # Coordenadas x específicas para las etiquetas
         x_coords = [0, 1, 2, 3]
@@ -840,12 +840,11 @@ def main():
 
         # Agregar etiquetas a ubicaciones específicas en el eje x
         for x, etiqueta in zip(x_coords, etiquetas):
-            plt.annotate(etiqueta, (x, valores[x]), ha='center', va='bottom')
+            ax.annotate(etiqueta, (x, valores[x]), ha='center', va='bottom')
 
-        plt.xlabel('Categorías')
-        plt.ylabel('Valores')
-        plt.title('Gráfico de Barras con Etiquetas Personalizadas')
-        plt.show()
+        ax.xlabel('Categorías')
+        ax.ylabel('Valores')
+        ax.title('Gráfico de Barras con Etiquetas Personalizadas')
 
 
         st.pyplot(plt)
