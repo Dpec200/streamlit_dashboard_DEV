@@ -738,17 +738,24 @@ def main():
 
         # Define los colores para '1' y '2'
         colores = ['blue', 'green']
+        data = {
+            'mes': [1, 1, 1, 1, 2, 2, 2, 2],
+            'semana': [1, 2, 3, 4, 1, 2, 3, 4],
+            '1': [5, 6, 9, 2, 3, 4, 1, 3],
+            '2': [1, 2, 3, 5, 5, 7, 1, 1]
+        }
 
+        grouped = pd.DataFrame(data)
         # Itera a través de los meses y crea las barras apiladas
         for i, month in enumerate(grouped['mes'].unique()):
             data = grouped[grouped['mes'] == month]
             
             # Barras para '1'
-            ax.bar(data['semana'], data['1'], label=f'Mes {month} - 1', color=colores[0], alpha=0.7)
+            ax.bar(data['semana'], data['2'], label=f'Mes {month} - 2', color=colores[1], alpha=0.7)
             
-            # Barras para '2' (apiladas encima de '1')
-            ax.bar(data['semana'], data['2'], bottom=data['1'], label=f'Mes {month} - 2', color=colores[1], alpha=0.7)
-
+            # Barras para '2' (apiladas encima de '1')            
+            ax.bar(data['semana'], data['1'], bottom=data['2'], label=f'Mes {month} - 1', color=colores[0], alpha=0.7)
+        
         # Etiqueta los ejes y agrega una leyenda
         ax.set_xlabel('Semana')
         ax.set_ylabel('Cantidad')
