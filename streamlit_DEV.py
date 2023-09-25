@@ -804,8 +804,8 @@ def main():
 
             grouped7 = grouped[(grouped['semana'] == 4) & (grouped['mes'] == mes)]
 
-            ax.bar(x - (1.5*width), grouped1['1'], width=width, label='semana 1')
-            ax.bar(x - (1.5*width), grouped1['2'], bottom=grouped1['1'], width=width, label='semana 1')
+            ax.bar(1.5*width, grouped1['1'], width=width, label='semana 1')
+            ax.bar(1.5*width, grouped1['2'], bottom=grouped1['1'], width=width, label='semana 1')
 
             # ax.bar(x - (0.5*width), grouped3['1'], width=width, label='semana 2')
             # ax.bar(x - (0.5*width), grouped3['2'], bottom=grouped3['1'], width=width, label='semana 2')
