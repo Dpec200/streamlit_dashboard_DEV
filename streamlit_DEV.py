@@ -5,6 +5,7 @@ from sqlalchemy import create_engine
 import matplotlib.pyplot as plt
 import seaborn as sns
 from matplotlib.dates import DateFormatter, DayLocator
+import numpy as np
 
 
 # Configuramos la página
