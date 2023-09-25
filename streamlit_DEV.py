@@ -736,18 +736,18 @@ def main():
         # st.pyplot(plt)
         fig, ax = plt.subplots(figsize=(10, 6))
 
-        # Define los colores para las barras apiladas
+        # Define los colores para '1' y '2'
         colores = ['blue', 'green']
 
         # Itera a través de los meses y crea las barras apiladas
         for i, month in enumerate(grouped['mes'].unique()):
             data = grouped[grouped['mes'] == month]
             
-            # Suma las cantidades de '1' y '2' para apilar las barras
-            suma_1 = data['1'].values
-            suma_2 = suma_1 + data['2'].values
+            # Barras para '1'
+            ax.bar(data['semana'], data['1'], label=f'Mes {month} - 1', color=colores[0], alpha=0.7)
             
-            ax.bar(data['semana'], suma_2, label=f'Mes {month}', color=colores[i], bottom=suma_1 if i > 0 else None)
+            # Barras para '2' (apiladas encima de '1')
+            ax.bar(data['semana'], data['2'], bottom=data['1'], label=f'Mes {month} - 2', color=colores[1], alpha=0.7)
 
         # Etiqueta los ejes y agrega una leyenda
         ax.set_xlabel('Semana')
