@@ -742,8 +742,8 @@ def main():
         data = {
             'mes': ['enero', 'enero', 'enero', 'enero', 'feb', 'feb', 'feb', 'feb'],
             'semana': [1, 2, 3, 4, 1, 2, 3, 4],
-            '1': [5, 6, 9, 2, 3, 4, 1, 3],
-            '2': [1, 2, 3, 5, 5, 7, 1, 1]
+                 '1': [5, 6, 9, 2, 3, 4, 1, 3],
+                 '2': [1, 2, 3, 5, 5, 7, 1, 1]
         }
 
         grouped = pd.DataFrame(data)
@@ -794,6 +794,7 @@ def main():
 
         n = len(grouped.index)
         x = np.arange(n)
+        x = list(x)
         width = 0.20
         grouped1 = grouped[(grouped['semana'] == 1) & (grouped['mes'] == 'enero')]
         grouped2 = grouped[(grouped['semana'] == 1) & (grouped['mes'] == 'enero')]
@@ -803,6 +804,9 @@ def main():
 
         grouped5 = grouped[(grouped['semana'] == 3) & (grouped['mes'] == 'enero')]
         grouped6 = grouped[(grouped['semana'] == 3) & (grouped['mes'] == 'enero')]
+
+        grouped7 = grouped[(grouped['semana'] == 3) & (grouped['mes'] == 'enero')]
+        grouped8 = grouped[(grouped['semana'] == 3) & (grouped['mes'] == 'enero')]
 
         plt.bar(x - (width/4), grouped1['1'], width=width, label='semana 1')
         plt.bar(x - (width/4), grouped2['2'], bottom=grouped1['1'], width=width, label='semana 1')
