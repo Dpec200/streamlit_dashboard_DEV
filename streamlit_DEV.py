@@ -797,7 +797,7 @@ def main():
         width = 0.25
         grouped1 = grouped[(grouped['semana'] == 1) & grouped['mes'] == 'enero']
         grouped2 = grouped[(grouped['semana'] == 1) & grouped['mes'] == 'enero']
-
+        st.write(grouped1)
         grouped3 = grouped[(grouped['semana'] == 2) & grouped['mes'] == 'enero']
         grouped4 = grouped[(grouped['semana'] == 2) & grouped['mes'] == 'enero']
 
