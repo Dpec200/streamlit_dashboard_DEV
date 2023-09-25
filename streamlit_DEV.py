@@ -804,19 +804,19 @@ def main():
 
             grouped7 = grouped[(grouped['semana'] == 4) & (grouped['mes'] == mes)]
             
-            ax.bar(i*6 + width, grouped1['1'], width=width, label='semana 1')
-            ax.bar(i*6 + width, grouped1['2'], bottom=grouped1['1'], width=width, label='semana 1')
+            ax.bar(i*6 + width, grouped1['1'], width=width, label='semana 1', color='#DFE2E5')
+            ax.bar(i*6 + width, grouped1['2'], bottom=grouped1['1'], width=width, label='semana 1', color='#2D8DEC')
 
-            ax.bar(i*6 + 2*width, grouped3['1'], width=width, label='semana 2')
-            ax.bar(i*6 + 2*width, grouped3['2'], bottom=grouped3['1'], width=width, label='semana 2')
+            ax.bar(i*6 + 2*width, grouped3['1'], width=width, label='semana 2', color='#DFE2E5')
+            ax.bar(i*6 + 2*width, grouped3['2'], bottom=grouped3['1'], width=width, label='semana 2', color='#2D8DEC')
 
-            ax.bar(i*6 + 3*width, grouped5['1'], width=width, label='semana 3')
-            ax.bar(i*6 + 3*width, grouped5['2'], bottom=grouped5['1'], width=width, label='semana 3')
+            ax.bar(i*6 + 3*width, grouped5['1'], width=width, label='semana 3', color='#DFE2E5')
+            ax.bar(i*6 + 3*width, grouped5['2'], bottom=grouped5['1'], width=width, label='semana 3', color='#2D8DEC')
 
-            ax.bar(i*6 + 4*width, grouped7['1'], width=width, label='semana 4')
-            ax.bar(i*6 + 4*width, grouped7['2'], bottom=grouped7['1'], width=width, label='semana 4')
+            ax.bar(i*6 + 4*width, grouped7['1'], width=width, label='semana 4', color='#DFE2E5')
+            ax.bar(i*6 + 4*width, grouped7['2'], bottom=grouped7['1'], width=width, label='semana 4', color='#2D8DEC')
 
-        ax.legend(loc='best')
+        ax.legend(loc='best', labels=['Interesado', 'No Interesado'], facecolor=['#2D8DEC', '#DFE2E5'])
         # fig.xticks(x, grouped.index)
         st.pyplot(plt)
 
