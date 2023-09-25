@@ -819,9 +819,9 @@ def main():
 
         legend = ax.legend(loc='best', labels=['Interesado', 'No Interesado'])
         for i, text in enumerate(legend.get_texts()):
-            if i == 0:
+            if i == 1:
                 text.set_bbox(dict(facecolor='#DFE2E5', alpha=0.5))
-            elif i == 1:
+            elif i == 2:
                 text.set_bbox(dict(facecolor='#2D8DEC', alpha=0.5))
         # fig.xticks(x, grouped.index)
         st.pyplot(plt)
