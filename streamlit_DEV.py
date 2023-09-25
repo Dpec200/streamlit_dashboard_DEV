@@ -742,13 +742,17 @@ def main():
         # Itera a través de los meses y crea las barras apiladas
         for i, month in enumerate(grouped['mes'].unique()):
             data = grouped[grouped['mes'] == month]
-            ax.bar(data[['mes', 'semana']], data['1'], label=f'Mes {month} - 1', bottom=data['2'].values if i > 0 else None, color=colores[0])
-            ax.bar(data[['mes', 'semana']], data['2'], label=f'Mes {month} - 2', bottom=data['1'].values if i > 0 else None, color=colores[1])
+            
+            # Suma las cantidades de '1' y '2' para apilar las barras
+            suma_1 = data['1'].values
+            suma_2 = suma_1 + data['2'].values
+            
+            ax.bar(data['semana'], suma_2, label=f'Mes {month}', color=colores[i], bottom=suma_1 if i > 0 else None)
 
         # Etiqueta los ejes y agrega una leyenda
         ax.set_xlabel('Semana')
         ax.set_ylabel('Cantidad')
-        ax.set_title('Cantidad de 1 y 2 por Semana y Mes')
+        ax.set_title('Cantidad de 1 y 2 por Semana y Mes (Barras Apiladas)')
         ax.legend()
         st.pyplot(plt)
 
