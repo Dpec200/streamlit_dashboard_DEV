@@ -816,7 +816,7 @@ def main():
             ax.bar(i*6 + 4*width, grouped7['1'], width=width, label='semana 4', color='#DFE2E5')
             ax.bar(i*6 + 4*width, grouped7['2'], bottom=grouped7['1'], width=width, label='semana 4', color='#2D8DEC')
 
-        ax.legend(loc='best', labels=['Interesado', 'No Interesado'], facecolor=['#2D8DEC', '#DFE2E5'])
+        ax.legend(loc='best', labels=['Interesado', 'No Interesado'], facecolor=[(45, 141, 236), (223, 226, 229)])
         # fig.xticks(x, grouped.index)
         st.pyplot(plt)
 
