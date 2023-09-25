@@ -795,14 +795,14 @@ def main():
         n = len(grouped.index)
         x = np.arange(n)
         width = 0.25
-        grouped1 = grouped[(grouped['semana'] == 1) & grouped['mes'] == 'enero']
-        grouped2 = grouped[(grouped['semana'] == 1) & grouped['mes'] == 'enero']
+        grouped1 = grouped[(grouped['semana'] == 1) & (grouped['mes'] == 'enero')]
+        grouped2 = grouped[(grouped['semana'] == 1) & (grouped['mes'] == 'enero')]
         st.write(grouped1)
-        grouped3 = grouped[(grouped['semana'] == 2) & grouped['mes'] == 'enero']
-        grouped4 = grouped[(grouped['semana'] == 2) & grouped['mes'] == 'enero']
+        grouped3 = grouped[(grouped['semana'] == 2) & (grouped['mes'] == 'enero')]
+        grouped4 = grouped[(grouped['semana'] == 2) & (grouped['mes'] == 'enero')]
 
-        grouped5 = grouped[(grouped['semana'] == 3) & grouped['mes'] == 'enero']
-        grouped6 = grouped[(grouped['semana'] == 3) & grouped['mes'] == 'enero']
+        grouped5 = grouped[(grouped['semana'] == 3) & (grouped['mes'] == 'enero')]
+        grouped6 = grouped[(grouped['semana'] == 3) & (grouped['mes'] == 'enero')]
 
         plt.bar(x - width, grouped1['1'], width=width, label='semana 1')
         plt.bar(x - width, grouped2['2'], bottom=grouped1['1'], width=width, label='semana 1')
