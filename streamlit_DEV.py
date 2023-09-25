@@ -800,12 +800,13 @@ def main():
         st.write(grouped1)
         grouped3 = grouped[(grouped['semana'] == 2) & (grouped['mes'] == 'enero')]
         grouped4 = grouped[(grouped['semana'] == 2) & (grouped['mes'] == 'enero')]
-
+        st.write(grouped3)
+        st.write(grouped4)
         grouped5 = grouped[(grouped['semana'] == 3) & (grouped['mes'] == 'enero')]
         grouped6 = grouped[(grouped['semana'] == 3) & (grouped['mes'] == 'enero')]
 
-        grouped7 = grouped[(grouped['semana'] == 3) & (grouped['mes'] == 'enero')]
-        grouped8 = grouped[(grouped['semana'] == 3) & (grouped['mes'] == 'enero')]
+        grouped7 = grouped[(grouped['semana'] == 4) & (grouped['mes'] == 'enero')]
+        grouped8 = grouped[(grouped['semana'] == 4) & (grouped['mes'] == 'enero')]
 
         plt.bar(x - (width/4), grouped1['1'], width=width, label='semana 1')
         plt.bar(x - (width/4), grouped2['2'], bottom=grouped1['1'], width=width, label='semana 1')
