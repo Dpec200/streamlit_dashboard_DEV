@@ -781,10 +781,10 @@ def main():
             data = grouped[grouped['mes'] == month]
             
             # Barras para '1'
-            ax.bar([x + i * ancho_barra for x in indices], data['1'], width=ancho_barra, label=f'Mes {month} - 1', color=colores[0], alpha=0.7)
+            ax.bar(data['mes'], data['1'], width=ancho_barra, label=f'Mes {month} - 1', color=colores[0], alpha=0.7)
             
             # Barras para '2'
-            ax.bar([x + i * ancho_barra for x in indices], data['2'], width=ancho_barra, label=f'Mes {month} - 2', color=colores[1], alpha=0.7, bottom=data['1'])
+            ax.bar(data['mes'], data['2'], width=ancho_barra, label=f'Mes {month} - 2', color=colores[1], alpha=0.7, bottom=data['1'])
 
         # Etiqueta los ejes y agrega una leyenda
         ax.set_xlabel('Semana')
