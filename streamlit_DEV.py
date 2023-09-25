@@ -729,12 +729,12 @@ def main():
         colores = ['red', 'blue']  # Puedes definir los colores que desees aquí
 
         # Crear el gráfico de barras apiladas
-        plt.figure(figsize=(10, 4))
+        fig, ax = plt.subplots(figsize=(10, 4))
         bottom = None
 
         for categoria, color in zip(categorias, colores):
             plt.bar(
-                pivot_df.index,
+                range(len(pivot_df)),
                 pivot_df[categoria],
                 bottom=bottom,
                 label=categoria,
@@ -750,9 +750,8 @@ def main():
         plt.title('Gráfico de Barras Apiladas por Mes y Semana')
         plt.legend(title='Categoría')
         plt.ylim(0, max(pivot_df.sum(axis=1)) + 5)  # Ajusta el límite superior
-        plt.xticks(pivot_df.index, [f'{mes} Semana {semana}' for mes, semana in pivot_df.index], rotation=45)
+        plt.xticks(range(len(pivot_df)), [f'{mes} Semana {semana}' for mes, semana in pivot_df.index], rotation=45)
         plt.tight_layout()
-        plt.show()
         st.pyplot(plt)
 
         st.write("---")
