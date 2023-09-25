@@ -795,7 +795,7 @@ def main():
         n = len(grouped.index)
         h = range(n)
         width = 0.40
-        for mes in list(grouped['mes'].unique()):
+        for i ,mes in enumerate(list(grouped['mes'].unique())):
             grouped1 = grouped[(grouped['semana'] == 1) & (grouped['mes'] == mes)]
 
             grouped3 = grouped[(grouped['semana'] == 2) & (grouped['mes'] == mes)]
@@ -803,18 +803,18 @@ def main():
             grouped5 = grouped[(grouped['semana'] == 3) & (grouped['mes'] == mes)]
 
             grouped7 = grouped[(grouped['semana'] == 4) & (grouped['mes'] == mes)]
+            
+            ax.bar(i*10 + 1, grouped1['1'], width=width, label='semana 1')
+            ax.bar(i*10 + 1, grouped1['2'], bottom=grouped1['1'], width=width, label='semana 1')
 
-            ax.bar(1.5*width + 1, grouped1['1'], width=width, label='semana 1')
-            ax.bar(1.5*width + 1, grouped1['2'], bottom=grouped1['1'], width=width, label='semana 1')
+            ax.bar(i*10 + 2, grouped3['1'], width=width, label='semana 2')
+            ax.bar(i*10 + 2, grouped3['2'], bottom=grouped3['1'], width=width, label='semana 2')
 
-            ax.bar(0.5*width + 2, grouped3['1'], width=width, label='semana 2')
-            ax.bar(0.5*width + 2, grouped3['2'], bottom=grouped3['1'], width=width, label='semana 2')
+            ax.bar(i*10 + 3, grouped5['1'], width=width, label='semana 3')
+            ax.bar(i*10 + 3, grouped5['2'], bottom=grouped5['1'], width=width, label='semana 3')
 
-            ax.bar(0.5*width + 3, grouped5['1'], width=width, label='semana 3')
-            ax.bar(0.5*width + 3, grouped5['2'], bottom=grouped5['1'], width=width, label='semana 3')
-
-            ax.bar(1.5*width + 4, grouped7['1'], width=width, label='semana 4')
-            ax.bar(1.5*width + 4, grouped7['2'], bottom=grouped7['1'], width=width, label='semana 4')
+            ax.bar(i*10 + 4, grouped7['1'], width=width, label='semana 4')
+            ax.bar(i*10 + 4, grouped7['2'], bottom=grouped7['1'], width=width, label='semana 4')
 
         ax.legend(loc='best')
         # fig.xticks(x, grouped.index)
