@@ -815,7 +815,6 @@ def main():
         ax.bar(x + (width/4), grouped7['1'], width=width, label='semana 4')
         ax.bar(x + (width/4), grouped7['2'], bottom=grouped7['1'], width=width, label='semana 4')
 
-        ax.xticks(x, grouped.index)
         ax.legend(loc='best')
         st.pyplot(plt)
 
