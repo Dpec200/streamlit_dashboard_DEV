@@ -794,7 +794,6 @@ def main():
 
         n = len(grouped.index)
         x = np.arange(n)
-        x = list(x)
         width = 0.20
         grouped1 = grouped[(grouped['semana'] == 1) & (grouped['mes'] == 'enero')]
         grouped2 = grouped[(grouped['semana'] == 1) & (grouped['mes'] == 'enero')]
