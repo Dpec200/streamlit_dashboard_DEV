@@ -812,7 +812,7 @@ def main():
             ax.bar(i*6 + 2*width, grouped3['1'], bottom=grouped3['2'], width=width, label='semana 2', color='#2D8DEC')
             ax.text(x=(i*6 + 2*width), s='2da', y=-1)
 
-            ax.text(x=(i*6 + (4*width))/2, s=mes, y=-2)
+            ax.text(x=(i*6 + (4*width)/2), s=str.capitalize(mes), y=-2)
 
             ax.bar(i*6 + 3*width, grouped5['2'], width=width, label='semana 3', color='#DFE2E5')
             ax.bar(i*6 + 3*width, grouped5['1'], bottom=grouped5['2'], width=width, label='semana 3', color='#2D8DEC')
@@ -825,7 +825,7 @@ def main():
 
         patch_1 = mpatches.Patch(color='#2D8DEC', label='Interesado')
         patch_2 = mpatches.Patch(color='#DFE2E5', label='No Interesado')
-
+        plt.xticks([])
         # Crear la leyenda con las barras de color personalizadas
         plt.legend(handles=[patch_1, patch_2], loc='upper right')
         st.pyplot(plt)
