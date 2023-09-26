@@ -670,139 +670,34 @@ def main():
         #         st.write("sin datos")
 
         # with col7:
-
-        # Datos de ejemplo (reemplázalos con tus propios datos)
-        # categorias = ['Si', 'No']
-        # valores_1 = [10, 15]
-        # valores_2 = [5, 10]
-
-        # Crear un DataFrame de pandas (opcional, pero útil para Seaborn)
-        # df = pd.DataFrame({'Categorías': categorias, 'Valor 1': valores_1, 'Valor 2': valores_2})
-        
-        # Crear el gráfico de barras apiladas vertical
-        # sns.set(style="whitegrid")
-        # plt.figure(figsize=(8, 6))
-        # sns.barplot(x='fecha', y='1', data=df_count, color='#2D8DEC', label='Interesado')
-        # sns.barplot(x='fecha', y='2', data=df_count, color='#DFE2E5', label='No Interesado')
-        # plt.xlabel('Categorías')
-        # plt.ylabel('Valores')
-        # plt.xticks(rotation=45)
-        # plt.title('Gráfico de Barras Apiladas Vertical')
-        # plt.legend()
-        # gráfico12 = plt.gcf()
-        # st.pyplot(gráfico12)
-
         # Crear columnas de mes y semana
         grafico_barras_data['mes'] = grafico_barras_data['fecha'].dt.month
         grafico_barras_data['semana'] = grafico_barras_data['fecha'].dt.day // 7 + 1
         grafico_barras_data['mes'] = grafico_barras_data['mes'].astype(str)
         grafico_barras_data['semana'] = grafico_barras_data['semana'].astype(str)
 
-        # Agrupar por mes y semana, contando las ocurrencias de cada categoría
         grouped = grafico_barras_data.groupby(['mes', 'semana', 'msgBody']).size().unstack(fill_value=0).reset_index()
-        # grouped1 = grouped[grouped['msgBody'] == '1']
-        # grouped2 = grouped[grouped['msgBody'] == '2']
-        st.write(grouped)
-        # st.write(grouped2)
-        # # Crear el gráfico de barras apiladas
-        # plt.figure(figsize=(10, 4))
-        # sns.barplot(x='mes', y='count', hue='semana', data=grouped, palette=['red'])
-        # # sns.barplot(x='mes', y='count', hue='semana', data=grouped2, palette=['blue'])
-        # plt.xlabel('Mes')
-        # plt.ylabel('Valores')
-        # plt.title('Gráfico de Barras Apiladas por Mes y Semana')
-        # plt.legend(title='Semana', labels=['1','2'], labelcolor=['red', 'blue']).get_lines()[0].set_color('red')
-        # plt.ylim(0, 30)
-        # st.pyplot(plt)
+        
         # data = {
-        #     'mes': ['Enero', 'Enero', 'Febrero', 'Febrero', 'Marzo', 'Marzo'],
-        #     'semana': [1, 2, 1, 2, 1, 2],
-        #     'msgBody': ['1', '2', '1', '2', '1', '2'],
-        #     'count': [10, 3, 12, 8, 15, 9]
+        #     'mes': ['enero', 'enero', 'enero', 'enero', 'feb', 'feb', 'feb', 'feb'],
+        #     'semana': [1, 2, 3, 4, 1, 2, 3, 4],
+        #          '1': [5, 6, 9, 2, 3, 4, 1, 3],
+        #          '2': [1, 2, 3, 5, 5, 7, 1, 1]
         # }
 
-        # df = pd.DataFrame(data)
-
-        # # Crear un DataFrame pivote
-        # pivot_df = df.pivot_table(index=['mes', 'semana'], columns='msgBody', values='count', aggfunc='sum', fill_value=0)
-        # st.write(pivot_df)
-        # # Crear el gráfico de barras apiladas
-        # ax = pivot_df.plot(kind='bar', stacked=True, figsize=(10, 4), colormap='Set1')
-
-        # plt.xlabel('Mes y Semana')
-        # plt.ylabel('Valores')
-        # plt.title('Gráfico de Barras Apiladas por Mes y Semana')
-        # plt.xticks(rotation=45)
-        # plt.legend(title='Categoría')
-        # plt.tight_layout()
-        # st.pyplot(plt)
-        # fig, ax = plt.subplots(figsize=(10, 6))
-
-        # # Define los colores para '1' y '2'
-        # colores = ['blue', 'green']
-        data = {
-            'mes': ['enero', 'enero', 'enero', 'enero', 'feb', 'feb', 'feb', 'feb'],
-            'semana': [1, 2, 3, 4, 1, 2, 3, 4],
-                 '1': [5, 6, 9, 2, 3, 4, 1, 3],
-                 '2': [1, 2, 3, 5, 5, 7, 1, 1]
-        }
-
-        grouped = pd.DataFrame(data)
-        st.write(grouped)
-        # # Itera a través de los meses y crea las barras apiladas
-        # for i, month in enumerate(grouped['mes'].unique()):
-        #     data = grouped[grouped['mes'] == month]
-            
-        #     # Barras para '1'
-        #     ax.bar(data['semana'], data['2'], label=f'Mes {month} - 2', color=colores[1], alpha=0.7)
-            
-        #     # Barras para '2' (apiladas encima de '1')            
-        #     ax.bar(data['semana'], data['1'], bottom=data['2'], label=f'Mes {month} - 1', color=colores[0], alpha=0.7)
+        # grouped = pd.DataFrame(data)
         
-        # # Etiqueta los ejes y agrega una leyenda
-        # ax.set_xlabel('Semana')
-        # ax.set_ylabel('Cantidad')
-        # ax.set_title('Cantidad de 1 y 2 por Semana y Mes (Barras Apiladas)')
-        # ax.legend()
-
-        # fig, ax = plt.subplots(figsize=(10, 6))
-
-        # # Define los colores para '1' y '2'
-        # colores = ['blue', 'green']
-
-        # # Definir la cantidad de semanas y el ancho de las barras
-        # num_semanas = grouped['semana'].max()
-        # ancho_barra = 0.35
-
-        # # Crear un arreglo de índices para las barras de cada semana
-        # indices = list(range(1, num_semanas + 1))
-
-        # # Itera a través de los meses y crea las barras separadas por mes
-        # for i, month in enumerate(grouped['mes'].unique()):
-        #     data = grouped[grouped['mes'] == month]
-            
-        #     # Barras para '1'
-        #     ax.bar([x + i * ancho_barra for x in indices], data['1'], width=ancho_barra, label=f'Mes {month} - 1', color=colores[0], alpha=0.7)
-            
-        #     # Barras para '2'
-        #     ax.bar([x + i * ancho_barra for x in indices], data['2'], width=ancho_barra, label=f'Mes {month} - 2', color=colores[1], alpha=0.7, bottom=data['1'])
-
-        # # Etiqueta los ejes y agrega una leyenda
-        # ax.set_xlabel('Semana')
-        # ax.set_ylabel('Cantidad')
-        # ax.set_title('Cantidad de 1 y 2 por Semana y Mes (Barras Separadas)')
-        # ax.legend()
         fig, ax = plt.subplots(figsize=(10, 6))
         n = len(grouped.index)
         width = 0.40
         for i ,mes in enumerate(list(grouped['mes'].unique())):
-            grouped1 = grouped[(grouped['semana'] == 1) & (grouped['mes'] == mes)]
+            grouped1 = grouped[(grouped['semana'] == '1') & (grouped['mes'] == mes)]
 
-            grouped3 = grouped[(grouped['semana'] == 2) & (grouped['mes'] == mes)]
+            grouped3 = grouped[(grouped['semana'] == '2') & (grouped['mes'] == mes)]
 
-            grouped5 = grouped[(grouped['semana'] == 3) & (grouped['mes'] == mes)]
+            grouped5 = grouped[(grouped['semana'] == '3') & (grouped['mes'] == mes)]
 
-            grouped7 = grouped[(grouped['semana'] == 4) & (grouped['mes'] == mes)]
+            grouped7 = grouped[(grouped['semana'] == '4') & (grouped['mes'] == mes)]
             
             ax.bar(i*6*width + width, grouped1['2'], width=width, label='semana 1', color='#DFE2E5', edgecolor='black')
             ax.bar(i*6*width + width, grouped1['1'], bottom=grouped1['2'], width=width, label='semana 1', color='#2D8DEC', edgecolor='black')
@@ -812,7 +707,9 @@ def main():
             ax.bar(i*6*width + 2*width, grouped3['1'], bottom=grouped3['2'], width=width, label='semana 2', color='#2D8DEC', edgecolor='black')
             ax.text(x=(i*6*width + 2*width), s='2da', y=-0.40, ha='center')
 
-            ax.text(x=(i*6*width + (5*width)/2), s=str.capitalize(mes), y=-0.8, ha='center')
+            meses_str = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+
+            ax.text(x=(i*6*width + (5*width)/2), s=str.capitalize(meses_str[int(mes)-1]), y=-0.8, ha='center')
 
             ax.bar(i*6*width + 3*width, grouped5['2'], width=width, label='semana 3', color='#DFE2E5', edgecolor='black')
             ax.bar(i*6*width + 3*width, grouped5['1'], bottom=grouped5['2'], width=width, label='semana 3', color='#2D8DEC', edgecolor='black')
