@@ -624,12 +624,16 @@ def main():
         
         df_oferta_snackys2 = pd.read_sql(query2, engine)
         df_oferta_snackys2.drop("hora",axis=1,inplace=True)
+
         grafico_barras_data = df_oferta_snackys2[['msgBody','fecha']][(df_oferta_snackys2['msgBody'].isin(['1', '2'])) & (df_oferta_snackys2['journeyClassName'] == 'SnackyOferta1') & (df_oferta_snackys2['journeyStep'] == "RespuestaMensajeInicial")]
-        # df_count = grafico_barras_data.groupby(['fecha', 'msgBody']).size().unstack(fill_value=0).reset_index()
-        grafico_barras_data['fecha'] = pd.to_datetime(grafico_barras_data['fecha'])
-        # st.write(df_count)
-        # st.write(str(df_count['fecha'].dtype))
         
+        grafico_barras_data['fecha'] = pd.to_datetime(grafico_barras_data['fecha'])
+        grafico_barras_data['mes'] = grafico_barras_data['fecha'].dt.month
+        grafico_barras_data['semana'] = grafico_barras_data['fecha'].dt.day // 7 + 1
+        grafico_barras_data['mes'] = grafico_barras_data['mes'].astype(str)
+        grafico_barras_data['semana'] = grafico_barras_data['semana'].astype(str)
+
+        grouped = grafico_barras_data.groupby(['mes', 'semana', 'msgBody']).size().unstack(fill_value=0).reset_index()
         # col7 = st.columns(1)
 
         # with col4 :
@@ -671,12 +675,7 @@ def main():
 
         # with col7:
         # Crear columnas de mes y semana
-        grafico_barras_data['mes'] = grafico_barras_data['fecha'].dt.month
-        grafico_barras_data['semana'] = grafico_barras_data['fecha'].dt.day // 7 + 1
-        grafico_barras_data['mes'] = grafico_barras_data['mes'].astype(str)
-        grafico_barras_data['semana'] = grafico_barras_data['semana'].astype(str)
 
-        grouped = grafico_barras_data.groupby(['mes', 'semana', 'msgBody']).size().unstack(fill_value=0).reset_index()
         
         # data = {
         #     'mes': ['enero', 'enero', 'enero', 'enero', 'feb', 'feb', 'feb', 'feb'],
@@ -686,9 +685,8 @@ def main():
         # }
 
         # grouped = pd.DataFrame(data)
-        st.write(grouped)
-        fig, ax = plt.subplots(figsize=(10, 6))
-        n = len(grouped.index)
+
+        fig, ax = plt.subplots(figsize=(10, 4), facecolor='none')
         width = 0.40
         for i ,mes in enumerate(list(grouped['mes'].unique())):
             grouped1 = grouped[(grouped['semana'] == '1') & (grouped['mes'] == mes)]
@@ -706,6 +704,7 @@ def main():
                 ax.bar(i*6*width + width, grouped1['1'], bottom=grouped1['2'], width=width, label='semana 1', color='#2D8DEC', edgecolor='black')
                 ax.text(x=(i*6*width + width), s='1era', y=-0.40, ha='center')
 
+
             if len(grouped2) > 0:
                 ax.bar(i*6*width + 2*width, grouped2['2'], width=width, label='semana 2', color='#DFE2E5', edgecolor='black')
                 ax.bar(i*6*width + 2*width, grouped2['1'], bottom=grouped2['2'], width=width, label='semana 2', color='#2D8DEC', edgecolor='black')
@@ -713,9 +712,6 @@ def main():
             else:
                 ax.text(x=(i*6*width + (2*width)/2), s=str.capitalize(meses_str[int(mes)-1]), y=-0.8, ha='center')
 
-            
-
-            # ax.text(x=(i*6*width + (5*width)/2), s=str.capitalize(meses_str[int(mes)-1]), y=-0.8, ha='center')
 
             if len(grouped3) > 0:
                 ax.bar(i*6*width + 3*width, grouped3['2'], width=width, label='semana 3', color='#DFE2E5', edgecolor='black')
@@ -739,7 +735,14 @@ def main():
         plt.xticks([])
         # Crear la leyenda con las barras de color personalizadas
         plt.legend(handles=[patch_1, patch_2], loc='upper right')
-        st.pyplot(plt)
+        buffer = BytesIO()
+        plt.savefig(buffer, format='png')
+        buffer.seek(0)
+        imagen_codificada2 = base64.b64encode(buffer.read()).decode()
+        grafico_oferta1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_core_2"><div class="ag-courses-item_link_core_2"><div class="ag-courses-item_title_core">Interaccion de oferta por semana</div><img src="data:image/png;base64,{imagen_codificada2}" alt="Gráfico de Pastel"></div></div></div></div>'
+        st.markdown(grafico_oferta1, unsafe_allow_html=True)
+        
+        # st.pyplot(plt)
 
         st.write("---")
  
