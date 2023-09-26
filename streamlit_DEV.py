@@ -792,61 +792,42 @@ def main():
         # ax.set_ylabel('Cantidad')
         # ax.set_title('Cantidad de 1 y 2 por Semana y Mes (Barras Separadas)')
         # ax.legend()
-        # fig, ax = plt.subplots(figsize=(10, 6))
-        # n = len(grouped.index)
-        # width = 0.40
-        # for i ,mes in enumerate(list(grouped['mes'].unique())):
-        #     grouped1 = grouped[(grouped['semana'] == 1) & (grouped['mes'] == mes)]
-
-        #     grouped3 = grouped[(grouped['semana'] == 2) & (grouped['mes'] == mes)]
-
-        #     grouped5 = grouped[(grouped['semana'] == 3) & (grouped['mes'] == mes)]
-
-        #     grouped7 = grouped[(grouped['semana'] == 4) & (grouped['mes'] == mes)]
-            
-        #     ax.bar(i*6 + width, grouped1['2'], width=width, label='semana 1', color='#DFE2E5')
-        #     ax.bar(i*6 + width, grouped1['1'], bottom=grouped1['2'], width=width, label='semana 1', color='#2D8DEC')
-            
-        #     ax.bar(i*6 + 2*width, grouped3['2'], width=width, label='semana 2', color='#DFE2E5')
-        #     ax.bar(i*6 + 2*width, grouped3['1'], bottom=grouped3['2'], width=width, label='semana 2', color='#2D8DEC')
-            
-        #     ax.bar(i*6 + 3*width, grouped5['2'], width=width, label='semana 3', color='#DFE2E5')
-        #     ax.bar(i*6 + 3*width, grouped5['1'], bottom=grouped5['2'], width=width, label='semana 3', color='#2D8DEC')
-            
-        #     ax.bar(i*6 + 4*width, grouped7['2'], width=width, label='semana 4', color='#DFE2E5')
-        #     ax.bar(i*6 + 4*width, grouped7['1'], bottom=grouped7['2'], width=width, label='semana 4', color='#2D8DEC')
-            
-            
-        #     plt.annotate(str(mes), (categorias[i], valor), ha='center', va='bottom')
-
-        # patch_1 = mpatches.Patch(color='#2D8DEC', label='Interesado')
-        # patch_2 = mpatches.Patch(color='#DFE2E5', label='No Interesado')
-
-        # # Crear la leyenda con las barras de color personalizadas
-        # plt.legend(handles=[patch_1, patch_2], loc='upper right')
-
-
-        categorias = ['A', 'B', 'C', 'D']
-        valores = [10, 24, 15, 30]
         fig, ax = plt.subplots(figsize=(10, 6))
-        # Crear el gráfico de barras
-        ax.bar(categorias, valores)
+        n = len(grouped.index)
+        width = 0.40
+        for i ,mes in enumerate(list(grouped['mes'].unique())):
+            grouped1 = grouped[(grouped['semana'] == 1) & (grouped['mes'] == mes)]
 
-        # Coordenadas x específicas para las etiquetas
-        x_coords = [0, 1, 2, 3]
+            grouped3 = grouped[(grouped['semana'] == 2) & (grouped['mes'] == mes)]
 
-        # Etiquetas personalizadas
-        etiquetas = ['Label 1', 'Label 2', 'Label 3', 'Label 4']
+            grouped5 = grouped[(grouped['semana'] == 3) & (grouped['mes'] == mes)]
 
-        # Agregar etiquetas a ubicaciones específicas en el eje x
-        for x, etiqueta in zip(x_coords, etiquetas):
-            ax.text(x, -5, etiqueta, ha='center')
+            grouped7 = grouped[(grouped['semana'] == 4) & (grouped['mes'] == mes)]
+            
+            ax.bar(i*6 + width, grouped1['2'], width=width, label='semana 1', color='#DFE2E5')
+            ax.bar(i*6 + width, grouped1['1'], bottom=grouped1['2'], width=width, label='semana 1', color='#2D8DEC')
+            ax.text(i*6 + width, '1era')
 
-        plt.xlabel('Categorías')
-        plt.ylabel('Valores')
-        plt.title('Gráfico de Barras con Etiquetas Personalizadas')
+            ax.bar(i*6 + 2*width, grouped3['2'], width=width, label='semana 2', color='#DFE2E5')
+            ax.bar(i*6 + 2*width, grouped3['1'], bottom=grouped3['2'], width=width, label='semana 2', color='#2D8DEC')
+            ax.text(i*6 + 2*width, '2da')
 
+            ax.text(i*6 + (4*width)/2, mes)
 
+            ax.bar(i*6 + 3*width, grouped5['2'], width=width, label='semana 3', color='#DFE2E5')
+            ax.bar(i*6 + 3*width, grouped5['1'], bottom=grouped5['2'], width=width, label='semana 3', color='#2D8DEC')
+            ax.text(i*6 + 3*width, '3era')
+
+            ax.bar(i*6 + 4*width, grouped7['2'], width=width, label='semana 4', color='#DFE2E5')
+            ax.bar(i*6 + 4*width, grouped7['1'], bottom=grouped7['2'], width=width, label='semana 4', color='#2D8DEC')
+            ax.text(i*6 + 4*width, '4ta')
+            
+
+        patch_1 = mpatches.Patch(color='#2D8DEC', label='Interesado')
+        patch_2 = mpatches.Patch(color='#DFE2E5', label='No Interesado')
+
+        # Crear la leyenda con las barras de color personalizadas
+        plt.legend(handles=[patch_1, patch_2], loc='upper right')
         st.pyplot(plt)
 
         st.write("---")
