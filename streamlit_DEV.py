@@ -806,21 +806,21 @@ def main():
             
             ax.bar(i*6 + width, grouped1['2'], width=width, label='semana 1', color='#DFE2E5')
             ax.bar(i*6 + width, grouped1['1'], bottom=grouped1['2'], width=width, label='semana 1', color='#2D8DEC')
-            ax.text(i*6 + width, '1era')
+            ax.text(x=(i*6 + width), s='1era', y=-5)
 
             ax.bar(i*6 + 2*width, grouped3['2'], width=width, label='semana 2', color='#DFE2E5')
             ax.bar(i*6 + 2*width, grouped3['1'], bottom=grouped3['2'], width=width, label='semana 2', color='#2D8DEC')
-            ax.text(i*6 + 2*width, '2da')
+            ax.text(x=(i*6 + 2*width), s='2da', y=-5)
 
-            ax.text(i*6 + (4*width)/2, mes)
+            ax.text(x=(i*6 + (4*width)/2), s=mes, y=-5)
 
             ax.bar(i*6 + 3*width, grouped5['2'], width=width, label='semana 3', color='#DFE2E5')
             ax.bar(i*6 + 3*width, grouped5['1'], bottom=grouped5['2'], width=width, label='semana 3', color='#2D8DEC')
-            ax.text(i*6 + 3*width, '3era')
+            ax.text(x=(i*6 + 3*width), y=-5, s='3era')
 
             ax.bar(i*6 + 4*width, grouped7['2'], width=width, label='semana 4', color='#DFE2E5')
             ax.bar(i*6 + 4*width, grouped7['1'], bottom=grouped7['2'], width=width, label='semana 4', color='#2D8DEC')
-            ax.text(i*6 + 4*width, '4ta')
+            ax.text(s='4ta', x=(i*6 + 4*width), y=-5)
             
 
         patch_1 = mpatches.Patch(color='#2D8DEC', label='Interesado')
