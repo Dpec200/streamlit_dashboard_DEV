@@ -686,14 +686,14 @@ def main():
         # Crear columnas de mes y semana
 
         
-        # data = {
-        #     'mes': ['enero', 'enero', 'enero', 'enero', 'feb', 'feb', 'feb', 'feb'],
-        #     'semana': [1, 2, 3, 4, 1, 2, 3, 4],
-        #          '1': [5, 6, 9, 2, 3, 4, 1, 3],
-        #          '2': [1, 2, 3, 5, 5, 7, 1, 1]
-        # }
+        data = {
+            'mes': ['enero', 'enero', 'enero', 'enero', 'feb', 'feb', 'feb', 'feb'],
+            'semana': [1, 2, 3, 4, 1, 2, 3, 4],
+                 '1': [5, 6, 9, 2, 3, 4, 1, 3],
+                 '2': [1, 2, 3, 5, 5, 7, 1, 1]
+        }
 
-        # grouped = pd.DataFrame(data)
+        grouped = pd.DataFrame(data)
 
         fig, ax = plt.subplots(figsize=(15, 4), facecolor='none')
         width = 0.40
