@@ -825,7 +825,7 @@ def main():
 
         patch_1 = mpatches.Patch(color='#2D8DEC', label='Interesado')
         patch_2 = mpatches.Patch(color='#DFE2E5', label='No Interesado')
-        plt.xticks([]) + 0.05
+        plt.xticks([])
         # Crear la leyenda con las barras de color personalizadas
         plt.legend(handles=[patch_1, patch_2], loc='upper right')
         st.pyplot(plt)
