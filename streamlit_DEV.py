@@ -686,7 +686,7 @@ def main():
 
         # grouped = pd.DataFrame(data)
 
-        fig, ax = plt.subplots(figsize=(10, 3), facecolor='none')
+        fig, ax = plt.subplots(figsize=(15, 3), facecolor='none')
         width = 0.40
         for i ,mes in enumerate(list(grouped['mes'].unique())):
             grouped1 = grouped[(grouped['semana'] == '1') & (grouped['mes'] == mes)]
