@@ -746,7 +746,6 @@ def main():
         plt.legend(handles=[patch_1, patch_2], loc='upper right')
         buffer = BytesIO()
         plt.subplots_adjust(left=0.03, right=0.73, top=1, bottom=0.1)
-        plt.gca().set_frame_on(False)
         plt.savefig(buffer, format='png', transparent=True)
         buffer.seek(0)
         imagen_codificada2 = base64.b64encode(buffer.read()).decode()
