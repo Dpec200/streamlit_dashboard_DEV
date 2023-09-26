@@ -804,22 +804,22 @@ def main():
 
             grouped7 = grouped[(grouped['semana'] == 4) & (grouped['mes'] == mes)]
             
-            ax.bar(i*6 + width, grouped1['2'], width=width, label='semana 1', color='#DFE2E5', edgecolor='gray0.5')
-            ax.bar(i*6 + width, grouped1['1'], bottom=grouped1['2'], width=width, label='semana 1', color='#2D8DEC', edgecolor='gray0.5')
+            ax.bar(i*6 + width, grouped1['2'], width=width, label='semana 1', color='#DFE2E5', edgecolor=0.5)
+            ax.bar(i*6 + width, grouped1['1'], bottom=grouped1['2'], width=width, label='semana 1', color='#2D8DEC', edgecolor=0.5)
             ax.text(x=(i*6 + width), s='1era', y=-1)
 
-            ax.bar(i*6 + 2*width, grouped3['2'], width=width, label='semana 2', color='#DFE2E5', edgecolor='gray0.5')
-            ax.bar(i*6 + 2*width, grouped3['1'], bottom=grouped3['2'], width=width, label='semana 2', color='#2D8DEC', edgecolor='gray0.5')
+            ax.bar(i*6 + 2*width, grouped3['2'], width=width, label='semana 2', color='#DFE2E5', edgecolor=0.5)
+            ax.bar(i*6 + 2*width, grouped3['1'], bottom=grouped3['2'], width=width, label='semana 2', color='#2D8DEC', edgecolor=0.5)
             ax.text(x=(i*6 + 2*width), s='2da', y=-1)
 
             ax.text(x=(i*6 + ((4*width)/2)), s=str.capitalize(mes), y=-2)
 
-            ax.bar(i*6 + 3*width, grouped5['2'], width=width, label='semana 3', color='#DFE2E5', edgecolor='gray0.5')
-            ax.bar(i*6 + 3*width, grouped5['1'], bottom=grouped5['2'], width=width, label='semana 3', color='#2D8DEC', edgecolor='gray0.5')
+            ax.bar(i*6 + 3*width, grouped5['2'], width=width, label='semana 3', color='#DFE2E5', edgecolor=0.5)
+            ax.bar(i*6 + 3*width, grouped5['1'], bottom=grouped5['2'], width=width, label='semana 3', color='#2D8DEC', edgecolor=0.5)
             ax.text(x=(i*6 + 3*width), y=-1, s='3era')
 
-            ax.bar(i*6 + 4*width, grouped7['2'], width=width, label='semana 4', color='#DFE2E5', edgecolor='gray0.5')
-            ax.bar(i*6 + 4*width, grouped7['1'], bottom=grouped7['2'], width=width, label='semana 4', color='#2D8DEC', edgecolor='gray0.5')
+            ax.bar(i*6 + 4*width, grouped7['2'], width=width, label='semana 4', color='#DFE2E5', edgecolor=0.5)
+            ax.bar(i*6 + 4*width, grouped7['1'], bottom=grouped7['2'], width=width, label='semana 4', color='#2D8DEC', edgecolor=0.5)
             ax.text(s='4ta', x=(i*6 + 4*width), y=-1)
             
 
