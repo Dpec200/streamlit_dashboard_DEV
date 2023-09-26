@@ -816,7 +816,7 @@ def main():
 
             ax.bar(i*6 + 3*width, grouped5['2'], width=width, label='semana 3', color='#DFE2E5', edgecolor='gray0.5')
             ax.bar(i*6 + 3*width, grouped5['1'], bottom=grouped5['2'], width=width, label='semana 3', color='#2D8DEC', edgecolor='gray0.5')
-            ax.text(x=(i*6 + 3*width), y=-1, s='3era'), edgecolor='gray0.5'
+            ax.text(x=(i*6 + 3*width), y=-1, s='3era')
 
             ax.bar(i*6 + 4*width, grouped7['2'], width=width, label='semana 4', color='#DFE2E5', edgecolor='gray0.5')
             ax.bar(i*6 + 4*width, grouped7['1'], bottom=grouped7['2'], width=width, label='semana 4', color='#2D8DEC', edgecolor='gray0.5')
