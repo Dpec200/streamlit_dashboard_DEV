@@ -746,7 +746,8 @@ def main():
         plt.legend(handles=[patch_1, patch_2], loc='upper right')
         buffer = BytesIO()
         plt.subplots_adjust(left=0.03, right=0.73, top=1, bottom=0.1)
-        plt.savefig(buffer, format='png', transparent=True, frameon=False)
+        plt.gca().set_frame_on(False)
+        plt.savefig(buffer, format='png', transparent=True)
         buffer.seek(0)
         imagen_codificada2 = base64.b64encode(buffer.read()).decode()
         grafico_oferta1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_core_2"><div class="ag-courses-item_link_core_3"><div class="ag-courses-item_title_core">Interaccion de oferta por semana</div><img src="data:image/png;base64,{imagen_codificada2}" alt="Gráfico de Pastel"></div></div></div></div>'
