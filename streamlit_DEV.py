@@ -736,7 +736,7 @@ def main():
         # Crear la leyenda con las barras de color personalizadas
         plt.legend(handles=[patch_1, patch_2], loc='upper right')
         buffer = BytesIO()
-        plt.subplots_adjust(left=0.89, right=0.1, top=1, bottom=0.1)
+        plt.subplots_adjust(left=0.88, right=0.89, top=1, bottom=0.1)
         plt.savefig(buffer, format='png', transparent=True)
         buffer.seek(0)
         imagen_codificada2 = base64.b64encode(buffer.read()).decode()
