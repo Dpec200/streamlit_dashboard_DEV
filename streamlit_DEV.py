@@ -686,7 +686,7 @@ def main():
 
         # grouped = pd.DataFrame(data)
 
-        fig, ax = plt.subplots(figsize=(10, 4), facecolor='none')
+        fig, ax = plt.subplots(figsize=(10, 3), facecolor='none')
         width = 0.40
         for i ,mes in enumerate(list(grouped['mes'].unique())):
             grouped1 = grouped[(grouped['semana'] == '1') & (grouped['mes'] == mes)]
@@ -736,6 +736,7 @@ def main():
         # Crear la leyenda con las barras de color personalizadas
         plt.legend(handles=[patch_1, patch_2], loc='upper right')
         buffer = BytesIO()
+        plt.subplots_adjust(left=0.1, right=0.89, top=1, bottom=0.1)
         plt.savefig(buffer, format='png', transparent=True)
         buffer.seek(0)
         imagen_codificada2 = base64.b64encode(buffer.read()).decode()
