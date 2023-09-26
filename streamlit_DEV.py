@@ -693,31 +693,35 @@ def main():
         for i ,mes in enumerate(list(grouped['mes'].unique())):
             grouped1 = grouped[(grouped['semana'] == '1') & (grouped['mes'] == mes)]
 
-            grouped3 = grouped[(grouped['semana'] == '2') & (grouped['mes'] == mes)]
+            grouped2 = grouped[(grouped['semana'] == '2') & (grouped['mes'] == mes)]
 
-            grouped5 = grouped[(grouped['semana'] == '3') & (grouped['mes'] == mes)]
+            grouped3 = grouped[(grouped['semana'] == '3') & (grouped['mes'] == mes)]
 
-            grouped7 = grouped[(grouped['semana'] == '4') & (grouped['mes'] == mes)]
+            grouped4 = grouped[(grouped['semana'] == '4') & (grouped['mes'] == mes)]
             
-            ax.bar(i*6*width + width, grouped1['2'], width=width, label='semana 1', color='#DFE2E5', edgecolor='black')
-            ax.bar(i*6*width + width, grouped1['1'], bottom=grouped1['2'], width=width, label='semana 1', color='#2D8DEC', edgecolor='black')
-            ax.text(x=(i*6*width + width), s='1era', y=-0.40, ha='center')
+            if len(grouped1) > 0:
+                ax.bar(i*6*width + width, grouped1['2'], width=width, label='semana 1', color='#DFE2E5', edgecolor='black')
+                ax.bar(i*6*width + width, grouped1['1'], bottom=grouped1['2'], width=width, label='semana 1', color='#2D8DEC', edgecolor='black')
+                ax.text(x=(i*6*width + width), s='1era', y=-0.40, ha='center')
 
-            ax.bar(i*6*width + 2*width, grouped3['2'], width=width, label='semana 2', color='#DFE2E5', edgecolor='black')
-            ax.bar(i*6*width + 2*width, grouped3['1'], bottom=grouped3['2'], width=width, label='semana 2', color='#2D8DEC', edgecolor='black')
-            ax.text(x=(i*6*width + 2*width), s='2da', y=-0.40, ha='center')
+            if len(grouped2) > 0:
+                ax.bar(i*6*width + 2*width, grouped2['2'], width=width, label='semana 2', color='#DFE2E5', edgecolor='black')
+                ax.bar(i*6*width + 2*width, grouped2['1'], bottom=grouped3['2'], width=width, label='semana 2', color='#2D8DEC', edgecolor='black')
+                ax.text(x=(i*6*width + 2*width), s='2da', y=-0.40, ha='center')
 
             meses_str = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
 
             ax.text(x=(i*6*width + (5*width)/2), s=str.capitalize(meses_str[int(mes)-1]), y=-0.8, ha='center')
 
-            ax.bar(i*6*width + 3*width, grouped5['2'], width=width, label='semana 3', color='#DFE2E5', edgecolor='black')
-            ax.bar(i*6*width + 3*width, grouped5['1'], bottom=grouped5['2'], width=width, label='semana 3', color='#2D8DEC', edgecolor='black')
-            ax.text(x=(i*6*width + 3*width), y=-0.40, s='3era', ha='center')
+            if len(grouped3) > 0:
+                ax.bar(i*6*width + 3*width, grouped3['2'], width=width, label='semana 3', color='#DFE2E5', edgecolor='black')
+                ax.bar(i*6*width + 3*width, grouped3['1'], bottom=grouped5['2'], width=width, label='semana 3', color='#2D8DEC', edgecolor='black')
+                ax.text(x=(i*6*width + 3*width), y=-0.40, s='3era', ha='center')
 
-            ax.bar(i*6*width + 4*width, grouped7['2'], width=width, label='semana 4', color='#DFE2E5', edgecolor='black')
-            ax.bar(i*6*width + 4*width, grouped7['1'], bottom=grouped7['2'], width=width, label='semana 4', color='#2D8DEC', edgecolor='black')
-            ax.text(s='4ta', x=(i*6*width + 4*width), y=-0.40, ha='center')
+            if len(grouped4) > 0:
+                ax.bar(i*6*width + 4*width, grouped4['2'], width=width, label='semana 4', color='#DFE2E5', edgecolor='black')
+                ax.bar(i*6*width + 4*width, grouped4['1'], bottom=grouped7['2'], width=width, label='semana 4', color='#2D8DEC', edgecolor='black')
+                ax.text(s='4ta', x=(i*6*width + 4*width), y=-0.40, ha='center')
             
 
         patch_1 = mpatches.Patch(color='#2D8DEC', label='Interesado')
