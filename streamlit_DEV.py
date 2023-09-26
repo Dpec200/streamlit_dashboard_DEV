@@ -686,7 +686,7 @@ def main():
         # }
 
         # grouped = pd.DataFrame(data)
-        
+        st.write(grouped)
         fig, ax = plt.subplots(figsize=(10, 6))
         n = len(grouped.index)
         width = 0.40
