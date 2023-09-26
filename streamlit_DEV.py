@@ -812,7 +812,7 @@ def main():
             ax.bar(i*6 + 2*width, grouped3['1'], bottom=grouped3['2'], width=width, label='semana 2', color='#2D8DEC')
             ax.text(x=(i*6 + 2*width), s='2da', y=-1)
 
-            ax.text(x=(i*6 + (4*width)/2), s=mes, y=-3)
+            ax.text(x=(i*6 + (4*width))/2, s=mes, y=-2)
 
             ax.bar(i*6 + 3*width, grouped5['2'], width=width, label='semana 3', color='#DFE2E5')
             ax.bar(i*6 + 3*width, grouped5['1'], bottom=grouped5['2'], width=width, label='semana 3', color='#2D8DEC')
