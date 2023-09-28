@@ -541,7 +541,6 @@ def main():
         # conversaciones_incompletas = cantidad_conversaciones - conversaciones_terminadas
         # clientes suscriptos
         clientes_suscriptos = subs["Suscriptos"]
-        st.write(df_oferta_snackys)
         # Clientes prefieren 'dejar de recibir'
         clientes_dejar_de_recibir = len(df_oferta_snackys[df_oferta_snackys['msgBody'] == 'dejar de recibir'])
         # Estilos CSS personalizados
@@ -701,14 +700,14 @@ def main():
         # Crear columnas de mes y semana
 
         
-        data = {
-            'mes': [1, 1, 1, 1, 2, 2, 2, 2],
-            'semana': ['1', '2', '3', '4', '1', '2', '3', '4'],
-                 '1': [5, 6, 9, 2, 3, 4, 1, 3],
-                 '2': [1, 2, 3, 5, 5, 7, 1, 1]
-        }
+        # data = {
+        #     'mes': [1, 1, 1, 1, 2, 2, 2, 2],
+        #     'semana': ['1', '2', '3', '4', '1', '2', '3', '4'],
+        #          '1': [5, 6, 9, 2, 3, 4, 1, 3],
+        #          '2': [1, 2, 3, 5, 5, 7, 1, 1]
+        # }
 
-        grouped = pd.DataFrame(data)
+        # grouped = pd.DataFrame(data)
 
         fig, ax = plt.subplots(figsize=(15, 4), facecolor='none')
         width = 0.40
@@ -776,7 +775,7 @@ def main():
     # Snackys
     opciones_paginas_snackys = ["Ofertas", "Recompra"]
     # pagina_seleccionada = st.sidebar.selectbox("Selecciona una página:", opciones_paginas_snackys)
-    pagina_seleccionada = st.selectbox("Selecciona una página:", opciones_paginas_snackys)
+    pagina_seleccionada = st.selectbox("Selecciona una experiencia:", opciones_paginas_snackys)
     # Mostrar páginas para Snackys
     # if pagina_seleccionada == "Inicio":
     #     pagina_inicio()
