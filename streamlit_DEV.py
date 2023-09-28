@@ -618,19 +618,19 @@ def main():
             # st.markdown('</div></div>', unsafe_allow_html=True)
             ver_motivos = st.checkbox("Mostrar motivos")
             if ver_motivos:
-            st.markdown("## **Comentarios**:")
-            motivos_clientes = df_oferta_snackys.loc[(df_oferta_snackys["journeyStep"] == "RespuestaMotivoClienteParaNoSuscripcion") ,"userPhoneNumber"].reset_index()
-            motivos_clientes = sorted(motivos_clientes["userPhoneNumber"].unique().tolist())
-            motivos_clientes.insert(0, "Todos")
-            seleccion_cliente = st.selectbox("Clientes", motivos_clientes)
-            if (seleccion_cliente == "Todos"):
-                msgbody_feedback1 = df_oferta_snackys.loc[(df_oferta_snackys["journeyStep"] == "RespuestaMotivoClienteParaNoSuscripcion") ,"msgBody"].str.capitalize()
-                for elemento1 in msgbody_feedback1 :
-                    st.write(f"+ {elemento1}")
-            else:
-                msgbody_feedback = df_oferta_snackys.loc[(df_oferta_snackys["journeyStep"] == "RespuestaMotivoClienteParaNoSuscripcion") & (df_oferta_snackys["userPhoneNumber"] == seleccion_cliente), "msgBody"].str.capitalize()
-                for elemento in msgbody_feedback :
-                    st.write(f"+ {elemento}")
+                st.markdown("## **Comentarios**:")
+                motivos_clientes = df_oferta_snackys.loc[(df_oferta_snackys["journeyStep"] == "RespuestaMotivoClienteParaNoSuscripcion") ,"userPhoneNumber"].reset_index()
+                motivos_clientes = sorted(motivos_clientes["userPhoneNumber"].unique().tolist())
+                motivos_clientes.insert(0, "Todos")
+                seleccion_cliente = st.selectbox("Clientes", motivos_clientes)
+                if (seleccion_cliente == "Todos"):
+                    msgbody_feedback1 = df_oferta_snackys.loc[(df_oferta_snackys["journeyStep"] == "RespuestaMotivoClienteParaNoSuscripcion") ,"msgBody"].str.capitalize()
+                    for elemento1 in msgbody_feedback1 :
+                        st.write(f"+ {elemento1}")
+                else:
+                    msgbody_feedback = df_oferta_snackys.loc[(df_oferta_snackys["journeyStep"] == "RespuestaMotivoClienteParaNoSuscripcion") & (df_oferta_snackys["userPhoneNumber"] == seleccion_cliente), "msgBody"].str.capitalize()
+                    for elemento in msgbody_feedback :
+                        st.write(f"+ {elemento}")
 
         with col3:
             # st.markdown('<div class="ag-courses-item_title">Clientes que no dejaron motivos</div>', unsafe_allow_html=True)
