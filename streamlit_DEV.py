@@ -541,6 +541,7 @@ def main():
         # conversaciones_incompletas = cantidad_conversaciones - conversaciones_terminadas
         # clientes suscriptos
         clientes_suscriptos = subs["Suscriptos"]
+        st.write(df_oferta_snackys)
         # Clientes prefieren 'dejar de recibir'
         clientes_dejar_de_recibir = len(df_oferta_snackys[df_oferta_snackys['msgBody'] == 'dejar de recibir'])
         # Estilos CSS personalizados
@@ -549,7 +550,7 @@ def main():
         st.markdown(custom_css, unsafe_allow_html=True)
         st.markdown(f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_gris_title"><div href="#" class="ag-courses-item_link_gris"><span class="adjustable-text" style="font-size: 40px;">Informacion General</span></div></div></div></div></div></div>',unsafe_allow_html=True)
         col_core_1, col_core_2 = st.columns(2)
-        tarjeta_clientes_contactados_col1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_core_1"><div href="#" class="ag-courses-item_link_core"><div class="ag-courses-item_title_core"> Clientes Totales Contactados <br> Numero</div></div></div></div></div>'
+        tarjeta_clientes_contactados_col1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_core_1"><div href="#" class="ag-courses-item_link_core"><div class="ag-courses-item_title_core"> Clientes Totales Contactados <br> {}</div></div></div></div></div>'
         tarjeta_clientes_con_respuesta_col1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_core_1"><div href="#" class="ag-courses-item_link_core"><div class="ag-courses-item_title_core"> Clientes con respuesta <br> Numero</div></div></div></div></div>'
         from io import BytesIO
         import base64
@@ -749,7 +750,7 @@ def main():
         plt.savefig(buffer, format='png', transparent=True)
         buffer.seek(0)
         imagen_codificada2 = base64.b64encode(buffer.read()).decode()
-        grafico_oferta1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_core_2"><div class="ag-courses-item_link_core_3"><div class="ag-courses-item_title_core">Interaccion de oferta por semana</div><img src="data:image/png;base64,{imagen_codificada2}" alt="Gráfico de Pastel"></div></div></div></div>'
+        grafico_oferta1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_core_2"><div class="ag-courses-item_link_core_3"><div class="ag-courses-item_title_core">Interesados en la oferta de la semana</div><img src="data:image/png;base64,{imagen_codificada2}" alt="Gráfico de Pastel"></div></div></div></div>'
         st.markdown(grafico_oferta1, unsafe_allow_html=True)
         
         # st.pyplot(plt)
