@@ -16,7 +16,7 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
     )
-
+# Obtener token de URL
 try:
     token = st.experimental_get_query_params()
     token = str(token['token'][0])
@@ -515,7 +515,7 @@ def main():
         #st.dataframe(df_oferta_snackys)
         if (len(df_oferta_snackys) > 0 ):
             cliente_pec = df_oferta_snackys['clientName'].unique().tolist()
-            st.markdown(f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_gris_title"><div href="#" class="ag-courses-item_link_gris"><span class="adjustable-text" style="font-size: 70px;">Dashboard de Ofertas <br></span><span class="adjustable-text" style="font-size: 40px;">Bienvenido {cliente_pec[0]}</span></div></div></div></div></div></div>',unsafe_allow_html=True)
+            st.markdown(f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_gris_title"><div href="#" class="ag-courses-item_link_gris"><span class="adjustable-text" style="font-size: 70px; margin: 5 5 5 5">Dashboard de Ofertas <br></span><span class="adjustable-text" style="font-size: 40px;">Bienvenido {cliente_pec[0]}</span></div></div></div></div></div></div>',unsafe_allow_html=True)
             # st.subheader(f"Bienvenido {cliente_pec[0]}", class_="centered-subheader")
             # st.markdown(f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_gris_subtitle"><div href="#" class="ag-courses-item_link_gris"><span class="adjustable-text" style="font-size: 40px;">Bienvenido {cliente_pec[0]}</span></div></div></div></div></div></div>',unsafe_allow_html=True,)
         st.write("---")
@@ -534,7 +534,7 @@ def main():
         con_motivo_no_interesados1 = len(df_oferta_snackys.loc[(df_oferta_snackys["journeyStep"] == "RespuestaMotivoClienteParaNoSuscripcion") & (df_oferta_snackys['journeyClassName'] == 'SnackyOfertasSuscripcion')].reset_index()) 
         con_motivo_no_interesados = f"{con_motivo_no_interesados1} de {subs['No suscriptos']}" 
         # Intencion de no dejar motivos
-        sin_motivo_no_interesado = len(df_oferta_snackys[(df_oferta_snackys['msgBody'] == 2) & (df_oferta_snackys['journeyStep'] == 'RespuestaClienteQuiereDejarMotivo') & (df_oferta_snackys['journeyClassName'] == 'SnackyOfertasSuscripcion')])
+        sin_motivo_no_interesado = len(df_oferta_snackys[(df_oferta_snackys['msgBody'] == '2') & (df_oferta_snackys['journeyStep'] == 'RespuestaClienteQuiereDejarMotivo') & (df_oferta_snackys['journeyClassName'] == 'SnackyOfertasSuscripcion')])
         # Conversaciones terminadas
         # conversaciones_terminadas = len(df_oferta_snackys[df_oferta_snackys["msgBody"].str.contains("ff")]) + motivos_clientes_no_interesados1
         # Conversaciones_incompletas 
