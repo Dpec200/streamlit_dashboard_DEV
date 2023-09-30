@@ -16,7 +16,7 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
     )
-
+# Obtener token de URL
 try:
     token = st.experimental_get_query_params()
     token = str(token['token'][0])
