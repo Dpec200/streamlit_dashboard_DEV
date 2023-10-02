@@ -580,7 +580,7 @@ def main():
             return imagen_codificada
 
         # Tarjeta con el gráfico de Matplotlib
-        tarjeta_subscritos_vs_nosubscritos = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_core_2"><div class="ag-courses-item_link_core_2"><div class="ag-courses-item_title_core">Clientes Subscritos VS No Subscritos</div><img src="data:image/png;base64,{generar_grafico()}" alt="Gráfico de Pastel"></div></div></div></div>'
+        tarjeta_suscritos_vs_nosuscritos = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_core_2"><div class="ag-courses-item_link_core_2"><div class="ag-courses-item_title_core">Clientes Suscritos VS No Suscritos</div><img src="data:image/png;base64,{generar_grafico()}" alt="Gráfico de Pastel"></div></div></div></div>'
 
         # Muestra la tarjeta en Streamlit
         with col_core_1:
@@ -588,7 +588,7 @@ def main():
             st.markdown(tarjeta_clientes_con_respuesta_col1, unsafe_allow_html=True)
 
         with col_core_2:
-            st.markdown(tarjeta_subscritos_vs_nosubscritos, unsafe_allow_html=True)
+            st.markdown(tarjeta_suscritos_vs_nosuscritos, unsafe_allow_html=True)
 
         st.write('---')
         st.markdown(f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_gris_subtitle"><div href="#" class="ag-courses-item_link_gris"><span class="adjustable-text" style="font-size: 40px; margin: 20px 25px 25px 25px;">Comportamiento del cliente</span></div></div></div></div></div></div>',unsafe_allow_html=True)
@@ -729,7 +729,9 @@ def main():
 
             if len(grouped1) > 0:
                 ax.bar(i*6*width + width, grouped1['2'], width=width, label='semana 1', color='#DFE2E5', edgecolor='black')
+                ax.text(x=(i*6*width + width), grouped1['2'], str(grouped1['2']), ha='center', va='bottom')
                 ax.bar(i*6*width + width, grouped1['1'], bottom=grouped1['2'], width=width, label='semana 1', color='#2D8DEC', edgecolor='black')
+                # ax.text(i, v, str(v), ha='center', va='bottom')
                 ax.text(x=(i*6*width + width), s='1era', y=-0.80, ha='center')
 
 
