@@ -726,7 +726,7 @@ def main():
             grouped4 = grouped[(grouped['semana'] == '4') & (grouped['mes'] == mes)]
             
             meses_str = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-            st.write(grouped2['2'])
+            st.write(int(grouped2['2']))
             st.write(grouped3['2'])
             st.write(grouped4['2'])
             if len(grouped1) > 0:
