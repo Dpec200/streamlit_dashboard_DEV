@@ -731,7 +731,7 @@ def main():
                 ax.bar(i*6*width + width, grouped1['2'], width=width, label='semana 1', color='#DFE2E5', edgecolor='black')
                 ax.text(x=(i*6*width + width),y=int(grouped1['2'][0]) , s=str(grouped1['2'][0]), ha='center', va='bottom')
                 ax.bar(i*6*width + width, grouped1['1'], bottom=grouped1['2'], width=width, label='semana 1', color='#2D8DEC', edgecolor='black')
-                ax.text(x=(i*6*width + width),y=int(grouped1['1'][0]) , s=str(grouped1['1'][0]), ha='center', va='bottom')
+                ax.text(x=(i*6*width + width),y=(int(grouped1['1'][0]) + int(grouped1['2'][0])) , s=str(grouped1['1'][0]), ha='center', va='bottom')
                 ax.text(x=(i*6*width + width), s='1era', y=-0.80, ha='center')
 
 
