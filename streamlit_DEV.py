@@ -726,7 +726,9 @@ def main():
             grouped4 = grouped[(grouped['semana'] == '4') & (grouped['mes'] == mes)]
             
             meses_str = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-
+            st.write(grouped2['2'][0])
+            st.write(grouped3['2'][0])
+            st.write(grouped4['2'][0])
             if len(grouped1) > 0:
                 ax.bar(i*6*width + width, grouped1['2'], width=width, label='semana 1', color='#DFE2E5', edgecolor='black')
                 ax.text(x=(i*6*width + width),y=int(grouped1['2'][0]) , s=str(grouped1['2'][0]), ha='center', va='top')
@@ -750,6 +752,7 @@ def main():
 
 
             if len(grouped3) > 0:
+
                 ax.bar(i*6*width + 3*width, grouped3['2'], width=width, label='semana 3', color='#DFE2E5', edgecolor='black')
                 ax.text(x=(i*6*width + 3*width),y=int(grouped3['2']) , s=str(grouped3['2']), ha='center', va='top')
                 
