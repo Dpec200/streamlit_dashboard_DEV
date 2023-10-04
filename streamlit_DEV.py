@@ -322,7 +322,7 @@ def main():
         engine = create_engine(conexion_string,pool_pre_ping=True)
         # Query de recompra
         query = f"""
-                SELECT e.*, c.businessPhoneNumber, c.clientName, c.userPhoneNumber
+                SELECT e.*, c.businessPhoneNumber, c.clientName
                 FROM experiencias e
                 JOIN clientes c ON (e.idCliente = c.idCliente)
                 WHERE e.journeyClassName IN ('GenerarRecompraGenteInactiva' ,'PreguntaSiClientePudoComprar', 'RecordatorioClienteQuiereRecomprar') AND c.businessPhoneNumber = {businessnumber} ;
@@ -503,10 +503,9 @@ def main():
         engine = create_engine(conexion_string,pool_pre_ping=True)
         # Query de recompra
         query = f"""
-                SELECT e.* , c.businessPhoneNumber, c.clientName, u.userPhoneNumber
+                SELECT e.* , c.businessPhoneNumber, c.clientName
                 FROM experiencias e
                 JOIN clientes c ON (e.idCliente = c.idCliente)
-                JOIN usuarios u ON (e.idCliente = u.idCliente)
                 WHERE e.journeyClassName = 'SnackyOfertasSuscripcion' AND c.businessPhoneNumber = {businessnumber} ;
                 """
         df_oferta_snackys = pd.read_sql(query, engine)
@@ -646,10 +645,9 @@ def main():
         st.write("---")
 
         query2 = f"""
-                SELECT e.* , c.businessPhoneNumber, c.clientName, u.userPhoneNumber
+                SELECT e.* , c.businessPhoneNumber, c.clientName
                 FROM experiencias e
                 JOIN clientes c ON (e.idCliente = c.idCliente)
-                JOIN usuarios u ON (e.idCliente = u.idCliente)
                 WHERE e.journeyClassName = 'SnackyOferta1' AND c.businessPhoneNumber = {businessnumber} ;
                 """
         
