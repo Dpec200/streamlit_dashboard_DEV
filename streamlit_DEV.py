@@ -503,13 +503,15 @@ def main():
         engine = create_engine(conexion_string,pool_pre_ping=True)
         # Query de recompra
         query = f"""
-                SELECT e.* , c.businessPhoneNumber, c.clientName, c.userPhoneNumber
+                SELECT e.* , c.businessPhoneNumber, c.clientName, u.userPhoneNumber
                 FROM experiencias e
                 JOIN clientes c ON (e.idCliente = c.idCliente)
+                JOIN usuarios u ON (e.idCliente = u.idCliente)
                 WHERE e.journeyClassName = 'SnackyOfertasSuscripcion' AND c.businessPhoneNumber = {businessnumber} ;
                 """
         df_oferta_snackys = pd.read_sql(query, engine)
         df_oferta_snackys.drop("hora",axis=1,inplace=True)
+        st.write(df_oferta_snackys)
         # Aquí también ocultamos el DF
         #st.write("Dataframe")
         #st.dataframe(df_oferta_snackys)
@@ -644,15 +646,16 @@ def main():
         st.write("---")
 
         query2 = f"""
-                SELECT e.* , c.businessPhoneNumber, c.clientName, c.userPhoneNumber
+                SELECT e.* , c.businessPhoneNumber, c.clientName, u.userPhoneNumber
                 FROM experiencias e
                 JOIN clientes c ON (e.idCliente = c.idCliente)
+                JOIN usuarios u ON (e.idCliente = u.idCliente)
                 WHERE e.journeyClassName = 'SnackyOferta1' AND c.businessPhoneNumber = {businessnumber} ;
                 """
         
         df_oferta_snackys2 = pd.read_sql(query2, engine)
         df_oferta_snackys2.drop("hora",axis=1,inplace=True)
-
+        st.write(df_oferta_snackys2)
         grafico_barras_data = df_oferta_snackys2[['msgBody','fecha']][(df_oferta_snackys2['msgBody'].isin(['1', '2'])) & (df_oferta_snackys2['journeyClassName'] == 'SnackyOferta1') & (df_oferta_snackys2['journeyStep'] == "RespuestaMensajeInicial")]
         
         grafico_barras_data['fecha'] = pd.to_datetime(grafico_barras_data['fecha'])
