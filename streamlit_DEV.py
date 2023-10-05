@@ -548,7 +548,7 @@ def main():
         df_clientes = pd.read_sql(query,engine)
 
 
-        query = f'SELECT * FROM usuarios WHERE idCliente = {int(df_clientes['idCliente'][df_clientes['businessPhoneNumber'] == businessnumber].unique()[0])};'
+        query = f"SELECT * FROM usuarios WHERE idCliente = {int(df_clientes['idCliente'][df_clientes['businessPhoneNumber'] == businessnumber].unique()[0])};"
         
         df_usuarios = pd.read_sql(query,engine)
         
