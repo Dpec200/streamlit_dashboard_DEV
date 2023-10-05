@@ -724,7 +724,7 @@ def main():
         #          '1': [5, 6, 9, 2, 3, 4, 1, 3],
         #          '2': [1, 2, 3, 5, 5, 7, 1, 1]
         # }
-        st.write(list(grouped['ano'].unique()).sort())
+        st.write(list(grouped['ano'].unique()))
         # grouped = pd.DataFrame(data)
         meses_str = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
         fig, ax = plt.subplots(figsize=(15, 4), facecolor='none')
