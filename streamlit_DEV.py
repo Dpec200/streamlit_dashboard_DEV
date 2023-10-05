@@ -757,6 +757,7 @@ def main():
                 ax.text(x=(i*6*width + 2*width), s='2da', y=-0.80, ha='center')
             else:
                 ax.text(x=(i*6*width + (2*width)/2), s=str.capitalize(meses_str[int(mes)-1]), y=-1.40, ha='center')
+                continue
 
 
             if len(grouped3) > 0:
@@ -770,6 +771,7 @@ def main():
                 ax.text(x=(i*6*width + 3*width), y=-0.80, s='3era', ha='center')
             else:
                 ax.text(x=(i*6*width + (3*width)/2), s=str.capitalize(meses_str[int(mes)-1]), y=-1.40, ha='center')
+                continue
 
 
             if len(grouped4) > 0:
@@ -783,6 +785,7 @@ def main():
                 ax.text(x=(i*6*width + (5*width)/2), s=str.capitalize(meses_str[int(mes)-1]), y=-1.40, ha='center')
             else:
                 ax.text(x=(i*6*width + (4*width)/2), s=str.capitalize(meses_str[int(mes)-1]), y=-1.40, ha='center')
+                continue
             
 
         patch_1 = mpatches.Patch(color='#2D8DEC', label='Interesado')
