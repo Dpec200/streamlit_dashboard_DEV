@@ -510,7 +510,7 @@ def main():
                 """
         df_oferta_snackys = pd.read_sql(query, engine)
         df_oferta_snackys.drop("hora",axis=1,inplace=True)
-        st.write(df_oferta_snackys)
+        st.write(df_oferta_snackys[df_oferta_snackys['journeyStep'] == 'RespuestaMensajeInicial'])
         # Aquí también ocultamos el DF
         #st.write("Dataframe")
         #st.dataframe(df_oferta_snackys)
