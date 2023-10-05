@@ -544,14 +544,25 @@ def main():
         clientes_suscriptos = subs["Suscriptos"]
         # Clientes prefieren 'dejar de recibir'
         clientes_dejar_de_recibir = len(df_oferta_snackys[df_oferta_snackys['msgBody'] == 'dejar de recibir'])
-        # Estilos CSS personalizados
+        query = 'SELECT * FROM clientes;'
+        df_clientes = pd.read_sql(query,engine)
+
+
+        query = f'SELECT * FROM usuarios WHERE idCliente = {int(df_clientes['idCliente'][df_clientes['businessPhoneNumber'] == businessnumber].unique()[0])};'
+        
+        df_usuarios = pd.read_sql(query,engine)
+        
+        clientes_contactados = len(df_usuarios[df_usuarios['SnackyOfertasSuscripcion_outbound'] == True])
+        clientes_que_respondieron = len(df_usuarios[(df_usuarios['SnackyOfertasSuscripcion_outbound'] == True) & (df_usuarios['SnackyOfertasSuscripcion_inbound'] == True)])
+
+
         
         # Agregar el estilo CSS personalizado utilizando st.markdown
         st.markdown(custom_css, unsafe_allow_html=True)
         st.markdown(f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_gris_title"><div href="#" class="ag-courses-item_link_gris"><span class="adjustable-text" style="font-size: 40px; margin: 20px 25px 25px 25px;">Informacion General</span></div></div></div></div></div></div>',unsafe_allow_html=True)
         col_core_1, col_core_2 = st.columns(2)
-        tarjeta_clientes_contactados_col1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_core_1"><div href="#" class="ag-courses-item_link_core"><div class="ag-courses-item_title_core"> Clientes Totales Contactados <br> Numero</div></div></div></div></div>'
-        tarjeta_clientes_con_respuesta_col1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_core_1"><div href="#" class="ag-courses-item_link_core"><div class="ag-courses-item_title_core"> Clientes con respuesta <br> Numero</div></div></div></div></div>'
+        tarjeta_clientes_contactados_col1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_core_1"><div href="#" class="ag-courses-item_link_core"><div class="ag-courses-item_title_core"> Clientes Totales Contactados <br> {clientes_contactados}</div></div></div></div></div>'
+        tarjeta_clientes_con_respuesta_col1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_core_1"><div href="#" class="ag-courses-item_link_core"><div class="ag-courses-item_title_core"> Clientes con respuesta <br> {clientes_que_respondieron}</div></div></div></div></div>'
         from io import BytesIO
         import base64
 
