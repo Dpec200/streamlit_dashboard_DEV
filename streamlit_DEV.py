@@ -749,6 +749,8 @@ def main():
                     ax.text(x=(i*6*width + width),y=(int(grouped1['1']) + int(grouped1['2'])) , s=str(int(grouped1['1'])), ha='center', va='bottom')
 
                     ax.text(x=(i*6*width + width), s='1era', y=-0.80, ha='center')
+                else:
+                    continue
 
 
                 if len(grouped2) > 0:
