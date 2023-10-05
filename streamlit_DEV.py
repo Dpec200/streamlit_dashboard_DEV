@@ -532,7 +532,7 @@ def main():
         cantidad_conversaciones = len(df_oferta_snackys.loc[(df_oferta_snackys["journeyStep"] == "RespuestaMensajeInicial")].reset_index())
         # motivos_clientes_no_interesados
         con_motivo_no_interesados1 = len(df_oferta_snackys.loc[(df_oferta_snackys["journeyStep"] == "RespuestaMotivoClienteParaNoSuscripcion") & (df_oferta_snackys['journeyClassName'] == 'SnackyOfertasSuscripcion')].reset_index()) 
-        con_motivo_no_interesados = f"{con_motivo_no_interesados1}}"
+        con_motivo_no_interesados = f"{con_motivo_no_interesados1}"
         # Intencion de no dejar motivos
         sin_motivo_no_interesado = len(df_oferta_snackys[(df_oferta_snackys['msgBody'] == '2') & (df_oferta_snackys['journeyStep'] == 'RespuestaClienteQuiereDejarMotivo') & (df_oferta_snackys['journeyClassName'] == 'SnackyOfertasSuscripcion')])
         # Conversaciones terminadas
