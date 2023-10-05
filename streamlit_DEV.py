@@ -510,7 +510,6 @@ def main():
                 """
         df_oferta_snackys = pd.read_sql(query, engine)
         df_oferta_snackys.drop("hora",axis=1,inplace=True)
-        st.write(df_oferta_snackys[df_oferta_snackys['journeyStep'] == 'RespuestaClienteQuiereDejarMotivo'])
         # Aquí también ocultamos el DF
         #st.write("Dataframe")
         #st.dataframe(df_oferta_snackys)
@@ -527,15 +526,13 @@ def main():
         subs = {"Suscriptos":     torta[torta["msgBody"] == '1'].shape[0],
                 "No suscriptos":    torta[torta["msgBody"] == '2'].shape[0]
                     }
-        st.write(subs['No suscriptos'])
-        st.write(subs['Suscriptos'])
-        st.write(list(subs.values()))
+        
         # Tarjetas
         # Cantidad de conversaciones
         cantidad_conversaciones = len(df_oferta_snackys.loc[(df_oferta_snackys["journeyStep"] == "RespuestaMensajeInicial")].reset_index())
         # motivos_clientes_no_interesados
         con_motivo_no_interesados1 = len(df_oferta_snackys.loc[(df_oferta_snackys["journeyStep"] == "RespuestaMotivoClienteParaNoSuscripcion") & (df_oferta_snackys['journeyClassName'] == 'SnackyOfertasSuscripcion')].reset_index()) 
-        con_motivo_no_interesados = f"{con_motivo_no_interesados1} de {subs['No suscriptos']}" 
+        con_motivo_no_interesados = f"{con_motivo_no_interesados1}}"
         # Intencion de no dejar motivos
         sin_motivo_no_interesado = len(df_oferta_snackys[(df_oferta_snackys['msgBody'] == '2') & (df_oferta_snackys['journeyStep'] == 'RespuestaClienteQuiereDejarMotivo') & (df_oferta_snackys['journeyClassName'] == 'SnackyOfertasSuscripcion')])
         # Conversaciones terminadas
@@ -666,7 +663,6 @@ def main():
         
         df_oferta_snackys2 = pd.read_sql(query2, engine)
         df_oferta_snackys2.drop("hora",axis=1,inplace=True)
-        st.write(df_oferta_snackys2)
         grafico_barras_data = df_oferta_snackys2[['msgBody','fecha']][(df_oferta_snackys2['msgBody'].isin(['1', '2'])) & (df_oferta_snackys2['journeyClassName'] == 'SnackyOferta1') & (df_oferta_snackys2['journeyStep'] == "RespuestaMensajeInicial")]
         
         grafico_barras_data['fecha'] = pd.to_datetime(grafico_barras_data['fecha'])
