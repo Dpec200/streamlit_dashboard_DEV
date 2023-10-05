@@ -529,6 +529,7 @@ def main():
                     }
         st.write(subs['No suscriptos'])
         st.write(subs['Suscriptos'])
+        st.write(list(subs.values()))
         # Tarjetas
         # Cantidad de conversaciones
         cantidad_conversaciones = len(df_oferta_snackys.loc[(df_oferta_snackys["journeyStep"] == "RespuestaMensajeInicial")].reset_index())
