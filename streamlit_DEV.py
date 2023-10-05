@@ -580,8 +580,8 @@ def main():
             plt.figure(figsize=(5, 3.5), facecolor='none')
 
             def autopct(pct, allvals):
-                absolute = allvals
-                return f"{pct:.1f}% ({int(absolute[0])})"
+                absolute = int(pct/100*sum(allvals))
+                return f"{pct:.1f}% ({absolute})"
 
             # Crea el gráfico de torta
             plt.pie(x=valores, labels=etiquetas, colors=colores, autopct=lambda pct: autopct(pct, valores), startangle=90)
