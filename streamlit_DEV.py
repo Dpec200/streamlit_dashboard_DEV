@@ -724,12 +724,12 @@ def main():
         #          '1': [5, 6, 9, 2, 3, 4, 1, 3],
         #          '2': [1, 2, 3, 5, 5, 7, 1, 1]
         # }
-        st.write(list(grouped['ano'].unique()).sort(key=len))
+        st.write(list(grouped['ano'].unique()).sort())
         # grouped = pd.DataFrame(data)
         meses_str = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
         fig, ax = plt.subplots(figsize=(15, 4), facecolor='none')
         width = 0.40
-        for index, ano in enumerate(list(grouped['ano'].unique()).sort(key=len)):
+        for index, ano in enumerate(list(grouped['ano'].unique()).sort()):
             for i ,mes in enumerate(meses_str):
                 grouped1 = grouped[(grouped['semana'] == '1') & (grouped['mes'] == str(i + 1)) & (grouped['ano'] == ano)]
 
