@@ -727,9 +727,10 @@ def main():
         st.write(list(grouped['ano'].unique()))
         # grouped = pd.DataFrame(data)
         meses_str = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+        anos = list(grouped['ano'].unique())
         fig, ax = plt.subplots(figsize=(15, 4), facecolor='none')
         width = 0.40
-        for index, ano in enumerate(list(grouped['ano'].unique()).sort()):
+        for index, ano in enumerate(anos):
             for i ,mes in enumerate(meses_str):
                 grouped1 = grouped[(grouped['semana'] == '1') & (grouped['mes'] == str(i + 1)) & (grouped['ano'] == ano)]
 
@@ -789,7 +790,9 @@ def main():
                 else:
                     ax.text(x=(i*6*width + (4*width)/2), s=str.capitalize(meses_str[int(mes)-1]), y=-1.40, ha='center')
                     continue
-            
+
+
+            # ax.text(x=(i*6*width*index + (4*width)/2), s=str.capitalize(ano), y=-1.40, ha='center')
 
         patch_1 = mpatches.Patch(color='#2D8DEC', label='Interesado')
         patch_2 = mpatches.Patch(color='#DFE2E5', label='No Interesado')
