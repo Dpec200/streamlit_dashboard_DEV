@@ -666,14 +666,17 @@ def main():
         grafico_barras_data = df_oferta_snackys2[['msgBody','fecha']][(df_oferta_snackys2['msgBody'].isin(['1', '2'])) & (df_oferta_snackys2['journeyClassName'] == 'SnackyOferta1') & (df_oferta_snackys2['journeyStep'] == "RespuestaMensajeInicial")]
         
         grafico_barras_data['fecha'] = pd.to_datetime(grafico_barras_data['fecha'])
+        grafico_barras_data['ano'] = grafico_barras_data['fecha'].dt.year
         grafico_barras_data['mes'] = grafico_barras_data['fecha'].dt.month
         grafico_barras_data['semana'] = grafico_barras_data['fecha'].dt.day // 7 + 1
+        # grafico_barras_data['ano'] = grafico_barras_data['ano'].astype(str)
         grafico_barras_data['mes'] = grafico_barras_data['mes'].astype(str)
         grafico_barras_data['semana'] = grafico_barras_data['semana'].astype(str)
+        
 
-        grouped = grafico_barras_data.groupby(['mes', 'semana', 'msgBody']).size().unstack(fill_value=0).reset_index()
+        grouped = grafico_barras_data.groupby(['ano','mes', 'semana', 'msgBody']).size().unstack(fill_value=0).reset_index()
         # col7 = st.columns(1)
-
+        st.write(grouped)
         # with col4 :
         #     # gráfico de cantidad de mensajes por fecha
         #     df_oferta_snackys['fecha'] = pd.to_datetime(df_oferta_snackys['fecha'])
@@ -721,71 +724,71 @@ def main():
         #          '1': [5, 6, 9, 2, 3, 4, 1, 3],
         #          '2': [1, 2, 3, 5, 5, 7, 1, 1]
         # }
-
+        st.write(list(grouped['ano'].unique()).sort(key=len))
         # grouped = pd.DataFrame(data)
-
+        meses_str = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
         fig, ax = plt.subplots(figsize=(15, 4), facecolor='none')
         width = 0.40
-        for i ,mes in enumerate(list(grouped['mes'].unique())):
-            grouped1 = grouped[(grouped['semana'] == '1') & (grouped['mes'] == mes)]
+        for index, ano in enumerate(list(grouped['ano'].unique()).sort(key=len)):
+            for i ,mes in enumerate(meses_str):
+                grouped1 = grouped[(grouped['semana'] == '1') & (grouped['mes'] == str(i + 1)) & (grouped['ano'] == ano)]
 
-            grouped2 = grouped[(grouped['semana'] == '2') & (grouped['mes'] == mes)]
+                grouped2 = grouped[(grouped['semana'] == '2') & (grouped['mes'] == str(i + 1)) & (grouped['ano'] == ano)]
 
-            grouped3 = grouped[(grouped['semana'] == '3') & (grouped['mes'] == mes)]
+                grouped3 = grouped[(grouped['semana'] == '3') & (grouped['mes'] == str(i + 1)) & (grouped['ano'] == ano)]
 
-            grouped4 = grouped[(grouped['semana'] == '4') & (grouped['mes'] == mes)]
-            
-            meses_str = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-            
-            if len(grouped1) > 0:
-                ax.bar(i*6*width + width, grouped1['2'], width=width, label='semana 1', color='#DFE2E5', edgecolor='black')
-                ax.text(x=(i*6*width + width),y=int(grouped1['2']) , s=str(int(grouped1['2'])), ha='center', va='top')
-
-                ax.bar(i*6*width + width, grouped1['1'], bottom=grouped1['2'], width=width, label='semana 1', color='#2D8DEC', edgecolor='black')
-                ax.text(x=(i*6*width + width),y=(int(grouped1['1']) + int(grouped1['2'])) , s=str(int(grouped1['1'])), ha='center', va='bottom')
-
-                ax.text(x=(i*6*width + width), s='1era', y=-0.80, ha='center')
-
-
-            if len(grouped2) > 0:
-                ax.bar(i*6*width + 2*width, grouped2['2'], width=width, label='semana 2', color='#DFE2E5', edgecolor='black')
-                ax.text(x=(i*6*width + 2*width),y=int(grouped2['2']) , s=str(int(grouped2['2'])), ha='center', va='top')
+                grouped4 = grouped[(grouped['semana'] == '4') & (grouped['mes'] == str(i + 1)) & (grouped['ano'] == ano)]
                 
-                ax.bar(i*6*width + 2*width, grouped2['1'], bottom=grouped2['2'], width=width, label='semana 2', color='#2D8DEC', edgecolor='black')
-                ax.text(x=(i*6*width + 2*width),y=(int(grouped2['1']) + int(grouped2['2'])) , s=str(int(grouped2['1'])), ha='center', va='bottom')
                 
-                ax.text(x=(i*6*width + 2*width), s='2da', y=-0.80, ha='center')
-            else:
-                ax.text(x=(i*6*width + (2*width)/2), s=str.capitalize(meses_str[int(mes)-1]), y=-1.40, ha='center')
-                continue
+                if len(grouped1) > 0:
+                    ax.bar(i*6*width + width, grouped1['2'], width=width, label='semana 1', color='#DFE2E5', edgecolor='black')
+                    ax.text(x=(i*6*width + width),y=int(grouped1['2']) , s=str(int(grouped1['2'])), ha='center', va='top')
+
+                    ax.bar(i*6*width + width, grouped1['1'], bottom=grouped1['2'], width=width, label='semana 1', color='#2D8DEC', edgecolor='black')
+                    ax.text(x=(i*6*width + width),y=(int(grouped1['1']) + int(grouped1['2'])) , s=str(int(grouped1['1'])), ha='center', va='bottom')
+
+                    ax.text(x=(i*6*width + width), s='1era', y=-0.80, ha='center')
 
 
-            if len(grouped3) > 0:
+                if len(grouped2) > 0:
+                    ax.bar(i*6*width + 2*width, grouped2['2'], width=width, label='semana 2', color='#DFE2E5', edgecolor='black')
+                    ax.text(x=(i*6*width + 2*width),y=int(grouped2['2']) , s=str(int(grouped2['2'])), ha='center', va='top')
+                    
+                    ax.bar(i*6*width + 2*width, grouped2['1'], bottom=grouped2['2'], width=width, label='semana 2', color='#2D8DEC', edgecolor='black')
+                    ax.text(x=(i*6*width + 2*width),y=(int(grouped2['1']) + int(grouped2['2'])) , s=str(int(grouped2['1'])), ha='center', va='bottom')
+                    
+                    ax.text(x=(i*6*width + 2*width), s='2da', y=-0.80, ha='center')
+                else:
+                    ax.text(x=(i*6*width + (2*width)/2), s=str.capitalize(meses_str[int(mes)-1]), y=-1.40, ha='center')
+                    continue
 
-                ax.bar(i*6*width + 3*width, grouped3['2'], width=width, label='semana 3', color='#DFE2E5', edgecolor='black')
-                ax.text(x=(i*6*width + 3*width),y=int(grouped3['2']) , s=str(int(grouped3['2'])), ha='center', va='top')
-                
-                ax.bar(i*6*width + 3*width, grouped3['1'], bottom=grouped3['2'], width=width, label='semana 3', color='#2D8DEC', edgecolor='black')
-                ax.text(x=(i*6*width + 3*width),y=(int(grouped3['1']) + int(grouped3['2'])) , s=str(int(grouped3['1'])), ha='center', va='bottom')
-                
-                ax.text(x=(i*6*width + 3*width), y=-0.80, s='3era', ha='center')
-            else:
-                ax.text(x=(i*6*width + (3*width)/2), s=str.capitalize(meses_str[int(mes)-1]), y=-1.40, ha='center')
-                continue
+
+                if len(grouped3) > 0:
+
+                    ax.bar(i*6*width + 3*width, grouped3['2'], width=width, label='semana 3', color='#DFE2E5', edgecolor='black')
+                    ax.text(x=(i*6*width + 3*width),y=int(grouped3['2']) , s=str(int(grouped3['2'])), ha='center', va='top')
+                    
+                    ax.bar(i*6*width + 3*width, grouped3['1'], bottom=grouped3['2'], width=width, label='semana 3', color='#2D8DEC', edgecolor='black')
+                    ax.text(x=(i*6*width + 3*width),y=(int(grouped3['1']) + int(grouped3['2'])) , s=str(int(grouped3['1'])), ha='center', va='bottom')
+                    
+                    ax.text(x=(i*6*width + 3*width), y=-0.80, s='3era', ha='center')
+                else:
+                    ax.text(x=(i*6*width + (3*width)/2), s=str.capitalize(meses_str[int(mes)-1]), y=-1.40, ha='center')
+                    continue
 
 
-            if len(grouped4) > 0:
-                ax.bar(i*6*width + 4*width, grouped4['2'], width=width, label='semana 4', color='#DFE2E5', edgecolor='black')
-                ax.text(x=(i*6*width + 4*width),y=int(grouped4['2']) , s=str(int(grouped4['2'])), ha='center', va='top')
-                
-                ax.bar(i*6*width + 4*width, grouped4['1'], bottom=grouped4['2'], width=width, label='semana 4', color='#2D8DEC', edgecolor='black')
-                ax.text(x=(i*6*width + 4*width),y=(int(grouped4['1']) + int(grouped4['2'])) , s=str(int(grouped4['1'])), ha='center', va='bottom')
-                
-                ax.text(s='4ta', x=(i*6*width + 4*width), y=-0.80, ha='center')
-                ax.text(x=(i*6*width + (5*width)/2), s=str.capitalize(meses_str[int(mes)-1]), y=-1.40, ha='center')
-            else:
-                ax.text(x=(i*6*width + (4*width)/2), s=str.capitalize(meses_str[int(mes)-1]), y=-1.40, ha='center')
-                continue
+                if len(grouped4) > 0:
+                    ax.bar(i*6*width + 4*width, grouped4['2'], width=width, label='semana 4', color='#DFE2E5', edgecolor='black')
+                    ax.text(x=(i*6*width + 4*width),y=int(grouped4['2']) , s=str(int(grouped4['2'])), ha='center', va='top')
+                    
+                    ax.bar(i*6*width + 4*width, grouped4['1'], bottom=grouped4['2'], width=width, label='semana 4', color='#2D8DEC', edgecolor='black')
+                    ax.text(x=(i*6*width + 4*width),y=(int(grouped4['1']) + int(grouped4['2'])) , s=str(int(grouped4['1'])), ha='center', va='bottom')
+                    
+                    ax.text(s='4ta', x=(i*6*width + 4*width), y=-0.80, ha='center')
+                    ax.text(x=(i*6*width + (5*width)/2), s=str.capitalize(meses_str[int(mes)-1]), y=-1.40, ha='center')
+                else:
+                    ax.text(x=(i*6*width + (4*width)/2), s=str.capitalize(meses_str[int(mes)-1]), y=-1.40, ha='center')
+                    continue
             
 
         patch_1 = mpatches.Patch(color='#2D8DEC', label='Interesado')
