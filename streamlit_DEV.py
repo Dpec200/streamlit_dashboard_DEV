@@ -527,7 +527,8 @@ def main():
         subs = {"Suscriptos":     torta[torta["msgBody"] == '1'].shape[0],
                 "No suscriptos":    torta[torta["msgBody"] == '2'].shape[0]
                     }
-
+        st.write(subs['No suscriptos'])
+        st.write(subs['Suscriptos'])
         # Tarjetas
         # Cantidad de conversaciones
         cantidad_conversaciones = len(df_oferta_snackys.loc[(df_oferta_snackys["journeyStep"] == "RespuestaMensajeInicial")].reset_index())
