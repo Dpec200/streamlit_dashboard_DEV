@@ -760,7 +760,7 @@ def main():
                     
                     ax.text(x=(i*6*width + 2*width), s='2da', y=-0.80, ha='center')
                 else:
-                    ax.text(x=(i*6*width + (2*width)/2), s=str.capitalize(meses_str[int(mes)-1]), y=-1.40, ha='center')
+                    ax.text(x=(i*6*width + (2*width)/2), s=str.capitalize(mes), y=-1.40, ha='center')
                     continue
 
 
@@ -774,7 +774,7 @@ def main():
                     
                     ax.text(x=(i*6*width + 3*width), y=-0.80, s='3era', ha='center')
                 else:
-                    ax.text(x=(i*6*width + (3*width)/2), s=str.capitalize(meses_str[int(mes)-1]), y=-1.40, ha='center')
+                    ax.text(x=(i*6*width + (3*width)/2), s=str.capitalize(mes), y=-1.40, ha='center')
                     continue
 
 
@@ -786,9 +786,9 @@ def main():
                     ax.text(x=(i*6*width + 4*width),y=(int(grouped4['1']) + int(grouped4['2'])) , s=str(int(grouped4['1'])), ha='center', va='bottom')
                     
                     ax.text(s='4ta', x=(i*6*width + 4*width), y=-0.80, ha='center')
-                    ax.text(x=(i*6*width + (5*width)/2), s=str.capitalize(meses_str[int(mes)-1]), y=-1.40, ha='center')
+                    ax.text(x=(i*6*width + (5*width)/2), s=str.capitalize(mes), y=-1.40, ha='center')
                 else:
-                    ax.text(x=(i*6*width + (4*width)/2), s=str.capitalize(meses_str[int(mes)-1]), y=-1.40, ha='center')
+                    ax.text(x=(i*6*width + (4*width)/2), s=str.capitalize(mes), y=-1.40, ha='center')
                     continue
 
 
