@@ -676,7 +676,6 @@ def main():
 
         grouped = grafico_barras_data.groupby(['ano','mes', 'semana', 'msgBody']).size().unstack(fill_value=0).reset_index()
         # col7 = st.columns(1)
-        st.write(grouped)
         # with col4 :
         #     # gráfico de cantidad de mensajes por fecha
         #     df_oferta_snackys['fecha'] = pd.to_datetime(df_oferta_snackys['fecha'])
@@ -724,7 +723,6 @@ def main():
         #          '1': [5, 6, 9, 2, 3, 4, 1, 3],
         #          '2': [1, 2, 3, 5, 5, 7, 1, 1]
         # }
-        st.write(list(grouped['ano'].unique()))
         # grouped = pd.DataFrame(data)
         meses_str = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
         anos = list(grouped['ano'].unique())
