@@ -745,7 +745,7 @@ def main():
                 
                 if len(grouped1) > 0:
                     ax.bar(x_val*6*width + width, grouped1['2'], width=width, label='semana 1', color='#DFE2E5', edgecolor='black')
-                    ax.text(x=(x_val*6*width + width),y=int(grouped1['2'])-0.80 , s=str(int(grouped1['2'])), ha='center', va='bottom')
+                    ax.text(x=(x_val*6*width + width),y=(int(grouped1['2'])-3.80) , s=str(int(grouped1['2'])), ha='center', va='bottom')
 
                     ax.bar(x_val*6*width + width, grouped1['1'], bottom=grouped1['2'], width=width, label='semana 1', color='#2D8DEC', edgecolor='black')
                     ax.text(x=(x_val*6*width + width),y=(int(grouped1['1']) + int(grouped1['2']))-0.80 , s=str(int(grouped1['1'])), ha='center', va='bottom')
