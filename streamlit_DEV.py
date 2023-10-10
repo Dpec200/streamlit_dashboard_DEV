@@ -628,23 +628,21 @@ def main():
         fig, ax = plt.subplots(figsize=(15, 4), facecolor='none')
         width = 0.40
 
-        for index, ano in enumerate(anos):
-            x_val = 0
+        # Ahora creamos un grafico de barra apiladas agrupadas por año, mes y las barras semanales de interesados y no intereados
+        
+        # Valor acumulativo de X mientras se van agregando columnas
+        x_val = 0
+        for index, ano in enumerate(anos):   
             for i, mes in enumerate(meses_str):
+                # Variables para indicar si escribir el mes y en que posicion con el indice de las semanas aparecidas ese mes
                 mes_no_nulo = False
                 indice_semana = None
+
                 for indice, semana in enumerate(semanas):
+                    # Filtramos
                     grouped1 = grouped[(grouped['semana'] == semana) & (grouped['mes'] == str(i + 1)) & (grouped['ano'] == ano)]
-
-                    # grouped2 = grouped[(grouped['semana'] == '2') & (grouped['mes'] == str(i + 1)) & (grouped['ano'] == ano)]
-
-                    # grouped3 = grouped[(grouped['semana'] == '3') & (grouped['mes'] == str(i + 1)) & (grouped['ano'] == ano)]
-
-                    # grouped4 = grouped[(grouped['semana'] == '4') & (grouped['mes'] == str(i + 1)) & (grouped['ano'] == ano)]
                     
-                    # if (len(grouped1) > 0) or (len(grouped2) > 0) or (len(grouped3) > 0) or (len(grouped4) > 0):
-                        
-                    
+                    # Creamos las barras
                     if len(grouped1) > 0:
                         ax.bar(x_val*6*width + (indice + 1)*width, grouped1['2'], width=width, label=f'semana {semana}', color='#DFE2E5', edgecolor='black')
                         ax.text(x=(x_val*6*width + (indice + 1)*width),y=(int(grouped1['2'])-1) , s=str(int(grouped1['2'])), ha='center', va='bottom')
@@ -657,80 +655,39 @@ def main():
                         indice_semana = indice + 1
                     else:
                         continue
-
-
-                # if len(grouped2) > 0:
-                #     ax.bar(x_val*6*width + 2*width, grouped2['2'], width=width, label='semana 2', color='#DFE2E5', edgecolor='black')
-                #     ax.text(x=(x_val*6*width + 2*width),y=int(grouped2['2'])-1 , s=str(int(grouped2['2'])), ha='center', va='bottom')
-                    
-                #     ax.bar(x_val*6*width + 2*width, grouped2['1'], bottom=grouped2['2'], width=width, label='semana 2', color='#2D8DEC', edgecolor='black')
-                #     ax.text(x=(x_val*6*width + 2*width),y=(int(grouped2['1']) + int(grouped2['2'])) -1, s=str(int(grouped2['1'])), ha='center', va='bottom')
-                    
-                #     ax.text(x=(x_val*6*width + 2*width), s='2da', y=-0.80, ha='center')
-                # else:
-                #     ax.text(x=(x_val*6*width + (2*width)/2), s=str.capitalize(mes), y=-1.40, ha='center')
-                #     continue
-
-
-                # if len(grouped3) > 0:
-
-                #     ax.bar(x_val*6*width + 3*width, grouped3['2'], width=width, label='semana 3', color='#DFE2E5', edgecolor='black')
-                #     ax.text(x=(x_val*6*width + 3*width),y=int(grouped3['2'])-1 , s=str(int(grouped3['2'])), ha='center', va='bottom')
-                    
-                #     ax.bar(x_val*6*width + 3*width, grouped3['1'], bottom=grouped3['2'], width=width, label='semana 3', color='#2D8DEC', edgecolor='black')
-                #     ax.text(x=(x_val*6*width + 3*width),y=(int(grouped3['1']) + int(grouped3['2']))-1 , s=str(int(grouped3['1'])), ha='center', va='bottom')
-                    
-                #     ax.text(x=(x_val*6*width + 3*width), y=-0.80, s='3era', ha='center')
-                # else:
-                #     ax.text(x=(x_val*6*width + (3*width)/2), s=str.capitalize(mes), y=-1.40, ha='center')
-                #     continue
-
-
-                # if len(grouped4) > 0:
-                #     ax.bar(x_val*6*width + 4*width, grouped4['2'], width=width, label='semana 4', color='#DFE2E5', edgecolor='black')
-                #     ax.text(x=(x_val*6*width + 4*width),y=int(grouped4['2'])-1.5 , s=str(int(grouped4['2'])), ha='center', va='bottom')
-                    
-                #     ax.bar(x_val*6*width + 4*width, grouped4['1'], bottom=grouped4['2'], width=width, label='semana 4', color='#2D8DEC', edgecolor='black')
-                #     ax.text(x=(x_val*6*width + 4*width),y=(int(grouped4['1']) + int(grouped4['2']))-1.5 , s=str(int(grouped4['1'])), ha='center', va='bottom')
-                    
-                #     ax.text(s='4ta', x=(i*6*width + 4*width), y=-0.80, ha='center')
-                #     ax.text(x=(x_val*6*width + (5*width)/2), s=str.capitalize(mes), y=-1.40, ha='center')
-                # else:
-                #     ax.text(x=(x_val*6*width + (4*width)/2), s=str.capitalize(mes), y=-1.40, ha='center')
-                #     continue
-                
+                # Escribimo el mes en la posicion correcta del agrupado de barras
                 if mes_no_nulo == True:
                     x_val += 1
                     ax.text(x=(x_val*6*width + ((indice_semana + 2)*width)/2), s=str.capitalize(mes), y=-1.40, ha='center')
 
             # ax.text(x=(i*6*width*index + (4*width)/2), s=str.capitalize(ano), y=-1.40, ha='center')
-
+        
+        # Colocamos colores y nombres a las etiquetas que correspondan con los colores de las barras
         patch_1 = mpatches.Patch(color='#2D8DEC', label='Interesado')
         patch_2 = mpatches.Patch(color='#DFE2E5', label='No Interesado')
         plt.xticks([])
-        # Crear la leyenda con las barras de color personalizadas
+
+        # Creamos la leyenda con las barras de color personalizadas
         plt.legend(handles=[patch_1, patch_2], loc='upper right')
+        # Lo convertimo a base 64 para mostrar en el HTML
         buffer = BytesIO()
         plt.subplots_adjust(left=0.03, right=0.73, top=1, bottom=0.1)
         plt.savefig(buffer, format='png', transparent=True)
         buffer.seek(0)
         imagen_codificada2 = base64.b64encode(buffer.read()).decode()
+        
+        # HTML del grafico de barras
         grafico_oferta1 = f'<div class="ag-format-container"><div class="ag-courses_box"><div class="ag-courses_item_core_2"><div class="ag-courses-item_link_core_3"><div class="ag-courses-item_title_core">Interesados en la oferta de la semana</div><img src="data:image/png;base64,{imagen_codificada2}" alt="Gráfico de Pastel"></div></div></div></div>'
         st.markdown(grafico_oferta1, unsafe_allow_html=True)
         
-        # st.pyplot(plt)
-
         st.write("---")
                     
-        st.write("---")
 
     # Snackys
     opciones_paginas_snackys = ["Ofertas", "Recompra"]
     # pagina_seleccionada = st.sidebar.selectbox("Selecciona una página:", opciones_paginas_snackys)
     pagina_seleccionada = st.selectbox("Selecciona una experiencia:", opciones_paginas_snackys)
     # Mostrar páginas para Snackys
-    # if pagina_seleccionada == "Inicio":
-    #     pagina_inicio()
     if pagina_seleccionada == "Recompra":
         recompra_snackys()
     if pagina_seleccionada == "Ofertas" :
