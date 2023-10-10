@@ -643,7 +643,7 @@ def main():
                     # grouped4 = grouped[(grouped['semana'] == '4') & (grouped['mes'] == str(i + 1)) & (grouped['ano'] == ano)]
                     
                     # if (len(grouped1) > 0) or (len(grouped2) > 0) or (len(grouped3) > 0) or (len(grouped4) > 0):
-                    #     x_val += 1
+                        
                     
                     if len(grouped1) > 0:
                         ax.bar(x_val*6*width + (indice + 1)*width, grouped1['2'], width=width, label=f'semana {semana}', color='#DFE2E5', edgecolor='black')
@@ -698,8 +698,10 @@ def main():
                 # else:
                 #     ax.text(x=(x_val*6*width + (4*width)/2), s=str.capitalize(mes), y=-1.40, ha='center')
                 #     continue
+                
                 if mes_no_nulo == True:
-                    ax.text(x=(x_val*6*width + ((indice + 2)*width)/2), s=str.capitalize(mes), y=-1.40, ha='center')
+                    x_val += 1
+                    ax.text(x=(x_val*6*width + ((indice_semana + 2)*width)/2), s=str.capitalize(mes), y=-1.40, ha='center')
 
             # ax.text(x=(i*6*width*index + (4*width)/2), s=str.capitalize(ano), y=-1.40, ha='center')
 
