@@ -511,7 +511,7 @@ def main():
             colores = ['#2D8DEC', '#DFE2E5']
 
             # Creamos el tamaño del grafico con fondo transparente (facecolor)
-            plt.figure(figsize=(5, 3.5), facecolor='none')
+            plt.figure(figsize=(5, 3), facecolor='none')
 
             # Creamos los valores del grafico en formato 'XX% (cantidad)'
             def autopct(pct, allvals):
