@@ -656,7 +656,7 @@ def main():
                 # Escribimo el mes en la posicion correcta del agrupado de barras
                 if mes_no_nulo == True:
                     
-                    ax.text(x=(x_val*6*width + ((indice_semana + 2)*width)/2), s=str.capitalize(mes), y=-1.40, ha='center')
+                    ax.text(x=(x_val*6*width + ((indice_semana + 2)*width)/2), s=str.capitalize(mes), y=-1.60, ha='center')
                     x_val += 1
 
             # ax.text(x=(i*6*width*index + (4*width)/2), s=str.capitalize(ano), y=-1.40, ha='center')
