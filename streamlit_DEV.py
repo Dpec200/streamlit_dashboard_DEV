@@ -634,7 +634,7 @@ def main():
             for i, mes in enumerate(meses_str):
                 # Variables para indicar si escribir el mes y en que posicion con el indice de las semanas aparecidas ese mes
                 mes_no_nulo = False
-                indice_semana = None
+                indice_semana = 0
 
                 for indice, semana in enumerate(semanas):
                     # Filtramos
@@ -650,7 +650,7 @@ def main():
 
                         ax.text(x=(x_val*6*width + (indice + 1)*width), s=f'Sem. {semana}', y=-0.80, ha='center')
                         mes_no_nulo = True
-                        indice_semana = indice + 1
+                        indice_semana += 1
                     else:
                         continue
                 # Escribimo el mes en la posicion correcta del agrupado de barras
