@@ -152,7 +152,7 @@ def main():
 
             overflow: hidden;
 
-            position: relative;
+            position: left;
             }
 
             .ag-courses-item_link_core {
