@@ -175,7 +175,7 @@ def main():
             .ag-courses-item_link_core_3 {
             display: block;
             background-color: #F5B7B1;
-            height: 54vh;
+            height: auto;
             overflow: hidden;
 
             position: relative;
