@@ -520,7 +520,7 @@ def main():
 
             # Crea el gráfico de torta
             plt.pie(x=valores, labels=etiquetas, colors=colores, autopct=lambda pct: autopct(pct, valores), startangle=90)
-            # plt.subplots_adjust(left=0.1, right=0.89, top=1, bottom=0.1)
+            plt.subplots_adjust(left=0.1, right=1, top=1, bottom=0.1)
 
             # Convierte el gráfico en una imagen base 64 y lo retornamos
             buffer = BytesIO()
