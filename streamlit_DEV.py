@@ -650,7 +650,7 @@ def main():
 
                         ax.text(x=(x_val*6*width + (indice + 1)*width), s=f'Sem. {semana}', y=-0.80, ha='center')
                         mes_no_nulo = True
-                        indice_semana += 1
+                        indice_semana = indice
                     else:
                         continue
                 # Escribimo el mes en la posicion correcta del agrupado de barras
