@@ -648,7 +648,7 @@ def main():
                         ax.bar(x_val*6*width + (indice + 1)*width, grouped1['1'], bottom=grouped1['2'], width=width, label=f'semana {semana}', color='#2D8DEC', edgecolor='black')
                         ax.text(x=(x_val*6*width + (indice + 1)*width),y=(int(grouped1['1']) + int(grouped1['2']))-1 , s=str(int(grouped1['1'])), ha='center', va='bottom')
 
-                        ax.text(x=(x_val*6*width + (indice + 1)*width), s=f'Sem. {semana}', y=-0.80, ha='center')
+                        ax.text(x=(x_val*6*width + (indice + 1)*width), s=f'Sem. {semana}', y=-1, ha='center')
                         mes_no_nulo = True
                         indice_semana = indice
                     else:
@@ -656,7 +656,7 @@ def main():
                 # Escribimo el mes en la posicion correcta del agrupado de barras
                 if mes_no_nulo == True:
                     
-                    ax.text(x=(x_val*6*width + ((indice_semana + 2)*width)/2), s=str.capitalize(mes), y=-1.60, ha='center')
+                    ax.text(x=(x_val*6*width + ((indice_semana + 2)*width)/2), s=str.capitalize(mes), y=-2, ha='center')
                     x_val += 1
 
             # ax.text(x=(i*6*width*index + (4*width)/2), s=str.capitalize(ano), y=-1.40, ha='center')
